@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { AIRCRAFT_DATABASE } from '@/data/aircraft';
+import { AIRCRAFT_DATABASE, IATA_CODE_ALIASES } from '@/data/aircraft';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get('code');
 
   if (code) {
-    const aircraft = AIRCRAFT_DATABASE[code.toUpperCase()];
+    const clean = code.toUpperCase().trim();
+    const canonicalId = IATA_CODE_ALIASES[clean] || clean;
+    const aircraft = AIRCRAFT_DATABASE[canonicalId];
     if (!aircraft) {
       return NextResponse.json({ error: 'Aircraft not found' }, { status: 404 });
     }

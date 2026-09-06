@@ -2,35 +2,68 @@ import { NextRequest, NextResponse } from 'next/server';
 import { searchTravelpayoutsFlights } from '@/lib/travelpayouts';
 import { searchDuffelFlights } from '@/lib/duffel';
 import { generateRealisticFlights } from '@/data/mockFlights';
-import { SearchParams, FlightOffer } from '@/lib/types';
+import { SearchParams, FlightOffer, CabinClass } from '@/lib/types';
+
+const VALID_CABIN_CLASSES: Set<CabinClass> = new Set([
+  'economy',
+  'premium_economy',
+  'business',
+  'first'
+]);
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
-      origin,
-      destination,
-      departureDate,
-      returnDate,
-      cabinClass = 'economy',
-      passengers = 1,
-      customToken
+      origin: rawOrigin,
+      destination: rawDest,
+      departureDate: rawDepDate,
+      returnDate: rawRetDate,
+      cabinClass: rawCabinClass = 'economy',
+      passengers: rawPassengers = 1
     } = body;
 
-    if (!origin || !destination || !departureDate) {
+    const origin = (rawOrigin || '').toUpperCase().trim();
+    const destination = (rawDest || '').toUpperCase().trim();
+    const departureDate = String(rawDepDate || '').trim();
+    const returnDate = rawRetDate ? String(rawRetDate).trim() : undefined;
+
+    // Strict input validation
+    if (!/^[A-Z]{3}$/.test(origin) || !/^[A-Z]{3}$/.test(destination)) {
       return NextResponse.json(
-        { error: 'origin, destination, and departureDate are required parameters.' },
+        { error: 'Origin and destination must be valid 3-letter IATA airport codes.' },
         { status: 400 }
       );
     }
 
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(departureDate)) {
+      return NextResponse.json(
+        { error: 'Departure date must be in YYYY-MM-DD format.' },
+        { status: 400 }
+      );
+    }
+
+    if (returnDate && !/^\d{4}-\d{2}-\d{2}$/.test(returnDate)) {
+      return NextResponse.json(
+        { error: 'Return date must be in YYYY-MM-DD format.' },
+        { status: 400 }
+      );
+    }
+
+    const cabinClass: CabinClass = VALID_CABIN_CLASSES.has(rawCabinClass)
+      ? rawCabinClass
+      : 'economy';
+
+    // Bound passengers strictly between 1 and 9 to prevent memory exhaustion
+    const passengers = Math.min(9, Math.max(1, parseInt(String(rawPassengers), 10) || 1));
+
     const searchParams: SearchParams = {
-      origin: origin.toUpperCase().trim(),
-      destination: destination.toUpperCase().trim(),
+      origin,
+      destination,
       departureDate,
-      returnDate: returnDate || undefined,
+      returnDate,
       cabinClass,
-      passengers: Number(passengers) || 1
+      passengers
     };
 
     let offers: FlightOffer[] = [];
@@ -49,11 +82,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 2. Secondary GDS Provider: Duffel (if customToken or DUFFEL_ACCESS_TOKEN is present)
-    if (offers.length === 0 && (customToken || process.env.DUFFEL_ACCESS_TOKEN)) {
+    // 2. Secondary GDS Provider: Duffel (if DUFFEL_ACCESS_TOKEN is configured)
+    if (offers.length === 0 && process.env.DUFFEL_ACCESS_TOKEN) {
       try {
         console.log(`[WhichPlane Gateway] Querying Duffel for ${searchParams.origin} -> ${searchParams.destination}`);
-        offers = await searchDuffelFlights(searchParams, customToken);
+        offers = await searchDuffelFlights(searchParams);
         if (offers.length > 0 && offers[0].source !== 'verified_simulation') {
           provider = 'duffel_live';
         }

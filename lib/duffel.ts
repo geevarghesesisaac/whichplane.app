@@ -59,7 +59,8 @@ export async function searchDuffelFlights(
         ? 'premium_economy'
         : 'economy';
 
-    const passengers = Array.from({ length: params.passengers || 1 }, () => ({
+    const safePaxCount = Math.min(9, Math.max(1, params.passengers || 1));
+    const passengers = Array.from({ length: safePaxCount }, () => ({
       type: 'adult'
     }));
 
@@ -159,13 +160,25 @@ export async function searchDuffelFlights(
 
       const googleFlightsUrl = `https://www.google.com/travel/flights?q=flights%20from%20${params.origin.toUpperCase()}%20to%20${params.destination.toUpperCase()}%20on%20${params.departureDate}`;
 
+      const currency = offer.total_currency || 'USD';
+      let formattedPrice = `$${Math.round(amountNum).toLocaleString()}`;
+      try {
+        formattedPrice = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency,
+          maximumFractionDigits: 0
+        }).format(Math.round(amountNum));
+      } catch {
+        // Fallback to basic string if currency code is unrecognized
+      }
+
       return {
         id: offer.id || `duffel_off_${index}`,
         source: 'duffel_live',
         price: {
           amount: Math.round(amountNum),
-          currency: offer.total_currency || 'USD',
-          formatted: `$${Math.round(amountNum).toLocaleString()}`
+          currency,
+          formatted: formattedPrice
         },
         totalDurationMinutes: totalDuration || 300,
         stops: Math.max(0, allSegments.length - 1),

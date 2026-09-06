@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FlightOffer } from '@/lib/types';
 import { formatDuration, formatTime } from '@/lib/utils';
 import FlightDetailModal from '@/components/FlightDetailModal';
+import ConfidenceBadge from '@/components/ConfidenceBadge';
 
 interface FlightCardProps {
   offer: FlightOffer;
@@ -49,14 +50,14 @@ export default function FlightCard({ offer }: FlightCardProps) {
               {offer.price.formatted}
             </div>
             <div className="font-mono-telemetry text-[10px] text-[#64748b] tracking-[0.06em] uppercase font-bold">
-              ROUNDTRIP TOTAL
+              ESTIMATED TOTAL
             </div>
           </div>
         </div>
 
         {/* AERODYNAMIC AIRFRAME HERO BADGE */}
-        <div className="bg-[#eff4ff] border border-[#dce9ff] rounded-lg p-2.5 flex items-center justify-between">
-          <div className="flex items-center gap-2.5 min-w-0">
+        <div className="bg-[#eff4ff] border border-[#dce9ff] rounded-lg p-2.5 flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
             <div className="w-8 h-8 rounded-lg bg-[#5bb8fe]/30 text-[#00476e] flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[20px]">airlines</span>
             </div>
@@ -85,11 +86,13 @@ export default function FlightCard({ offer }: FlightCardProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-1 shrink-0 ml-2" title="Stated by airline booking equipment line">
-            <span className="material-symbols-outlined text-[#0284c7] text-[18px]">verified</span>
-            <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-bold tracking-[0.05em] hidden sm:inline">
-              {primarySegment.confidencePercent || 98}% LOCK
-            </span>
+          <div className="shrink-0">
+            <ConfidenceBadge
+              confidence={primarySegment.confidence}
+              note={primarySegment.confidenceNote}
+              aircraftName={aircraft.name}
+              percent={primarySegment.confidencePercent}
+            />
           </div>
         </div>
 
@@ -105,7 +108,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
                 {primarySegment.origin.code}
               </span>
               <span className="font-body text-xs text-[#64748b]">
-                {primarySegment.origin.terminal || 'T4'}
+                {primarySegment.origin.terminal || primarySegment.origin.city}
               </span>
             </div>
           </div>
@@ -113,7 +116,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
           {/* Vector Progress Bar */}
           <div className="flex-1 px-4 flex flex-col items-center">
             <span className="font-mono-telemetry text-xs text-[#64748b] mb-1 font-medium tracking-[0.02em]">
-              {formatDuration(offer.totalDurationMinutes)} nonstop
+              {formatDuration(offer.totalDurationMinutes)} {offer.stops === 0 ? 'nonstop' : `${offer.stops} stop`}
             </span>
             <div className="w-full flex items-center relative">
               <div className="w-2 h-2 rounded-full bg-[#0284c7]" />
@@ -124,7 +127,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
               <div className="w-2 h-2 rounded-full bg-[#0284c7]" />
             </div>
             <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-bold tracking-[0.06em] mt-1">
-              3,451 NM • HIGH EFFICIENCY
+              SCHEDULED ROUTE VECTOR
             </span>
           </div>
 
@@ -141,7 +144,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
                 {lastSegment.destination.code}
               </span>
               <span className="font-body text-xs text-[#64748b]">
-                {lastSegment.destination.terminal || 'T3'}
+                {lastSegment.destination.terminal || lastSegment.destination.city}
               </span>
             </div>
           </div>
@@ -179,11 +182,14 @@ export default function FlightCard({ offer }: FlightCardProps) {
               {primarySegment.wifiGeneration}
             </span>
           )}
-          <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
-            <span className="material-symbols-outlined text-[13px] text-[#0284c7]">videocam</span>
-            Live HD Tail Cam
-          </span>
+          {(aircraft.family === 'A350' || aircraft.family === 'A380') && (
+            <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
+              <span className="material-symbols-outlined text-[13px] text-[#0284c7]">videocam</span>
+              Live HD Tail Cam
+            </span>
+          )}
         </div>
+
 
         {/* CALL TO ACTION ROW */}
         <div className="flex items-center justify-between pt-1">

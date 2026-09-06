@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import { AIRCRAFT_DATABASE } from '@/data/aircraft';
 import Link from 'next/link';
 
@@ -303,6 +304,8 @@ export default function FleetRadarPage() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }

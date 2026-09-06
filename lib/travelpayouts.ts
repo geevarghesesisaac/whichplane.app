@@ -53,7 +53,6 @@ export async function searchTravelpayoutsFlights(params: SearchParams): Promise<
   searchUrl.searchParams.set('sorting', 'price');
   searchUrl.searchParams.set('market', 'us');
   searchUrl.searchParams.set('limit', '30');
-  searchUrl.searchParams.set('token', token);
 
   console.log(`[WhichPlane] Querying Travelpayouts API: ${origin} -> ${destination} on ${departureAt}`);
 

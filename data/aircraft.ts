@@ -285,6 +285,34 @@ export const AIRCRAFT_DATABASE: Record<string, AircraftType> = {
   }
 };
 
+export const UNKNOWN_AIRFRAME: AircraftType = {
+  id: 'UNK',
+  icaoCode: 'UNKN',
+  name: 'Standard Commercial Airliner',
+  shortName: 'Airliner',
+  manufacturer: 'Other',
+  family: 'Commercial Jet',
+  bodyType: 'narrowbody',
+  isComposite: false,
+  compositePercent: 'Traditional Aluminum Alloy',
+  cabinAltitudeFt: 8000,
+  acousticRating: '72 dB Standard',
+  humidityPercent: '10-15%',
+  productionStatus: 'in_production',
+  seatingTypicalLayout: 'Standard Configuration',
+  aisles: 1,
+  engineVariants: ['High-Bypass Turbofan'],
+  wakeTurbulence: 'MEDIUM',
+  wingspan: '35 m (115 ft)',
+  maxPassengers: 180,
+  funFacts: [
+    'Scheduled standard airline equipment with final airframe tail assigned at flight dispatch.'
+  ],
+  whyFlyThis: 'Standard reliable scheduled passenger air service.',
+  primaryAirlines: ['Commercial Airlines'],
+  heroImageUrl: ''
+};
+
 export const IATA_CODE_ALIASES: Record<string, string> = {
   '388': '380',
   'A388': '380',
@@ -302,19 +330,32 @@ export const IATA_CODE_ALIASES: Record<string, string> = {
   'A35K': '351',
   '77W': '77W',
   'B77W': '77W',
+  '772': '77W',
+  '773': '77W',
   '339': '339',
   'A339': '339',
+  '333': '339',
+  '332': '339',
   '7M8': '7M8',
   'B38M': '7M8',
   '7M9': '7M8',
+  'B39M': '7M8',
+  '738': '7M8', // Boeing 737 Next Gen family mapped appropriately
+  '739': '7M8',
   '32Q': '32Q',
   'A21N': '32Q',
   '32N': '32Q',
-  '320': '32Q'
+  '320': '32Q',
+  '319': '32Q',
+  '321': '32Q',
+  '223': '32Q',
+  '221': '32Q'
 };
 
 export function lookupAircraft(iataOrName: string): AircraftType {
-  const clean = iataOrName.toUpperCase().trim();
+  const clean = (iataOrName || '').toUpperCase().trim();
+  if (!clean) return UNKNOWN_AIRFRAME;
+
   const directId = IATA_CODE_ALIASES[clean] || clean;
 
   if (AIRCRAFT_DATABASE[directId]) {
@@ -333,5 +374,6 @@ export function lookupAircraft(iataOrName: string): AircraftType {
     return found;
   }
 
-  return AIRCRAFT_DATABASE['351'];
+  return UNKNOWN_AIRFRAME;
 }
+

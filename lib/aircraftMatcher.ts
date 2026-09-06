@@ -1,5 +1,5 @@
 import { AircraftConfidence, AircraftType } from '@/lib/types';
-import { lookupAircraft, AIRCRAFT_DATABASE } from '@/data/aircraft';
+import { lookupAircraft } from '@/data/aircraft';
 
 export interface MatchedAeroDetails {
   aircraft: AircraftType;

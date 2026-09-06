@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { FilterState, Manufacturer, BodyType } from '@/lib/types';
+import { FilterState, Manufacturer } from '@/lib/types';
 
 interface AircraftFilterPanelProps {
   filters: FilterState;
@@ -311,7 +311,7 @@ export default function AircraftFilterPanel({
         </div>
         <select
           value={filters.sortBy}
-          onChange={(e) => onChange({ ...filters, sortBy: e.target.value as any })}
+          onChange={(e) => onChange({ ...filters, sortBy: e.target.value as FilterState['sortBy'] })}
           className="font-mono-telemetry text-xs font-bold text-[#0b1c30] bg-[#eff4ff] border border-[#dce9ff] px-2.5 py-1 rounded-md focus:outline-none focus:border-[#0284c7] cursor-pointer"
         >
           <option value="best_spec">Best Aircraft Spec (A350 / 787 / A380)</option>

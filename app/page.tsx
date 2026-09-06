@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import Navbar from '@/components/Navbar';
 import FlightSearchForm from '@/components/FlightSearchForm';
 import AircraftFilterPanel from '@/components/AircraftFilterPanel';
 import FlightCard from '@/components/FlightCard';
 import { FlightOffer, SearchParams, FilterState } from '@/lib/types';
 import { generateRealisticFlights } from '@/data/mockFlights';
+import Footer from '@/components/Footer';
 import Link from 'next/link';
 
 export default function Home() {
-  const [customToken, setCustomToken] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
   // Initial Search Parameters
@@ -45,36 +45,15 @@ export default function Home() {
     sortBy: 'best_spec'
   });
 
-  useEffect(() => {
-    const saved = localStorage.getItem('whichplane_duffel_token');
-    if (saved) {
-      setCustomToken(saved);
-    }
-  }, []);
-
-  useEffect(() => {
-    handleSearch(initialParams);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleSaveToken = (token: string) => {
-    setCustomToken(token);
-    handleSearch(searchParams, token);
-  };
-
-  const handleSearch = async (params: SearchParams, tokenOverride?: string) => {
+  const handleSearch = useCallback(async (params: SearchParams) => {
     setIsLoading(true);
     setSearchParams(params);
 
     try {
-      const activeToken = tokenOverride !== undefined ? tokenOverride : customToken;
       const res = await fetch('/api/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...params,
-          customToken: activeToken
-        })
+        body: JSON.stringify(params)
       });
 
       if (!res.ok) throw new Error('Search failed');
@@ -88,7 +67,35 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    let ignore = false;
+    async function loadInitial() {
+      try {
+        const res = await fetch('/api/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(initialParams)
+        });
+        if (!res.ok) throw new Error('Initial search failed');
+        const data = await res.json();
+        if (!ignore) {
+          setOffers(data.offers || []);
+        }
+      } catch (err) {
+        console.warn('Initial search error, using client simulation:', err);
+        if (!ignore) {
+          setOffers(generateRealisticFlights(initialParams));
+        }
+      }
+    }
+
+    loadInitial();
+    return () => {
+      ignore = true;
+    };
+  }, [initialParams]);
 
   // Filter and Sort Offers
   const filteredOffers = useMemo(() => {
@@ -100,7 +107,7 @@ export default function Home() {
 
         if (filters.sub6000FtAltitudeOnly) {
           const alt = offer.primaryAircraft.cabinAltitudeFt || 8000;
-          if (alt >= 6000) return false;
+          if (alt > 6000) return false;
         }
 
         if (filters.manufacturers.length > 0 && !filters.manufacturers.includes(offer.primaryAircraft.manufacturer)) {
@@ -147,10 +154,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#f8f9ff] text-[#0b1c30]">
       <Navbar
-        onTokenChange={handleSaveToken}
-        customToken={customToken}
         activeAirframe={offers[0]?.primaryAircraft.shortName || 'A350-1000'}
       />
+
 
       {/* Main Content Feed */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-5">
@@ -264,15 +270,8 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-[#e2e8f0] bg-white py-6 px-4 text-center text-xs text-[#64748b] space-y-1.5 mt-8">
-        <p className="font-mono-telemetry">
-          WhichPlane (whichplane.app) • AeroPrecision Design System. Data verified against live GDS booking lines.
-        </p>
-        <p className="text-[11px] text-[#94a3b8]">
-          Equipment Confidence Disclaimer: Airlines reserve the right to swap airframes for maintenance or scheduling. Always reverify at check-in.
-        </p>
-      </footer>
+      {/* Rich 4-Column Compliant Footer */}
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useSyncExternalStore, useCallback } from 'react';
 import Link from 'next/link';
 import { Award, CheckCircle2, Search } from 'lucide-react';
 
@@ -10,44 +10,45 @@ interface AircraftPassportLoggerProps {
   shortName: string;
 }
 
+function subscribe(callback: () => void) {
+  window.addEventListener('storage', callback);
+  window.addEventListener('whichplane_passport_change', callback);
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener('whichplane_passport_change', callback);
+  };
+}
+
 export default function AircraftPassportLogger({
   aircraftId,
   aircraftName,
   shortName
 }: AircraftPassportLoggerProps) {
-  const [logged, setLogged] = useState(false);
-  const [loggedCount, setLoggedCount] = useState(0);
-
-  useEffect(() => {
+  const getLoggedSnapshot = useCallback(() => {
     try {
-      const stored = localStorage.getItem(`whichplane_passport_${aircraftId}`);
-      if (stored) {
-        setLogged(true);
-      }
-      const totalStored = localStorage.getItem('whichplane_passport_total') || '0';
-      setLoggedCount(parseInt(totalStored, 10));
+      return Boolean(localStorage.getItem(`whichplane_passport_${aircraftId}`));
     } catch {
-      // ignore SSR or restricted localStorage
+      return false;
     }
   }, [aircraftId]);
 
+  const logged = useSyncExternalStore(subscribe, getLoggedSnapshot, () => false);
+
   const handleTogglePassport = () => {
     try {
-      if (!logged) {
+      const isCurrentlyLogged = Boolean(localStorage.getItem(`whichplane_passport_${aircraftId}`));
+      const totalStored = parseInt(localStorage.getItem('whichplane_passport_total') || '0', 10);
+
+      if (!isCurrentlyLogged) {
         localStorage.setItem(`whichplane_passport_${aircraftId}`, new Date().toISOString());
-        const newCount = loggedCount + 1;
-        localStorage.setItem('whichplane_passport_total', newCount.toString());
-        setLogged(true);
-        setLoggedCount(newCount);
+        localStorage.setItem('whichplane_passport_total', (totalStored + 1).toString());
       } else {
         localStorage.removeItem(`whichplane_passport_${aircraftId}`);
-        const newCount = Math.max(0, loggedCount - 1);
-        localStorage.setItem('whichplane_passport_total', newCount.toString());
-        setLogged(false);
-        setLoggedCount(newCount);
+        localStorage.setItem('whichplane_passport_total', Math.max(0, totalStored - 1).toString());
       }
+      window.dispatchEvent(new Event('whichplane_passport_change'));
     } catch {
-      setLogged(!logged);
+      // ignore in restricted environments
     }
   };
 
@@ -76,8 +77,9 @@ export default function AircraftPassportLogger({
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
           <button
+            type="button"
             onClick={handleTogglePassport}
-            className={`py-3 px-5 rounded-xl font-mono-telemetry text-xs font-bold tracking-[0.04em] flex items-center justify-center gap-2 transition-all shadow-md ${
+            className={`py-3 px-5 rounded-xl font-mono-telemetry text-xs font-bold tracking-[0.04em] flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer ${
               logged
                 ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
                 : 'bg-sky-500 hover:bg-sky-400 text-slate-950'

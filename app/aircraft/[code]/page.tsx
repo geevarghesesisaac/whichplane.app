@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import AircraftCabinSchematic from '@/components/AircraftCabinSchematic';
 import AircraftPassportLogger from '@/components/AircraftPassportLogger';
 import { AIRCRAFT_DATABASE, IATA_CODE_ALIASES } from '@/data/aircraft';
@@ -11,10 +13,7 @@ import {
   CheckCircle2,
   Armchair,
   Gauge,
-  Wind,
   Sparkles,
-  Search,
-  Building2,
   ArrowRight,
   ExternalLink,
   Flame,
@@ -377,6 +376,36 @@ const ROUTES_MAP: Record<string, AircraftRoute[]> = {
   ]
 };
 
+export function generateStaticParams() {
+  return Object.keys(AIRCRAFT_DATABASE).map((code) => ({
+    code: code.toLowerCase(),
+  }));
+}
+
+export async function generateMetadata({ params }: AircraftDetailPageProps): Promise<Metadata> {
+  const { code } = await params;
+  const upperCode = code.toUpperCase();
+  const canonicalId = IATA_CODE_ALIASES[upperCode] || upperCode;
+  const aircraft = AIRCRAFT_DATABASE[canonicalId];
+
+  if (!aircraft) {
+    return {
+      title: 'Aircraft Not Found — WhichPlane',
+      description: 'The requested aircraft type could not be located in the fleet database.'
+    };
+  }
+
+  return {
+    title: `${aircraft.name} (${aircraft.shortName}) Routes & Cabin Specs — WhichPlane`,
+    description: `Discover where the ${aircraft.name} flies worldwide. Detailed cabin altitude (${aircraft.cabinAltitudeFt || 8000}ft), seating layouts, engine variants, and live scheduled routes.`,
+    openGraph: {
+      title: `${aircraft.name} (${aircraft.shortName}) Routes & AvGeek Guide`,
+      description: aircraft.whyFlyThis,
+      images: aircraft.heroImageUrl ? [{ url: aircraft.heroImageUrl }] : []
+    }
+  };
+}
+
 export default async function AircraftDetailPage({ params }: AircraftDetailPageProps) {
   const { code } = await params;
   const upperCode = code.toUpperCase();
@@ -388,7 +417,7 @@ export default async function AircraftDetailPage({ params }: AircraftDetailPageP
   }
 
   // Operators list fallback
-  const operators = OPERATORS_MAP[aircraft.id] || (aircraft.primaryAirlines || []).map((airline, idx) => ({
+  const operators = OPERATORS_MAP[aircraft.id] || (aircraft.primaryAirlines || []).map((airline) => ({
     name: airline,
     code: airline.slice(0, 2).toUpperCase(),
     activeCount: 'Active Fleet',
@@ -494,7 +523,7 @@ export default async function AircraftDetailPage({ params }: AircraftDetailPageP
                 {aircraft.name}
               </h1>
               <p className="text-xs sm:text-sm text-sky-100/90 italic font-body max-w-2xl line-clamp-2 mt-1 leading-relaxed">
-                "{aircraft.whyFlyThis}"
+                &ldquo;{aircraft.whyFlyThis}&rdquo;
               </p>
             </div>
           </div>
@@ -777,6 +806,8 @@ export default async function AircraftDetailPage({ params }: AircraftDetailPageP
           shortName={aircraft.shortName}
         />
       </main>
+
+      <Footer />
     </div>
   );
 }

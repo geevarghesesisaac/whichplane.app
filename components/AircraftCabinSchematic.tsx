@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { AircraftType } from '@/lib/types';
-import { Armchair, CheckCircle2, AlertTriangle, Sparkles, Layers } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, Layers } from 'lucide-react';
 
 interface AircraftCabinSchematicProps {
   aircraft: AircraftType;
