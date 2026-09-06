@@ -124,11 +124,11 @@ export default function AircraftFilterPanel({
             {currentBodyType === 'widebody' ? 'TWIN AISLE EMPHASIS' : currentBodyType === 'narrowbody' ? 'SINGLE AISLE' : 'ALL CONFIGS'}
           </span>
         </div>
-        <div className="grid grid-cols-3 p-0.5 bg-[#eff4ff] rounded-lg gap-1 border border-[#dce9ff]">
+        <div className="grid grid-cols-3 p-1 bg-[#eff4ff] rounded-lg gap-1 border border-[#dce9ff]">
           <button
             type="button"
             onClick={() => setBodyType('all')}
-            className={`py-1.5 rounded font-mono-telemetry text-xs font-semibold transition-all cursor-pointer ${
+            className={`py-2 px-2 rounded font-mono-telemetry text-xs font-bold tracking-[0.05em] transition-all cursor-pointer ${
               currentBodyType === 'all'
                 ? 'bg-[#0F172A] text-white shadow-xs'
                 : 'text-[#45464d] hover:text-[#0b1c30]'
@@ -139,7 +139,7 @@ export default function AircraftFilterPanel({
           <button
             type="button"
             onClick={() => setBodyType('widebody')}
-            className={`py-1.5 rounded font-mono-telemetry text-xs font-semibold transition-all cursor-pointer ${
+            className={`py-2 px-2 rounded font-mono-telemetry text-xs font-bold tracking-[0.05em] transition-all cursor-pointer ${
               currentBodyType === 'widebody'
                 ? 'bg-[#0F172A] text-white shadow-xs'
                 : 'text-[#45464d] hover:text-[#0b1c30]'
@@ -150,7 +150,7 @@ export default function AircraftFilterPanel({
           <button
             type="button"
             onClick={() => setBodyType('narrowbody')}
-            className={`py-1.5 rounded font-mono-telemetry text-xs font-semibold transition-all cursor-pointer ${
+            className={`py-2 px-2 rounded font-mono-telemetry text-xs font-bold tracking-[0.05em] transition-all cursor-pointer ${
               currentBodyType === 'narrowbody'
                 ? 'bg-[#0F172A] text-white shadow-xs'
                 : 'text-[#45464d] hover:text-[#0b1c30]'
@@ -174,7 +174,7 @@ export default function AircraftFilterPanel({
                 key={m}
                 type="button"
                 onClick={() => toggleManufacturer(m)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono-telemetry text-xs font-semibold border transition-all cursor-pointer shrink-0 ${
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg font-mono-telemetry text-xs font-bold tracking-[0.05em] border transition-all cursor-pointer shrink-0 ${
                   isSelected
                     ? 'bg-[#0F172A] text-white border-[#0F172A]'
                     : 'bg-[#eff4ff] text-[#45464d] hover:text-[#0b1c30] border-[#dce9ff]'

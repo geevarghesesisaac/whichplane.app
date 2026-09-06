@@ -53,10 +53,10 @@ export default function Navbar({ onTokenChange, customToken, activeAirframe = 'A
                 </svg>
               </div>
               <div className="flex flex-col">
-                <span className="font-headline text-lg font-bold leading-none tracking-tight text-[#0b1c30]">
+                <span className="font-headline text-lg font-bold leading-none tracking-[0.02em] text-[#0b1c30]">
                   Which<span className="text-[#0284c7]">Plane</span>
                 </span>
-                <span className="font-mono-telemetry text-[9px] font-bold text-[#0284c7] uppercase tracking-widest mt-0.5">
+                <span className="font-mono-telemetry text-[10px] font-bold text-[#0284c7] uppercase tracking-[0.08em] mt-1">
                   AV-OPS // SCAN
                 </span>
               </div>
@@ -64,10 +64,10 @@ export default function Navbar({ onTokenChange, customToken, activeAirframe = 'A
 
             {/* Active Airframe Telemetry Tag */}
             <div className="hidden lg:flex items-center gap-2 bg-[#eff4ff] border border-[#dce9ff] px-2.5 py-1 rounded-md">
-              <span className="font-mono-telemetry text-[10px] font-bold text-[#45464d] uppercase">
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#45464d] uppercase tracking-[0.06em]">
                 ACTIVE
               </span>
-              <span className="font-mono-telemetry text-xs font-semibold text-[#0284c7] flex items-center gap-1.5">
+              <span className="font-mono-telemetry text-xs font-bold text-[#0284c7] tracking-[0.04em] flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] animate-pulse" />
                 {activeAirframe}
               </span>
@@ -92,13 +92,13 @@ export default function Navbar({ onTokenChange, customToken, activeAirframe = 'A
             </Link>
             <Link
               href="/aircraft/380"
-              className="hover:text-[#0284c7] transition-colors flex items-center gap-1.5 text-xs px-2 py-0.5 rounded bg-[#fef3c7] text-[#b45309] font-mono-telemetry font-bold border border-[#fde68a]"
+              className="hover:text-[#0284c7] transition-colors flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md bg-[#fef3c7] text-[#b45309] font-mono-telemetry font-bold border border-[#fde68a] tracking-[0.04em]"
             >
               <span>A380 Superjumbo</span>
             </Link>
             <Link
               href="/aircraft/748"
-              className="hover:text-[#0284c7] transition-colors flex items-center gap-1.5 text-xs px-2 py-0.5 rounded bg-[#eff4ff] text-[#0284c7] font-mono-telemetry font-bold border border-[#cce5ff]"
+              className="hover:text-[#0284c7] transition-colors flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md bg-[#eff4ff] text-[#0284c7] font-mono-telemetry font-bold border border-[#cce5ff] tracking-[0.04em]"
             >
               <span>747-8 Queen</span>
             </Link>

@@ -157,10 +157,10 @@ export default function Home() {
         {/* Search Header Banner */}
         <div className="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-[#e2e8f0]">
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-normal leading-snug">
               Flight Telemetry & Airframe Search
             </h1>
-            <p className="text-xs text-[#64748b]">
+            <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed mt-1">
               Discover real flights filtered by composite cabins, quiet turbofans, and equipment confidence.
             </p>
           </div>

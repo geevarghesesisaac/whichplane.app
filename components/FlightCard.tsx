@@ -45,10 +45,10 @@ export default function FlightCard({ offer }: FlightCardProps) {
           </div>
 
           <div className="text-right">
-            <div className="font-display text-xl sm:text-2xl text-[#0b1c30] font-bold tracking-tight">
+            <div className="font-display text-xl sm:text-2xl text-[#0b1c30] font-bold tracking-normal font-tabular">
               {offer.price.formatted}
             </div>
-            <div className="font-mono-telemetry text-[10px] text-[#64748b] tracking-wider uppercase">
+            <div className="font-mono-telemetry text-[10px] text-[#64748b] tracking-[0.06em] uppercase font-bold">
               ROUNDTRIP TOTAL
             </div>
           </div>
@@ -62,24 +62,24 @@ export default function FlightCard({ offer }: FlightCardProps) {
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="font-mono-telemetry text-xs sm:text-sm font-bold text-[#0b1c30] tracking-tight">
+                <span className="font-headline text-xs sm:text-sm font-bold text-[#0b1c30] tracking-normal">
                   {aircraft.name}
                 </span>
-                <span className="bg-[#0284c7] text-white px-1.5 py-0.2 rounded font-mono-telemetry text-[9px] uppercase font-bold">
+                <span className="bg-[#0284c7] text-white px-2 py-0.5 rounded font-mono-telemetry text-[10px] uppercase font-bold tracking-[0.06em]">
                   {aircraft.aisles === 2 ? 'Twin Aisle' : 'Single Aisle'}
                 </span>
                 {aircraft.isComposite && (
-                  <span className="bg-[#ecfdf5] text-[#047857] border border-[#a7f3d0] px-1.5 py-0.2 rounded font-mono-telemetry text-[9px] uppercase font-bold">
+                  <span className="bg-[#ecfdf5] text-[#047857] border border-[#a7f3d0] px-2 py-0.5 rounded font-mono-telemetry text-[10px] uppercase font-bold tracking-[0.06em]">
                     Composite
                   </span>
                 )}
                 {aircraft.family === '737 MAX' && (
-                  <span className="bg-[#fff1f2] text-[#ba1a1a] border border-[#fecdd3] px-1.5 py-0.2 rounded font-mono-telemetry text-[9px] uppercase font-bold">
+                  <span className="bg-[#fff1f2] text-[#ba1a1a] border border-[#fecdd3] px-2 py-0.5 rounded font-mono-telemetry text-[10px] uppercase font-bold tracking-[0.06em]">
                     737 MAX
                   </span>
                 )}
               </div>
-              <div className="text-[11px] text-[#0284c7] truncate font-medium">
+              <div className="text-xs text-[#0284c7] truncate font-medium mt-0.5">
                 {aircraft.isComposite ? 'Aerodynamic Flagship • Sub-6,000ft Cabin Altitude' : aircraft.family === 'A380' ? 'Double-Decker Superjumbo • Whisper Quiet Cabin' : aircraft.family.includes('747') ? 'Queen of the Skies • Upper Deck Hump' : 'Standard Scheduled Commercial Airliner'}
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
 
           <div className="flex items-center gap-1 shrink-0 ml-2" title="Stated by airline booking equipment line">
             <span className="material-symbols-outlined text-[#0284c7] text-[18px]">verified</span>
-            <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-bold hidden sm:inline">
+            <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-bold tracking-[0.05em] hidden sm:inline">
               {primarySegment.confidencePercent || 98}% LOCK
             </span>
           </div>
@@ -97,14 +97,14 @@ export default function FlightCard({ offer }: FlightCardProps) {
         <div className="flex items-center justify-between py-1">
           {/* Departure */}
           <div className="flex flex-col">
-            <span className="font-display text-lg sm:text-xl font-bold text-[#0b1c30]">
+            <span className="font-display text-lg sm:text-xl font-bold text-[#0b1c30] tracking-normal font-tabular">
               {formatTime(primarySegment.departureTime)}
             </span>
             <div className="flex items-center gap-1.5">
-              <span className="font-ocr text-base font-bold text-[#0b1c30] tracking-wider">
+              <span className="font-ocr text-base sm:text-lg font-bold text-[#0b1c30] tracking-[0.08em]">
                 {primarySegment.origin.code}
               </span>
-              <span className="font-body text-[11px] text-[#64748b]">
+              <span className="font-body text-xs text-[#64748b]">
                 {primarySegment.origin.terminal || 'T4'}
               </span>
             </div>
@@ -112,7 +112,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
 
           {/* Vector Progress Bar */}
           <div className="flex-1 px-4 flex flex-col items-center">
-            <span className="font-mono-telemetry text-xs text-[#64748b] mb-1 font-medium">
+            <span className="font-mono-telemetry text-xs text-[#64748b] mb-1 font-medium tracking-[0.02em]">
               {formatDuration(offer.totalDurationMinutes)} nonstop
             </span>
             <div className="w-full flex items-center relative">
@@ -123,7 +123,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
               </span>
               <div className="w-2 h-2 rounded-full bg-[#0284c7]" />
             </div>
-            <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-semibold mt-1">
+            <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-bold tracking-[0.06em] mt-1">
               3,451 NM • HIGH EFFICIENCY
             </span>
           </div>
@@ -131,16 +131,16 @@ export default function FlightCard({ offer }: FlightCardProps) {
           {/* Arrival */}
           <div className="flex flex-col text-right">
             <div className="flex items-center justify-end gap-1">
-              <span className="font-display text-lg sm:text-xl font-bold text-[#0b1c30]">
+              <span className="font-display text-lg sm:text-xl font-bold text-[#0b1c30] tracking-normal font-tabular">
                 {formatTime(lastSegment.arrivalTime)}
               </span>
               <span className="font-mono-telemetry text-[10px] text-[#ba1a1a] font-bold">+1</span>
             </div>
             <div className="flex items-center justify-end gap-1.5">
-              <span className="font-ocr text-base font-bold text-[#0b1c30] tracking-wider">
+              <span className="font-ocr text-base sm:text-lg font-bold text-[#0b1c30] tracking-[0.08em]">
                 {lastSegment.destination.code}
               </span>
-              <span className="font-body text-[11px] text-[#64748b]">
+              <span className="font-body text-xs text-[#64748b]">
                 {lastSegment.destination.terminal || 'T3'}
               </span>
             </div>
@@ -150,36 +150,36 @@ export default function FlightCard({ offer }: FlightCardProps) {
         {/* BOTTOM DECK: TECHNICAL SPEC BAR (MOMENTS OF DELIGHT) */}
         <div className="bg-[#f8f9ff] border border-[#e2e8f0] rounded-lg p-2 flex flex-wrap items-center gap-1.5">
           {aircraft.compositePercent && (
-            <span className="bg-white border border-[#cbd5e1] px-2 py-0.5 rounded font-mono-telemetry text-[10px] text-[#0b1c30] flex items-center gap-1">
+            <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
               <span className="material-symbols-outlined text-[13px] text-[#0284c7]">layers</span>
               {aircraft.compositePercent}
             </span>
           )}
           {primarySegment.engineVariant && (
-            <span className="bg-white border border-[#cbd5e1] px-2 py-0.5 rounded font-mono-telemetry text-[10px] text-[#0b1c30] flex items-center gap-1">
+            <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
               <span className="material-symbols-outlined text-[13px] text-[#0284c7]">volume_down</span>
               {primarySegment.engineVariant}
             </span>
           )}
           {aircraft.cabinAltitudeFt && (
-            <span className="bg-white border border-[#cbd5e1] px-2 py-0.5 rounded font-mono-telemetry text-[10px] text-[#0b1c30] flex items-center gap-1">
+            <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
               <span className="material-symbols-outlined text-[13px] text-[#0284c7]">air</span>
               {aircraft.cabinAltitudeFt.toLocaleString()} ft Altitude
             </span>
           )}
           {primarySegment.seatPitch && (
-            <span className="bg-white border border-[#cbd5e1] px-2 py-0.5 rounded font-mono-telemetry text-[10px] text-[#0b1c30] flex items-center gap-1">
+            <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
               <span className="material-symbols-outlined text-[13px] text-[#0284c7]">airline_seat_recline_normal</span>
               {primarySegment.seatPitch}
             </span>
           )}
           {primarySegment.wifiGeneration && (
-            <span className="bg-white border border-[#cbd5e1] px-2 py-0.5 rounded font-mono-telemetry text-[10px] text-[#0b1c30] flex items-center gap-1">
+            <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
               <span className="material-symbols-outlined text-[13px] text-[#0284c7]">wifi</span>
               {primarySegment.wifiGeneration}
             </span>
           )}
-          <span className="bg-white border border-[#cbd5e1] px-2 py-0.5 rounded font-mono-telemetry text-[10px] text-[#0b1c30] flex items-center gap-1">
+          <span className="bg-white border border-[#cbd5e1] px-2.5 py-1 rounded-md font-mono-telemetry text-[11px] text-[#0b1c30] flex items-center gap-1.5 tracking-[0.02em]">
             <span className="material-symbols-outlined text-[13px] text-[#0284c7]">videocam</span>
             Live HD Tail Cam
           </span>
@@ -190,7 +190,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
           <button
             type="button"
             onClick={() => setIsDetailModalOpen(true)}
-            className="font-mono-telemetry text-xs text-[#0284c7] hover:underline flex items-center gap-1 font-bold cursor-pointer"
+            className="font-mono-telemetry text-xs text-[#0284c7] hover:underline flex items-center gap-1 font-bold cursor-pointer tracking-[0.03em]"
           >
             <span>Airframe Specs & Seat Map</span>
             <span className="material-symbols-outlined text-[16px]">chevron_right</span>
@@ -200,7 +200,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
             href={offer.bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#0F172A] hover:bg-[#1E293B] text-white px-4 py-1.5 rounded-lg font-headline text-xs font-semibold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+            className="bg-[#0F172A] hover:bg-[#1E293B] text-white px-4 py-2 rounded-lg font-headline text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer tracking-[0.03em]"
           >
             <span>Select Flight</span>
             <span className="material-symbols-outlined text-[14px]">arrow_outward</span>

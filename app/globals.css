@@ -60,30 +60,43 @@ body {
 .font-display {
   font-family: var(--font-b612-base);
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.015em;
+  line-height: 1.25;
 }
 
 .font-headline {
   font-family: var(--font-b612-base);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
 }
 
-/* 2. Authentic Boarding Pass OCR-B Stamp (Big Airport Codes SFO, SIN & Ticket Identifiers) */
+/* 2. Authentic Boarding Pass OCR-B Stamp (Big Airport Codes SFO, SIN, JFK, LHR & Ticket Identifiers) */
 .font-ocr {
   font-family: var(--font-ocr);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 /* 3. Boarding Pass Stationery Labels, Pill Badges, Filter Toggles & Body (Helvetica Neue) */
 .font-body {
   font-family: var(--font-helvetica);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
 }
 
 .font-mono-telemetry {
   font-family: var(--font-helvetica);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.045em;
+}
+
+.label-caps {
+  font-family: var(--font-helvetica);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 /* Tabular figures for aviation times & prices */

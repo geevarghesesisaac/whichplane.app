@@ -66,25 +66,25 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
             <div className="flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
+                  <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-[0.08em]">
                     {segment.origin.code}
                   </span>
                   <span className="material-symbols-outlined text-[#0284c7] text-[20px]">
                     trending_flat
                   </span>
-                  <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
+                  <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-[0.08em]">
                     {segment.destination.code}
                   </span>
                 </div>
-                <p className="text-xs text-[#64748b] mt-0.5 font-mono-telemetry">
+                <p className="text-xs text-[#64748b] mt-1 font-mono-telemetry tracking-[0.02em]">
                   {segment.operatingCarrier.name} • {segment.flightNumber}
                 </p>
               </div>
               <div className="text-right">
-                <span className="font-display text-xl sm:text-2xl text-[#0b1c30] font-bold tracking-tight">
+                <span className="font-display text-xl sm:text-2xl text-[#0b1c30] font-bold tracking-normal font-tabular">
                   {offer.price.formatted}
                 </span>
-                <span className="block font-mono-telemetry text-[9px] text-[#64748b] uppercase">
+                <span className="block font-mono-telemetry text-[10px] text-[#64748b] uppercase tracking-[0.06em] font-bold">
                   ROUNDTRIP PER PAX
                 </span>
               </div>
@@ -93,26 +93,26 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-3 gap-2 pt-1 border-t border-[#f1f5f9]">
               <div className="bg-[#eff4ff] p-2.5 rounded-lg border border-[#dce9ff]">
-                <span className="block font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">
+                <span className="block font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em] mb-0.5">
                   AIRTIME DURATION
                 </span>
-                <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30]">
+                <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30] tracking-[0.02em]">
                   {formatDuration(offer.totalDurationMinutes)}
                 </span>
               </div>
               <div className="bg-[#eff4ff] p-2.5 rounded-lg border border-[#dce9ff]">
-                <span className="block font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">
+                <span className="block font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em] mb-0.5">
                   ROUTING // STOPS
                 </span>
-                <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30]">
+                <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30] tracking-[0.02em]">
                   {offer.stops === 0 ? 'Non-Stop Direct' : `${offer.stops} Stop`}
                 </span>
               </div>
               <div className="bg-[#eff4ff] p-2.5 rounded-lg border border-[#dce9ff]">
-                <span className="block font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">
+                <span className="block font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em] mb-0.5">
                   AIRFRAME FUSELAGE
                 </span>
-                <span className="font-mono-telemetry text-xs font-bold text-[#0284c7]">
+                <span className="font-mono-telemetry text-xs font-bold text-[#0284c7] tracking-[0.02em]">
                   {aircraft.bodyType === 'widebody' ? 'Twin-Aisle Wide' : 'Single Aisle'}
                 </span>
               </div>
@@ -122,10 +122,10 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
           {/* Segment 1: Equipment & Operating Carrier Detail */}
           <div className="bg-white rounded-xl p-4 sm:p-5 border border-[#e2e8f0] shadow-xs space-y-3">
             <div className="flex items-center justify-between">
-              <span className="bg-[#0F172A] text-white font-mono-telemetry text-[9px] font-bold px-2 py-0.5 rounded uppercase">
+              <span className="bg-[#0F172A] text-white font-mono-telemetry text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-[0.06em]">
                 LEG 01 • TRANSATLANTIC SECTOR
               </span>
-              <span className="font-mono-telemetry text-xs text-[#64748b]">
+              <span className="font-mono-telemetry text-xs text-[#64748b] tracking-[0.02em]">
                 {formatDuration(segment.durationMinutes)} Non-stop
               </span>
             </div>
@@ -137,7 +137,7 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
                   <span className="material-symbols-outlined text-[18px]">airlines</span>
                 </div>
                 <div className="min-w-0">
-                  <span className="block font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">
+                  <span className="block font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em]">
                     OPERATING CARRIER (DOT DISCLOSURE)
                   </span>
                   <span className="font-headline text-xs font-bold text-[#0b1c30] truncate block">
@@ -146,7 +146,7 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
                 </div>
               </div>
               {segment.operatingCarrier.isCodeshare && (
-                <span className="font-mono-telemetry text-[10px] text-[#0284c7] bg-white px-2 py-0.5 rounded border border-[#dce9ff]">
+                <span className="font-mono-telemetry text-[10px] text-[#0284c7] bg-white px-2 py-0.5 rounded border border-[#dce9ff] tracking-[0.04em]">
                   {segment.operatingCarrier.codeshareNotice}
                 </span>
               )}
@@ -155,24 +155,24 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
             {/* Times */}
             <div className="flex items-center justify-between px-1 py-1">
               <div>
-                <span className="font-display text-lg font-bold text-[#0b1c30] block">
+                <span className="font-display text-lg font-bold text-[#0b1c30] block tracking-normal font-tabular">
                   {formatTime(segment.departureTime)}
                 </span>
-                <span className="font-mono-telemetry text-xs font-bold text-[#0284c7]">
+                <span className="font-ocr text-sm font-bold text-[#0284c7] tracking-[0.06em]">
                   {segment.origin.code}
                 </span>
                 <span className="text-[11px] text-[#64748b] block">{segment.origin.city} {segment.origin.terminal}</span>
               </div>
               <div className="flex-1 px-4 text-center">
-                <span className="font-mono-telemetry text-[10px] text-[#64748b] block">3,451 NM</span>
+                <span className="font-mono-telemetry text-[10px] text-[#64748b] block tracking-[0.04em]">3,451 NM</span>
                 <div className="w-full h-0.5 bg-[#dce9ff] my-1" />
-                <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-semibold">DIRECT TRACK</span>
+                <span className="font-mono-telemetry text-[10px] text-[#0284c7] font-bold tracking-[0.05em]">DIRECT TRACK</span>
               </div>
               <div className="text-right">
-                <span className="font-display text-lg font-bold text-[#0b1c30] block">
+                <span className="font-display text-lg font-bold text-[#0b1c30] block tracking-normal font-tabular">
                   {formatTime(segment.arrivalTime)}
                 </span>
-                <span className="font-mono-telemetry text-xs font-bold text-[#0284c7]">
+                <span className="font-ocr text-sm font-bold text-[#0284c7] tracking-[0.06em]">
                   {segment.destination.code}
                 </span>
                 <span className="text-[11px] text-[#64748b] block">{segment.destination.city} {segment.destination.terminal}</span>

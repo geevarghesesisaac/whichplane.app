@@ -39,19 +39,19 @@ export default function FleetRadarPage() {
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#0284c7] animate-ping" />
               <span className="w-2 h-2 rounded-full bg-[#0284c7] -ml-4" />
-              <span className="font-mono-telemetry text-xs font-bold text-[#0284c7] uppercase tracking-wider pl-1">
+              <span className="font-mono-telemetry text-xs font-bold text-[#0284c7] uppercase tracking-[0.06em] pl-1">
                 RADAR SPECTRUM LIVE
               </span>
             </div>
-            <span className="font-mono-telemetry text-xs text-[#64748b] bg-[#eff4ff] border border-[#dce9ff] px-2.5 py-1 rounded">
+            <span className="font-mono-telemetry text-xs text-[#64748b] bg-[#eff4ff] border border-[#dce9ff] px-2.5 py-1 rounded tracking-[0.02em]">
               9,412 ACTIVE AIRFRAMES MONITORED
             </span>
           </div>
           <div>
-            <h1 className="font-display text-2xl sm:text-4xl font-bold text-[#0b1c30] tracking-tight">
+            <h1 className="font-display text-2xl sm:text-4xl font-bold text-[#0b1c30] tracking-normal leading-snug">
               Fleet Radar & Aircraft Taxonomy
             </h1>
-            <p className="text-xs sm:text-sm text-[#64748b]">
+            <p className="font-body text-xs sm:text-sm text-[#45464d] leading-relaxed mt-1">
               Discover where your bucket-list aircraft fly worldwide and hunt rare cabin architectures.
             </p>
           </div>
@@ -62,32 +62,32 @@ export default function FleetRadarPage() {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-[#0284c7] text-[20px]">explore</span>
-              <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30] uppercase tracking-widest">
+              <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30] uppercase tracking-[0.08em]">
                 GLOBAL FLEET COVERAGE METRICS
               </span>
             </div>
-            <span className="font-mono-telemetry text-xs font-bold text-[#0284c7]">
+            <span className="font-mono-telemetry text-xs font-bold text-[#0284c7] tracking-[0.04em]">
               ICAO // EN-ROUTE
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="bg-[#eff4ff] border border-[#dce9ff] p-3 rounded-lg flex flex-col">
-              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase">
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em]">
                 SUPERJUMBOS ACTIVE
               </span>
-              <span className="font-display text-2xl font-bold text-[#0b1c30] mt-0.5">142</span>
-              <span className="font-mono-telemetry text-xs text-[#0284c7] font-semibold">
+              <span className="font-display text-2xl font-bold text-[#0b1c30] mt-0.5 tracking-normal font-tabular">142</span>
+              <span className="font-mono-telemetry text-xs text-[#0284c7] font-semibold tracking-[0.02em]">
                 Airbus A380 + Boeing 747-8
               </span>
             </div>
 
             <div className="bg-[#eff4ff] border border-[#dce9ff] p-3 rounded-lg flex flex-col">
-              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase">
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em]">
                 COMPOSITE WIDEBODIES
               </span>
-              <span className="font-display text-2xl font-bold text-[#0b1c30] mt-0.5">1,894</span>
-              <span className="font-mono-telemetry text-xs text-[#0284c7] font-semibold">
+              <span className="font-display text-2xl font-bold text-[#0b1c30] mt-0.5 tracking-normal font-tabular">1,894</span>
+              <span className="font-mono-telemetry text-xs text-[#0284c7] font-semibold tracking-[0.02em]">
                 Airbus A350 + Boeing 787
               </span>
             </div>

@@ -62,14 +62,14 @@ export default function AircraftPassportLogger({
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-2 text-sky-400">
             <Award className="w-5 h-5" />
-            <span className="font-mono-telemetry text-xs uppercase tracking-wider font-bold">
+            <span className="font-mono-telemetry text-xs uppercase tracking-[0.08em] font-bold">
               AVGEEK PASSPORT LOGBOOK
             </span>
           </div>
-          <h3 className="font-headline text-xl sm:text-2xl font-bold text-white tracking-tight">
+          <h3 className="font-headline text-xl sm:text-2xl font-bold text-white tracking-[0.015em] leading-snug">
             Flown on the {shortName}?
           </h3>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+          <p className="font-body text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
             Add the {aircraftName} to your personal WhichPlane logged aircraft fleet. Stamp your tail badge, track your flight hours, and build your certified AvGeek airframe passport.
           </p>
         </div>
@@ -77,7 +77,7 @@ export default function AircraftPassportLogger({
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
           <button
             onClick={handleTogglePassport}
-            className={`py-3 px-5 rounded-xl font-mono-telemetry text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md ${
+            className={`py-3 px-5 rounded-xl font-mono-telemetry text-xs font-bold tracking-[0.04em] flex items-center justify-center gap-2 transition-all shadow-md ${
               logged
                 ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
                 : 'bg-sky-500 hover:bg-sky-400 text-slate-950'
@@ -98,7 +98,7 @@ export default function AircraftPassportLogger({
 
           <Link
             href={`/?search=${aircraftId}`}
-            className="py-3 px-5 rounded-xl font-mono-telemetry text-xs font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 flex items-center justify-center gap-2 transition-all"
+            className="py-3 px-5 rounded-xl font-mono-telemetry text-xs font-bold tracking-[0.04em] bg-white/10 hover:bg-white/20 text-white border border-white/20 flex items-center justify-center gap-2 transition-all"
           >
             <Search className="w-4 h-4 text-sky-300" />
             <span>Search All {shortName} Flights</span>

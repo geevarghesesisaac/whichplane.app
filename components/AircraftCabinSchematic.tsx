@@ -236,7 +236,7 @@ export default function AircraftCabinSchematic({ aircraft }: AircraftCabinSchema
               {gIdx < deckSpecs.seatConfig.length - 1 && (
                 <div className="px-1 flex flex-col items-center justify-center text-slate-300">
                   <div className="w-0.5 h-7 sm:h-8 bg-slate-300 border-dashed" />
-                  <span className="font-mono-telemetry text-[9px] text-slate-400 font-bold uppercase tracking-tighter mt-1">
+                  <span className="font-mono-telemetry text-[9px] text-slate-500 font-bold uppercase tracking-[0.08em] mt-1">
                     AISLE
                   </span>
                 </div>

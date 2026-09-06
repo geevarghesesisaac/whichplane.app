@@ -482,18 +482,18 @@ export default async function AircraftDetailPage({ params }: AircraftDetailPageP
             {/* Aircraft Titles over Hero Base */}
             <div className="absolute bottom-5 inset-x-5 flex flex-col gap-1 text-white">
               <div className="flex items-center gap-2">
-                <span className="font-mono-telemetry text-xs text-sky-300 font-bold uppercase tracking-wider">
+                <span className="font-mono-telemetry text-xs text-sky-300 font-bold uppercase tracking-[0.08em]">
                   {aircraft.manufacturer.toUpperCase()} COMMERCIAL AIRCRAFT
                 </span>
                 <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                <span className="font-mono-telemetry text-xs text-slate-300 font-bold">
+                <span className="font-mono-telemetry text-xs text-slate-300 font-bold tracking-[0.04em]">
                   {aircraft.family}
                 </span>
               </div>
-              <h1 className="font-headline text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white drop-shadow-sm">
+              <h1 className="font-headline text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-[0.015em] leading-tight text-white drop-shadow-sm">
                 {aircraft.name}
               </h1>
-              <p className="text-xs sm:text-sm text-sky-100/90 italic font-body max-w-2xl line-clamp-2 mt-0.5">
+              <p className="text-xs sm:text-sm text-sky-100/90 italic font-body max-w-2xl line-clamp-2 mt-1 leading-relaxed">
                 "{aircraft.whyFlyThis}"
               </p>
             </div>

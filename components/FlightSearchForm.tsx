@@ -75,11 +75,11 @@ export default function FlightSearchForm({
       >
         {/* Card Header Telemetry Tag */}
         <div className="flex items-center justify-between pb-1 border-b border-[#f1f5f9]">
-          <span className="font-mono-telemetry text-[10px] font-bold text-[#0284c7] uppercase tracking-wider flex items-center gap-1.5">
+          <span className="font-mono-telemetry text-xs font-bold text-[#0284c7] uppercase tracking-[0.08em] flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[#0284c7] animate-pulse" />
             FLIGHT TELEMETRY SECTOR
           </span>
-          <div className="flex items-center gap-1 bg-[#eff4ff] px-2 py-0.5 rounded text-[#45464d] font-mono-telemetry text-[11px] border border-[#dce9ff]">
+          <div className="flex items-center gap-1 bg-[#eff4ff] px-2.5 py-1 rounded text-[#45464d] font-mono-telemetry text-xs font-semibold tracking-[0.04em] border border-[#dce9ff]">
             <span>RT</span>
             <span className="text-[#cbd5e1]">/</span>
             <span>{passengers} PAX</span>
@@ -96,10 +96,10 @@ export default function FlightSearchForm({
               onClick={() => setShowOriginDropdown(true)}
               className="bg-[#eff4ff] hover:bg-[#e5eeff] border border-[#dce9ff] p-3 rounded-lg text-left transition-colors flex flex-col cursor-pointer"
             >
-              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-wider uppercase">
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-[0.08em] uppercase">
                 ORIGIN WAYPOINT
               </span>
-              <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
+              <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-[0.08em]">
                 {origin}
               </span>
               <span className="text-xs text-[#45464d] truncate font-medium">
@@ -157,10 +157,10 @@ export default function FlightSearchForm({
               onClick={() => setShowDestDropdown(true)}
               className="bg-[#eff4ff] hover:bg-[#e5eeff] border border-[#dce9ff] p-3 rounded-lg text-left transition-colors flex flex-col cursor-pointer"
             >
-              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-wider uppercase">
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-[0.08em] uppercase">
                 DESTINATION WAYPOINT
               </span>
-              <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
+              <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-[0.08em]">
                 {destination}
               </span>
               <span className="text-xs text-[#45464d] truncate font-medium">
@@ -191,7 +191,7 @@ export default function FlightSearchForm({
                     className="w-full text-left px-2.5 py-1.5 rounded hover:bg-[#eff4ff] flex items-center justify-between text-xs text-[#0b1c30] transition-colors"
                   >
                     <div>
-                      <span className="font-mono-telemetry font-bold text-[#0284c7] mr-2">{a.code}</span>
+                      <span className="font-ocr font-bold text-[#0284c7] mr-2 text-sm tracking-[0.06em]">{a.code}</span>
                       <span className="font-medium">{a.city}</span>
                       <span className="text-[#64748b] ml-1 text-[11px]">({a.name})</span>
                     </div>
@@ -209,12 +209,12 @@ export default function FlightSearchForm({
           <div className="flex items-center gap-2 bg-[#eff4ff] border border-[#dce9ff] px-3 py-2 rounded-lg">
             <span className="material-symbols-outlined text-[18px] text-[#0284c7]">calendar_today</span>
             <div className="flex flex-col min-w-0 flex-1">
-              <span className="font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">TRAVEL DATE</span>
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em]">TRAVEL DATE</span>
               <input
                 type="date"
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
-                className="font-mono-telemetry text-xs font-bold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer"
+                className="font-mono-telemetry text-xs font-bold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer tracking-[0.02em]"
               />
             </div>
           </div>
@@ -223,12 +223,12 @@ export default function FlightSearchForm({
           <div className="flex items-center gap-2 bg-[#eff4ff] border border-[#dce9ff] px-3 py-2 rounded-lg">
             <span className="material-symbols-outlined text-[18px] text-[#0284c7]">airline_seat_recline_normal</span>
             <div className="flex flex-col min-w-0 flex-1">
-              <span className="font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">CABIN // PAX</span>
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-[0.06em]">CABIN // PAX</span>
               <div className="flex items-center gap-2">
                 <select
                   value={cabinClass}
                   onChange={(e) => setCabinClass(e.target.value as CabinClass)}
-                  className="font-mono-telemetry text-xs font-semibold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer capitalize"
+                  className="font-mono-telemetry text-xs font-semibold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer capitalize tracking-[0.02em]"
                 >
                   <option value="economy">Economy</option>
                   <option value="premium_economy">Prem Economy</option>
@@ -238,7 +238,7 @@ export default function FlightSearchForm({
                 <select
                   value={passengers}
                   onChange={(e) => setPassengers(Number(e.target.value))}
-                  className="font-mono-telemetry text-xs font-semibold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer"
+                  className="font-mono-telemetry text-xs font-semibold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer tracking-[0.02em]"
                 >
                   {[1, 2, 3, 4, 5, 6].map(n => (
                     <option key={n} value={n}>{n} Pax</option>
@@ -252,7 +252,7 @@ export default function FlightSearchForm({
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#0F172A] hover:bg-[#1E293B] text-white px-5 py-2.5 rounded-lg font-headline text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="w-full bg-[#0F172A] hover:bg-[#1E293B] text-white px-5 py-2.5 rounded-lg font-headline text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 tracking-[0.02em]"
           >
             {isLoading ? (
               <>
@@ -270,39 +270,39 @@ export default function FlightSearchForm({
       </form>
 
       {/* Curated AvGeek Itineraries Module */}
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <div className="flex items-center justify-between px-1">
-          <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-wider flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[14px] text-[#0284c7]">trending_up</span>
+          <span className="font-mono-telemetry text-xs font-bold text-[#64748b] uppercase tracking-[0.06em] flex items-center gap-1.5">
+            <span className="material-symbols-outlined text-[15px] text-[#0284c7]">trending_up</span>
             Curated AvGeek Itineraries
           </span>
-          <span className="font-mono-telemetry text-[11px] text-[#0284c7] font-semibold">
+          <span className="font-mono-telemetry text-[11px] text-[#0284c7] font-bold tracking-[0.05em]">
             INSTANT SCAN
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Card 1: A380 */}
           <div
             onClick={() => handleLoadCurated('DXB', 'LHR')}
-            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+            className="bg-white rounded-xl border border-[#e2e8f0] p-3.5 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="label-caps px-2 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
                   SUPERJUMBO QUAD
                 </span>
-                <span className="font-mono-telemetry text-[10px] text-[#64748b]">EK0001</span>
+                <span className="font-ocr text-[11px] font-bold text-[#64748b] tracking-[0.06em]">EK0001</span>
               </div>
-              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+              <h4 className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors leading-snug">
                 A380 Over the Atlantic
               </h4>
-              <p className="text-[11px] text-[#45464d] mt-0.5">DXB ⇄ LHR • Emirates Double Decker with Lounge</p>
+              <p className="font-body text-xs text-[#45464d] mt-1 leading-relaxed">DXB ⇄ LHR • Emirates Double Decker with Lounge</p>
             </div>
-            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
-              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$840</span>
-              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
-                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+            <div className="pt-2.5 mt-2.5 border-t border-[#f1f5f9] flex items-center justify-between text-xs">
+              <span className="font-ocr font-bold text-[#0b1c30] text-sm tracking-wide">$840</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold text-[11px] tracking-[0.05em] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
               </span>
             </div>
           </div>
@@ -310,24 +310,24 @@ export default function FlightSearchForm({
           {/* Card 2: 747-8 Queen */}
           <div
             onClick={() => handleLoadCurated('FRA', 'JFK')}
-            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+            className="bg-white rounded-xl border border-[#e2e8f0] p-3.5 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="label-caps px-2 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
                   QUEEN OF SKIES
                 </span>
-                <span className="font-mono-telemetry text-[10px] text-[#64748b]">LH400</span>
+                <span className="font-ocr text-[11px] font-bold text-[#64748b] tracking-[0.06em]">LH400</span>
               </div>
-              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+              <h4 className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors leading-snug">
                 Boeing 747-8 Intercontinental
               </h4>
-              <p className="text-[11px] text-[#45464d] mt-0.5">FRA ⇄ JFK • Upper Deck & Nose Cone Flights</p>
+              <p className="font-body text-xs text-[#45464d] mt-1 leading-relaxed">FRA ⇄ JFK • Upper Deck & Nose Cone Flights</p>
             </div>
-            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
-              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$820</span>
-              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
-                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+            <div className="pt-2.5 mt-2.5 border-t border-[#f1f5f9] flex items-center justify-between text-xs">
+              <span className="font-ocr font-bold text-[#0b1c30] text-sm tracking-wide">$820</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold text-[11px] tracking-[0.05em] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
               </span>
             </div>
           </div>
@@ -335,24 +335,24 @@ export default function FlightSearchForm({
           {/* Card 3: A350-1000 XWB */}
           <div
             onClick={() => handleLoadCurated('JFK', 'LHR')}
-            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+            className="bg-white rounded-xl border border-[#e2e8f0] p-3.5 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#ecfdf5] text-[#047857] border border-[#a7f3d0]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="label-caps px-2 py-0.5 rounded bg-[#ecfdf5] text-[#047857] border border-[#a7f3d0]">
                   5,800FT CABIN
                 </span>
-                <span className="font-mono-telemetry text-[10px] text-[#64748b]">VS0004</span>
+                <span className="font-ocr text-[11px] font-bold text-[#64748b] tracking-[0.06em]">VS0004</span>
               </div>
-              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+              <h4 className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors leading-snug">
                 Airbus A350-1000 Flagship
               </h4>
-              <p className="text-[11px] text-[#45464d] mt-0.5">JFK ⇄ LHR • Carbon Composite Trent XWB</p>
+              <p className="font-body text-xs text-[#45464d] mt-1 leading-relaxed">JFK ⇄ LHR • Carbon Composite Trent XWB</p>
             </div>
-            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
-              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$684</span>
-              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
-                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+            <div className="pt-2.5 mt-2.5 border-t border-[#f1f5f9] flex items-center justify-between text-xs">
+              <span className="font-ocr font-bold text-[#0b1c30] text-sm tracking-wide">$684</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold text-[11px] tracking-[0.05em] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
               </span>
             </div>
           </div>
@@ -360,24 +360,24 @@ export default function FlightSearchForm({
           {/* Card 4: 787 Dreamliner */}
           <div
             onClick={() => handleLoadCurated('SFO', 'SIN')}
-            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+            className="bg-white rounded-xl border border-[#e2e8f0] p-3.5 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#eff4ff] text-[#0284c7] border border-[#cce5ff]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="label-caps px-2 py-0.5 rounded bg-[#eff4ff] text-[#0284c7] border border-[#cce5ff]">
                   DIMMABLE WINDOWS
                 </span>
-                <span className="font-mono-telemetry text-[10px] text-[#64748b]">UA001</span>
+                <span className="font-ocr text-[11px] font-bold text-[#64748b] tracking-[0.06em]">UA001</span>
               </div>
-              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+              <h4 className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors leading-snug">
                 Dreamliner Ultra Long-Haul
               </h4>
-              <p className="text-[11px] text-[#45464d] mt-0.5">SFO ⇄ SIN • 17h Non-Stop HEPA Filtration</p>
+              <p className="font-body text-xs text-[#45464d] mt-1 leading-relaxed">SFO ⇄ SIN • 17h Non-Stop HEPA Filtration</p>
             </div>
-            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
-              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$990</span>
-              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
-                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+            <div className="pt-2.5 mt-2.5 border-t border-[#f1f5f9] flex items-center justify-between text-xs">
+              <span className="font-ocr font-bold text-[#0b1c30] text-sm tracking-wide">$990</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold text-[11px] tracking-[0.05em] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
               </span>
             </div>
           </div>
