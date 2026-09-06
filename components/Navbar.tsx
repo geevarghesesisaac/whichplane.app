@@ -1,13 +1,44 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useCurrency, CURRENCIES, CurrencyCode } from '@/lib/currency';
 
 interface NavbarProps {
   activeAirframe?: string;
 }
 
 export default function Navbar({ activeAirframe = 'A350-1000' }: NavbarProps) {
+  const { currency, setCurrency, userTimeZone } = useCurrency();
+  const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
+  const [localClock, setLocalClock] = useState('');
+  const currencyRef = useRef<HTMLDivElement>(null);
+
+  // Live local clock updating every minute
+  useEffect(() => {
+    function updateClock() {
+      const d = new Date();
+      const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+      setLocalClock(timeStr);
+    }
+    updateClock();
+    const interval = setInterval(updateClock, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Click outside listener for currency dropdown
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (currencyRef.current && !currencyRef.current.contains(e.target as Node)) {
+        setIsCurrencyOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const activeCurrency = CURRENCIES[currency] || CURRENCIES.USD;
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-xl border-b border-[#e2e8f0] shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
@@ -76,17 +107,70 @@ export default function Navbar({ activeAirframe = 'A350-1000' }: NavbarProps) {
           </Link>
         </nav>
 
-        {/* Right Action: Live Radar System Tag & Currency */}
-        <div className="flex items-center gap-2.5">
-          <div className="flex items-center gap-1.5 font-mono-telemetry text-[11px] text-[#0284c7] font-bold px-2.5 py-1 bg-[#eff4ff] border border-[#dce9ff] rounded-md tracking-[0.04em]">
+        {/* Right Action: Local Timezone Clock & Currency Selector */}
+        <div className="flex items-center gap-2">
+          {/* User's Local Time & Telemetry Tag */}
+          <div className="hidden sm:flex items-center gap-1.5 font-mono-telemetry text-[11px] text-[#0284c7] font-bold px-2.5 py-1 bg-[#eff4ff] border border-[#dce9ff] rounded-md tracking-[0.04em]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-            <span>RADAR // LIVE</span>
+            <span>{localClock ? `${localClock} ${userTimeZone.shortName}` : 'RADAR // LIVE'}</span>
           </div>
-          <span className="hidden sm:inline-flex font-mono-telemetry text-[11px] font-bold text-[#45464d] px-2.5 py-1 bg-white border border-[#cbd5e1] rounded-md tracking-[0.04em]">
-            USD ($)
-          </span>
+
+          {/* Interactive Currency Selector */}
+          <div ref={currencyRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
+              className="flex items-center gap-1 font-mono-telemetry text-xs font-bold text-[#0b1c30] px-2.5 py-1 bg-white hover:bg-[#eff4ff] border border-[#cbd5e1] hover:border-[#0284c7] rounded-md tracking-[0.03em] transition-colors cursor-pointer shadow-xs"
+              title="Change display currency"
+            >
+              <span className="text-[#0284c7] font-semibold">{activeCurrency.symbol.trim()}</span>
+              <span>{currency}</span>
+              <span className="material-symbols-outlined text-[14px] text-[#64748b]">
+                expand_more
+              </span>
+            </button>
+
+            {/* Currency Dropdown Menu */}
+            {isCurrencyOpen && (
+              <div className="absolute right-0 top-full mt-1.5 w-48 bg-white border border-[#cbd5e1] rounded-lg shadow-xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100">
+                <div className="px-3 py-1 text-[10px] font-mono-telemetry font-bold text-[#64748b] uppercase border-b border-[#f1f5f9]">
+                  Select Currency ({userTimeZone.shortName} Auto-detected)
+                </div>
+                {(Object.keys(CURRENCIES) as CurrencyCode[]).map((code) => {
+                  const item = CURRENCIES[code];
+                  const isSelected = code === currency;
+                  return (
+                    <button
+                      key={code}
+                      type="button"
+                      onClick={() => {
+                        setCurrency(code);
+                        setIsCurrencyOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-1.5 flex items-center justify-between text-xs transition-colors cursor-pointer ${
+                        isSelected
+                          ? 'bg-[#eff4ff] text-[#0284c7] font-bold'
+                          : 'text-[#0b1c30] hover:bg-[#f8fafc]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono-telemetry font-bold w-4 text-center">
+                          {item.symbol.trim()}
+                        </span>
+                        <span>{item.code}</span>
+                      </div>
+                      <span className="text-[11px] text-[#64748b] font-normal truncate max-w-[80px]">
+                        {item.name}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
   );
 }
+

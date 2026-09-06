@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { FlightOffer } from '@/lib/types';
 import { formatDuration, formatTime } from '@/lib/utils';
+import { useCurrency } from '@/lib/currency';
 import FlightDetailModal from '@/components/FlightDetailModal';
 import ConfidenceBadge from '@/components/ConfidenceBadge';
 
@@ -11,6 +12,7 @@ interface FlightCardProps {
 }
 
 export default function FlightCard({ offer }: FlightCardProps) {
+  const { formatPrice } = useCurrency();
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   const primarySegment = offer.segments[0];
@@ -47,7 +49,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
 
           <div className="text-right">
             <div className="font-display text-xl sm:text-2xl text-[#0b1c30] font-bold tracking-normal font-tabular">
-              {offer.price.formatted}
+              {formatPrice(offer.price.amount)}
             </div>
             <div className="font-mono-telemetry text-[10px] text-[#64748b] tracking-[0.06em] uppercase font-bold">
               ESTIMATED TOTAL

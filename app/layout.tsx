@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { B612, Space_Mono } from 'next/font/google';
+import { CurrencyProvider } from '@/lib/currency';
 import './globals.css';
 
 const b612 = B612({
@@ -78,7 +79,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#f8f9ff] text-[#0b1c30] font-sans">
-        {children}
+        <CurrencyProvider>{children}</CurrencyProvider>
       </body>
     </html>
   );

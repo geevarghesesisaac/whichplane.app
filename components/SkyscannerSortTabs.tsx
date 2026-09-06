@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react';
 import { FlightOffer, FilterState } from '@/lib/types';
+import { useCurrency } from '@/lib/currency';
 
 interface SkyscannerSortTabsProps {
   offers: FlightOffer[];
@@ -56,6 +57,8 @@ export default function SkyscannerSortTabs({
   currentSort,
   onSortChange
 }: SkyscannerSortTabsProps) {
+  const { formatPrice } = useCurrency();
+
   // 1. Cheapest offer
   const cheapestOffer = useMemo(() => {
     if (!offers || offers.length === 0) return null;
@@ -114,7 +117,7 @@ export default function SkyscannerSortTabs({
             </div>
             <div className="mt-1 flex flex-wrap items-baseline gap-1 sm:gap-1.5">
               <span className="font-ocr text-sm sm:text-base font-bold text-[#0b1c30]">
-                {bestOffer ? bestOffer.price.formatted : '—'}
+                {bestOffer ? formatPrice(bestOffer.price.amount) : '—'}
               </span>
               <span className="text-[11px] sm:text-xs font-mono-telemetry text-[#64748b]">
                 · {bestOffer ? formatDuration(bestOffer.totalDurationMinutes) : '—'}
@@ -152,7 +155,7 @@ export default function SkyscannerSortTabs({
             </div>
             <div className="mt-1 flex flex-wrap items-baseline gap-1 sm:gap-1.5">
               <span className="font-ocr text-sm sm:text-base font-bold text-[#10b981]">
-                {cheapestOffer ? cheapestOffer.price.formatted : '—'}
+                {cheapestOffer ? formatPrice(cheapestOffer.price.amount) : '—'}
               </span>
               <span className="text-[11px] sm:text-xs font-mono-telemetry text-[#64748b]">
                 · {cheapestOffer ? formatDuration(cheapestOffer.totalDurationMinutes) : '—'}
@@ -193,7 +196,7 @@ export default function SkyscannerSortTabs({
                 {fastestOffer ? formatDuration(fastestOffer.totalDurationMinutes) : '—'}
               </span>
               <span className="text-[11px] sm:text-xs font-mono-telemetry text-[#64748b]">
-                · {fastestOffer ? fastestOffer.price.formatted : '—'}
+                · {fastestOffer ? formatPrice(fastestOffer.price.amount) : '—'}
               </span>
             </div>
           </div>
