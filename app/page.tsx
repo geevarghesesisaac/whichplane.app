@@ -6,6 +6,7 @@ import FlightSearchForm from '@/components/FlightSearchForm';
 import AircraftFilterPanel from '@/components/AircraftFilterPanel';
 import FlightCard from '@/components/FlightCard';
 import FeaturedAvgeekRoutes from '@/components/FeaturedAvgeekRoutes';
+import SkyscannerSortTabs, { calculateBestScore } from '@/components/SkyscannerSortTabs';
 import { FlightOffer, SearchParams, FilterState } from '@/lib/types';
 import { generateRealisticFlights } from '@/data/mockFlights';
 import Footer from '@/components/Footer';
@@ -145,9 +146,7 @@ export default function Home() {
       })
       .sort((a, b) => {
         if (filters.sortBy === 'best_spec') {
-          const scoreA = (a.primaryAircraft.isComposite ? 4 : 0) + (a.containsA380 || a.contains747 ? 5 : 0) + (a.primaryAircraft.bodyType === 'widebody' ? 2 : 0);
-          const scoreB = (b.primaryAircraft.isComposite ? 4 : 0) + (b.containsA380 || b.contains747 ? 5 : 0) + (b.primaryAircraft.bodyType === 'widebody' ? 2 : 0);
-          return scoreB - scoreA;
+          return calculateBestScore(b, offers) - calculateBestScore(a, offers);
         }
         if (filters.sortBy === 'price_asc') {
           return a.price.amount - b.price.amount;
@@ -217,7 +216,18 @@ export default function Home() {
         />
 
         {/* Results Section with Anchor and Scroll Ref */}
-        <div ref={resultsRef} id="flight-results" className="scroll-mt-4 space-y-4">
+        <div ref={resultsRef} id="flight-results" className="scroll-mt-4 space-y-3">
+          {/* Skyscanner 3 Subcategory Tabs: Best / Cheapest / Fastest */}
+          {!isLoading && offers.length > 0 && (
+            <SkyscannerSortTabs
+              offers={filteredOffers.length > 0 ? filteredOffers : offers}
+              currentSort={filters.sortBy}
+              onSortChange={(newSort) =>
+                setFilters((prev) => ({ ...prev, sortBy: newSort }))
+              }
+            />
+          )}
+
           {/* Telemetry Indicator Strip */}
           <div className="flex flex-wrap items-center justify-between bg-white px-4 py-3 rounded-xl border border-[#e2e8f0] shadow-xs gap-2">
             <div className="flex items-center gap-2">

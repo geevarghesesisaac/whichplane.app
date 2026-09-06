@@ -314,9 +314,9 @@ export default function AircraftFilterPanel({
           onChange={(e) => onChange({ ...filters, sortBy: e.target.value as FilterState['sortBy'] })}
           className="font-mono-telemetry text-xs font-bold text-[#0b1c30] bg-[#eff4ff] border border-[#dce9ff] px-2.5 py-1 rounded-md focus:outline-none focus:border-[#0284c7] cursor-pointer"
         >
-          <option value="best_spec">Best Aircraft Spec (A350 / 787 / A380)</option>
-          <option value="price_asc">Lowest Direct Fare ($)</option>
-          <option value="duration_asc">Shortest Airtime</option>
+          <option value="best_spec">Best (Optimal Price, Speed & Spec)</option>
+          <option value="price_asc">Cheapest (Lowest Fare)</option>
+          <option value="duration_asc">Fastest (Shortest Duration)</option>
           <option value="departure_time">Departure Timeline</option>
         </select>
       </div>
