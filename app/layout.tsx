@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import { B612, Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
-const spaceGrotesk = Space_Grotesk({
-  variable: '--font-space-grotesk',
+const b612 = B612({
+  variable: '--font-b612',
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
+  weight: ['400', '700'],
 });
 
 const inter = Inter({
@@ -14,10 +14,10 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-jetbrains-mono',
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: '--font-plus-jakarta-sans',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased light`}
+      className={`${b612.variable} ${inter.variable} ${plusJakartaSans.variable} h-full antialiased light`}
     >
       <head>
         <link
