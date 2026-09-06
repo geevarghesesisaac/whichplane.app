@@ -83,6 +83,7 @@ export const AIRLINE_REGISTRY: Record<string, AirlineInfo> = {
   LA: { name: 'LATAM Airlines', logoLetter: 'LA' },
   AM: { name: 'Aeromexico', logoLetter: 'AM' },
   AV: { name: 'Avianca', logoLetter: 'AV' },
+  AT: { name: 'Royal Air Maroc', logoLetter: 'AT' },
   ET: { name: 'Ethiopian Airlines', logoLetter: 'ET' },
   MS: { name: 'EgyptAir', logoLetter: 'MS' },
   SA: { name: 'South African Airways', logoLetter: 'SA' }
