@@ -57,24 +57,27 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ---
 
-## 🔑 Optional Duffel API Configuration
+## 🔑 Server-Side Flight Data Gateway
 
-You can configure a live Duffel API access token either:
-1. In the UI via the **Duffel API** button in the top navbar.
-2. In a `.env.local` file:
-   ```env
-   DUFFEL_ACCESS_TOKEN=your_duffel_token_here
-   ```
+WhichPlane operates as a centralized metasearch engine (like Skyscanner or Google Flights). End-users never carry or provide API keys. All airline data feeds are securely resolved server-side through Next.js route handlers.
 
-*(If omitted, WhichPlane automatically runs with the realistic flight simulator).*
+To connect WhichPlane to live real-world airline booking engines in production, set your centralized server token in `.env.local` (or hosting environment variables):
+
+```env
+DUFFEL_ACCESS_TOKEN=duffel_live_YOUR_TOKEN_HERE
+```
+
+*When no server token is configured (such as during local front-end development or testing), WhichPlane's built-in simulation engine automatically activates to ensure the entire flight discovery UI and aircraft taxonomy remain fully operational without breaking.*
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 16 (App Router)
+- **Framework**: Next.js 16 (App Router with Turbopack)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS v4 (Aviation Dark Cockpit Theme)
-- **Iconography**: Lucide React
+- **Design System**: AeroPrecision (Daylight Aviation Canvas `#F8F9FF` & Obsidian Stratosphere `#0F172A`)
+- **Typography**: B612 (Airbus Avionics Cockpit) + OCR-B (Boarding Pass Stamps) + Helvetica Neue (Stationery & Micro-Labels)
+- **Styling**: Tailwind CSS v4
+- **Iconography**: Google Material Symbols Outlined & Lucide React
 - **Flight Data**: Duffel API & Aviation Taxonomy Engine
 - **License**: MIT

@@ -104,29 +104,15 @@ export default function Navbar({ onTokenChange, customToken, activeAirframe = 'A
             </Link>
           </nav>
 
-          {/* Right Action: Duffel API & Live System Tag */}
+          {/* Right Action: Live Radar System Tag & Currency */}
           <div className="flex items-center gap-2.5">
-            <span className="hidden sm:inline-flex font-mono-telemetry text-[11px] text-[#45464d] px-2 py-1 bg-[#eff4ff] border border-[#dce9ff] rounded">
-              SYS.LIVE
+            <div className="flex items-center gap-1.5 font-mono-telemetry text-[11px] text-[#0284c7] font-bold px-2.5 py-1 bg-[#eff4ff] border border-[#dce9ff] rounded-md tracking-[0.04em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+              <span>RADAR // LIVE</span>
+            </div>
+            <span className="hidden sm:inline-flex font-mono-telemetry text-[11px] font-bold text-[#45464d] px-2.5 py-1 bg-white border border-[#cbd5e1] rounded-md tracking-[0.04em]">
+              USD ($)
             </span>
-            <button
-              type="button"
-              onClick={() => setIsApiKeyModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-white border border-[#cbd5e1] hover:border-[#0284c7] hover:bg-[#eff4ff] transition-all text-[#0b1c30] shadow-xs cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[16px] text-[#0284c7]">key</span>
-              <span className="hidden sm:inline">Duffel API:</span>
-              {token ? (
-                <span className="text-[#10b981] font-mono-telemetry font-bold flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
-                  Live
-                </span>
-              ) : (
-                <span className="text-[#0284c7] font-mono-telemetry font-bold">
-                  Sim Engine
-                </span>
-              )}
-            </button>
           </div>
         </div>
       </header>
