@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ApiKeyModal from '@/components/ApiKeyModal';
+import BoardingPassFontToggle from '@/components/BoardingPassFontToggle';
 
 interface NavbarProps {
   onTokenChange?: (token: string) => void;
@@ -104,9 +105,10 @@ export default function Navbar({ onTokenChange, customToken, activeAirframe = 'A
             </Link>
           </nav>
 
-          {/* Right Action: Duffel API & Live System Tag */}
-          <div className="flex items-center gap-2.5">
-            <span className="hidden sm:inline-flex font-mono-telemetry text-[11px] text-[#45464d] px-2 py-1 bg-[#eff4ff] border border-[#dce9ff] rounded">
+          {/* Right Action: Duffel API & Font Mode Toggle */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <BoardingPassFontToggle />
+            <span className="hidden lg:inline-flex font-mono-telemetry text-[11px] text-[#45464d] px-2 py-1 bg-[#eff4ff] border border-[#dce9ff] rounded">
               SYS.LIVE
             </span>
             <button

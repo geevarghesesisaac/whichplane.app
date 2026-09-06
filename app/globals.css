@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --font-b612: var(--font-b612), 'B612', sans-serif;
-  --font-inter: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-plus-jakarta-sans: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+  /* Font Family Definitions */
+  --font-helvetica: 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  --font-ocr: 'OCR-B', 'OCR B Std', 'OCRB', var(--font-space-mono), 'Courier New', monospace;
+  --font-inter-base: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Backward-compatible mappings */
-  --font-space-grotesk: var(--font-b612);
-  --font-jetbrains-mono: var(--font-plus-jakarta-sans);
+  /* Default / Option A: Authentic Boarding Pass */
+  /* Display & Headlines: Helvetica Neue */
+  /* Telemetry, Specs & Codes: OCR-B */
+  /* Body & Inputs: Inter */
+  --current-display: var(--font-helvetica);
+  --current-headline: var(--font-helvetica);
+  --current-telemetry: var(--font-ocr);
+  --current-body: var(--font-inter-base);
 
   /* AeroPrecision Color Palette */
   --surface: #f8f9ff;
@@ -45,10 +51,25 @@
   --on-error-container: #93000a;
 }
 
+/* Mode Switchers */
+html[data-font-mode="authentic"] {
+  --current-display: var(--font-helvetica);
+  --current-headline: var(--font-helvetica);
+  --current-telemetry: var(--font-ocr);
+  --current-body: var(--font-inter-base);
+}
+
+html[data-font-mode="terminal"] {
+  --current-display: var(--font-ocr);
+  --current-headline: var(--font-ocr);
+  --current-telemetry: var(--font-helvetica);
+  --current-body: var(--font-inter-base);
+}
+
 body {
   background-color: var(--surface);
   color: var(--on-surface);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--current-body);
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -56,22 +77,23 @@ body {
 
 /* Typography Utility Classes */
 .font-display {
-  font-family: var(--font-b612), sans-serif;
-  letter-spacing: -0.01em;
+  font-family: var(--current-display);
+  letter-spacing: -0.015em;
 }
 
 .font-headline {
-  font-family: var(--font-b612), sans-serif;
+  font-family: var(--current-headline);
   letter-spacing: -0.01em;
 }
 
 .font-body {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--current-body);
 }
 
 .font-mono-telemetry {
-  font-family: var(--font-plus-jakarta-sans), sans-serif;
+  font-family: var(--current-telemetry);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 /* Tabular figures for aviation times & prices */

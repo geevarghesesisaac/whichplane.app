@@ -1,12 +1,6 @@
 import type { Metadata } from 'next';
-import { B612, Inter, Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter, Space_Mono } from 'next/font/google';
 import './globals.css';
-
-const b612 = B612({
-  variable: '--font-b612',
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
 
 const inter = Inter({
   variable: '--font-inter',
@@ -14,10 +8,10 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: '--font-plus-jakarta-sans',
+const spaceMono = Space_Mono({
+  variable: '--font-space-mono',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '700'],
 });
 
 export const metadata: Metadata = {
@@ -55,7 +49,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${b612.variable} ${inter.variable} ${plusJakartaSans.variable} h-full antialiased light`}
+      className={`${inter.variable} ${spaceMono.variable} h-full antialiased light`}
+      data-font-mode="authentic"
     >
       <head>
         <link
