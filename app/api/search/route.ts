@@ -95,7 +95,21 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Fallback High-Fidelity Simulation Engine (Guarantees zero downtime / zero blank screens)
+    // 3. Multi-Airframe Enrichment: If live search returned fewer than 4 offers,
+    // complement with realistic schedule lines for that route so users can compare airframe specs
+    if (offers.length > 0 && offers.length < 4) {
+      console.log(`[WhichPlane Gateway] Complemented ${offers.length} live offer(s) with multi-airframe schedule lines for airframe comparison`);
+      const simulations = generateRealisticFlights(searchParams);
+      const existingAirlines = new Set(offers.map(o => o.segments[0].marketingCarrier.code));
+      for (const sim of simulations) {
+        if (!existingAirlines.has(sim.segments[0].marketingCarrier.code)) {
+          offers.push(sim);
+          existingAirlines.add(sim.segments[0].marketingCarrier.code);
+        }
+      }
+    }
+
+    // 4. Fallback High-Fidelity Simulation Engine (Guarantees zero downtime / zero blank screens)
     if (offers.length === 0) {
       console.log(`[WhichPlane Gateway] Running high-fidelity simulation engine for ${searchParams.origin} -> ${searchParams.destination}`);
       offers = generateRealisticFlights(searchParams);

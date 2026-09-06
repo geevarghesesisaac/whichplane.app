@@ -44,6 +44,16 @@ export default function FlightSearchForm({
   const [cabinClass, setCabinClass] = useState<CabinClass>('economy');
   const [passengers, setPassengers] = useState(1);
 
+  // Synchronize internal state when initialParams updates externally
+  useEffect(() => {
+    if (initialParams?.origin) setOrigin(initialParams.origin);
+    if (initialParams?.destination) setDestination(initialParams.destination);
+    if (initialParams?.departureDate) setDepartureDate(initialParams.departureDate);
+    if (initialParams?.returnDate) setReturnDate(initialParams.returnDate);
+    if (initialParams?.cabinClass) setCabinClass(initialParams.cabinClass);
+    if (initialParams?.passengers) setPassengers(initialParams.passengers);
+  }, [initialParams]);
+
   // Dropdown Autocomplete States & Refs
   const [showOriginDropdown, setShowOriginDropdown] = useState(false);
   const [showDestDropdown, setShowDestDropdown] = useState(false);
@@ -70,6 +80,18 @@ export default function FlightSearchForm({
     };
   }, []);
 
+  const selectOrigin = (code: string) => {
+    setOrigin(code);
+    setShowOriginDropdown(false);
+    setOriginQuery('');
+  };
+
+  const selectDest = (code: string) => {
+    setDestination(code);
+    setShowDestDropdown(false);
+    setDestQuery('');
+  };
+
   const handleSwap = () => {
     const temp = origin;
     setOrigin(destination);
@@ -78,11 +100,36 @@ export default function FlightSearchForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!origin || !destination || !departureDate) return;
+
+    let resolvedOrigin = origin;
+    let resolvedDest = destination;
+
+    // Auto-commit active search query if user typed into input without explicitly clicking dropdown
+    if (showOriginDropdown && originQuery.trim()) {
+      const matches = findAirport(originQuery.trim());
+      if (matches.length > 0) {
+        resolvedOrigin = matches[0].code;
+        setOrigin(matches[0].code);
+      }
+      setShowOriginDropdown(false);
+      setOriginQuery('');
+    }
+
+    if (showDestDropdown && destQuery.trim()) {
+      const matches = findAirport(destQuery.trim());
+      if (matches.length > 0) {
+        resolvedDest = matches[0].code;
+        setDestination(matches[0].code);
+      }
+      setShowDestDropdown(false);
+      setDestQuery('');
+    }
+
+    if (!resolvedOrigin || !resolvedDest || !departureDate) return;
 
     onSearch({
-      origin: origin.toUpperCase().trim(),
-      destination: destination.toUpperCase().trim(),
+      origin: resolvedOrigin.toUpperCase().trim(),
+      destination: resolvedDest.toUpperCase().trim(),
       departureDate,
       returnDate: isRoundtrip ? returnDate : undefined,
       cabinClass,
@@ -160,6 +207,42 @@ export default function FlightSearchForm({
           </div>
         </div>
 
+        {/* Quick AvGeek Preset Pills */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
+          <span className="text-[10px] font-mono-telemetry font-bold text-[#64748b] shrink-0 uppercase tracking-wider flex items-center gap-1">
+            <span className="material-symbols-outlined text-[14px] text-[#0284c7]">bolt</span>
+            PRESETS:
+          </span>
+          <button
+            type="button"
+            onClick={() => handleLoadCurated('FRA', 'JFK')}
+            className="shrink-0 px-2 py-0.5 rounded text-[11px] font-mono-telemetry font-semibold bg-[#eff4ff] hover:bg-[#dce9ff] text-[#0b1c30] hover:text-[#0284c7] border border-[#dce9ff] transition-all cursor-pointer"
+          >
+            FRA ⇄ JFK <span className="text-[#b45309] font-bold">(747-8)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleLoadCurated('DXB', 'LHR')}
+            className="shrink-0 px-2 py-0.5 rounded text-[11px] font-mono-telemetry font-semibold bg-[#eff4ff] hover:bg-[#dce9ff] text-[#0b1c30] hover:text-[#0284c7] border border-[#dce9ff] transition-all cursor-pointer"
+          >
+            DXB ⇄ LHR <span className="text-[#0284c7] font-bold">(A380)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleLoadCurated('JFK', 'LHR')}
+            className="shrink-0 px-2 py-0.5 rounded text-[11px] font-mono-telemetry font-semibold bg-[#eff4ff] hover:bg-[#dce9ff] text-[#0b1c30] hover:text-[#0284c7] border border-[#dce9ff] transition-all cursor-pointer"
+          >
+            JFK ⇄ LHR <span className="text-[#059669] font-bold">(A350)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleLoadCurated('SFO', 'SIN')}
+            className="shrink-0 px-2 py-0.5 rounded text-[11px] font-mono-telemetry font-semibold bg-[#eff4ff] hover:bg-[#dce9ff] text-[#0b1c30] hover:text-[#0284c7] border border-[#dce9ff] transition-all cursor-pointer"
+          >
+            SFO ⇄ SIN <span className="text-[#7c3aed] font-bold">(787-9)</span>
+          </button>
+        </div>
+
         {/* Origin & Destination Split Node */}
         <div className="flex items-center justify-between gap-2 sm:gap-3 relative">
           {/* Origin Node */}
@@ -215,11 +298,9 @@ export default function FlightSearchForm({
                     type="button"
                     onMouseDown={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      setOrigin(a.code);
-                      setShowOriginDropdown(false);
-                      setOriginQuery('');
+                      selectOrigin(a.code);
                     }}
+                    onClick={() => selectOrigin(a.code)}
                     className="w-full text-left px-2.5 py-2 rounded hover:bg-[#eff4ff] active:bg-[#dbeafe] flex items-center justify-between text-xs text-[#0b1c30] transition-colors cursor-pointer group"
                   >
                     <div className="truncate pr-2">
@@ -282,9 +363,7 @@ export default function FlightSearchForm({
                       setShowDestDropdown(false);
                     } else if (e.key === 'Enter' && destList.length > 0) {
                       e.preventDefault();
-                      setDestination(destList[0].code);
-                      setShowDestDropdown(false);
-                      setDestQuery('');
+                      selectDest(destList[0].code);
                     }
                   }}
                   className="w-full px-2.5 py-2 rounded text-xs border border-[#cbd5e1] mb-1 font-mono-telemetry focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7]"
@@ -299,11 +378,9 @@ export default function FlightSearchForm({
                     type="button"
                     onMouseDown={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      setDestination(a.code);
-                      setShowDestDropdown(false);
-                      setDestQuery('');
+                      selectDest(a.code);
                     }}
+                    onClick={() => selectDest(a.code)}
                     className="w-full text-left px-2.5 py-2 rounded hover:bg-[#eff4ff] active:bg-[#dbeafe] flex items-center justify-between text-xs text-[#0b1c30] transition-colors cursor-pointer group"
                   >
                     <div className="truncate pr-2">
@@ -420,119 +497,6 @@ export default function FlightSearchForm({
           )}
         </button>
       </form>
-
-      {/* AvGeek Bucket List Itineraries */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between px-1">
-          <span className="font-mono-telemetry text-xs font-bold text-[#0284c7] uppercase tracking-[0.08em] flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[16px]">stars</span>
-            FEATURED AVGEEK FLIGHT LINES
-          </span>
-          <span className="font-mono-telemetry text-[11px] text-[#64748b]">1-Click Airframe Loader</span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-          {/* Card 1: Queen of the Skies 747-8 */}
-          <div
-            onClick={() => handleLoadCurated('FRA', 'JFK')}
-            className="group bg-white hover:bg-[#eff4ff] border border-[#e2e8f0] hover:border-[#0284c7] p-3 rounded-xl transition-all shadow-xs cursor-pointer flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between pb-1.5">
-                <span className="bg-[#fef3c7] text-[#92400e] border border-[#fde68a] px-2 py-0.5 rounded font-mono-telemetry text-[10px] uppercase font-bold tracking-[0.06em]">
-                  QUEEN OF SKIES
-                </span>
-                <span className="font-mono-telemetry text-[11px] text-[#64748b]">FRA ⇄ JFK</span>
-              </div>
-              <div className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
-                Boeing 747-8 Intercontinental
-              </div>
-              <p className="text-[11px] text-[#64748b] line-clamp-2 mt-0.5">
-                Lufthansa 4-engine flagship with iconic upper-deck hump.
-              </p>
-            </div>
-            <div className="mt-2 pt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px] font-mono-telemetry text-[#0284c7] font-bold">
-              <span>Load 747-8 Route</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </div>
-          </div>
-
-          {/* Card 2: Superjumbo A380 */}
-          <div
-            onClick={() => handleLoadCurated('DXB', 'LHR')}
-            className="group bg-white hover:bg-[#eff4ff] border border-[#e2e8f0] hover:border-[#0284c7] p-3 rounded-xl transition-all shadow-xs cursor-pointer flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between pb-1.5">
-                <span className="bg-[#dbeafe] text-[#1e40af] border border-[#bfdbfe] px-2 py-0.5 rounded font-mono-telemetry text-[10px] uppercase font-bold tracking-[0.06em]">
-                  SUPERJUMBO QUAD
-                </span>
-                <span className="font-mono-telemetry text-[11px] text-[#64748b]">DXB ⇄ LHR</span>
-              </div>
-              <div className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
-                Airbus A380-800 Double Decker
-              </div>
-              <p className="text-[11px] text-[#64748b] line-clamp-2 mt-0.5">
-                Emirates double-deck giant with whisper-quiet 59 dB acoustic cabin.
-              </p>
-            </div>
-            <div className="mt-2 pt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px] font-mono-telemetry text-[#0284c7] font-bold">
-              <span>Load A380 Route</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </div>
-          </div>
-
-          {/* Card 3: Project Sunrise A350-1000 */}
-          <div
-            onClick={() => handleLoadCurated('JFK', 'LHR')}
-            className="group bg-white hover:bg-[#eff4ff] border border-[#e2e8f0] hover:border-[#0284c7] p-3 rounded-xl transition-all shadow-xs cursor-pointer flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between pb-1.5">
-                <span className="bg-[#ecfdf5] text-[#065f46] border border-[#a7f3d0] px-2 py-0.5 rounded font-mono-telemetry text-[10px] uppercase font-bold tracking-[0.06em]">
-                  5,800FT CABIN
-                </span>
-                <span className="font-mono-telemetry text-[11px] text-[#64748b]">JFK ⇄ LHR</span>
-              </div>
-              <div className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
-                Airbus A350-1000 XWB Flagship
-              </div>
-              <p className="text-[11px] text-[#64748b] line-clamp-2 mt-0.5">
-                Virgin Atlantic & British Airways 53% carbon-fiber airframe.
-              </p>
-            </div>
-            <div className="mt-2 pt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px] font-mono-telemetry text-[#0284c7] font-bold">
-              <span>Load A350 Route</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </div>
-          </div>
-
-          {/* Card 4: Pacific Dreamliner 787-9 */}
-          <div
-            onClick={() => handleLoadCurated('SFO', 'SIN')}
-            className="group bg-white hover:bg-[#eff4ff] border border-[#e2e8f0] hover:border-[#0284c7] p-3 rounded-xl transition-all shadow-xs cursor-pointer flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center justify-between pb-1.5">
-                <span className="bg-[#f3e8ff] text-[#6b21a8] border border-[#e9d5ff] px-2 py-0.5 rounded font-mono-telemetry text-[10px] uppercase font-bold tracking-[0.06em]">
-                  DIMMABLE WINDOWS
-                </span>
-                <span className="font-mono-telemetry text-[11px] text-[#64748b]">SFO ⇄ SIN</span>
-              </div>
-              <div className="font-headline text-sm font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
-                Boeing 787-9 Dreamliner
-              </div>
-              <p className="text-[11px] text-[#64748b] line-clamp-2 mt-0.5">
-                United Airlines transpacific sector with 25% humidity air conditioning.
-              </p>
-            </div>
-            <div className="mt-2 pt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px] font-mono-telemetry text-[#0284c7] font-bold">
-              <span>Load 787-9 Route</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -64,7 +64,8 @@ export async function searchTravelpayoutsFlights(params: SearchParams): Promise<
       'User-Agent': 'WhichPlane-AeroAggregator/2.0'
     },
     // Cache at edge for 3 minutes to optimize metasearch speed and reduce load
-    next: { revalidate: 180 }
+    next: { revalidate: 180 },
+    signal: AbortSignal.timeout(5000)
   });
 
   if (!response.ok) {

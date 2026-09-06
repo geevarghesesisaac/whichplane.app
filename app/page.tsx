@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import FlightSearchForm from '@/components/FlightSearchForm';
 import AircraftFilterPanel from '@/components/AircraftFilterPanel';
 import FlightCard from '@/components/FlightCard';
+import FeaturedAvgeekRoutes from '@/components/FeaturedAvgeekRoutes';
 import { FlightOffer, SearchParams, FilterState } from '@/lib/types';
 import { generateRealisticFlights } from '@/data/mockFlights';
 import Footer from '@/components/Footer';
@@ -12,6 +13,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   // Initial Search Parameters
   const initialParams: SearchParams = useMemo(() => {
@@ -49,6 +51,19 @@ export default function Home() {
     setIsLoading(true);
     setSearchParams(params);
 
+    // Auto-reset restrictive filters on new route search so flights are not inadvertently hidden
+    setFilters(prev => ({
+      ...prev,
+      manufacturers: [],
+      families: [],
+      bodyTypes: [],
+      compositeOnly: false,
+      excludeBoeing737Max: false,
+      chaseA380Or747: false,
+      acousticChevronsOnly: false,
+      sub6000FtAltitudeOnly: false
+    }));
+
     try {
       const res = await fetch('/api/search', {
         method: 'POST',
@@ -66,6 +81,10 @@ export default function Home() {
       setOffers(fallback);
     } finally {
       setIsLoading(false);
+      // Smoothly scroll down to results so user immediately sees their flight cards
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     }
   }, []);
 
@@ -197,77 +216,91 @@ export default function Home() {
           filteredResults={filteredOffers.length}
         />
 
-        {/* Telemetry Indicator Strip */}
-        <div className="flex items-center justify-between bg-white px-4 py-2.5 rounded-xl border border-[#e2e8f0] shadow-xs">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#0284c7] animate-pulse" />
-            <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30]">
-              {filteredOffers.length} FLIGHTS SCANNED
-            </span>
-            <span className="text-[#cbd5e1]">/</span>
-            <span className="font-mono-telemetry text-xs text-[#64748b]">
-              {activeAirframeCount} AIRFRAME MODELS DETECTED
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1.5 text-[11px] font-mono-telemetry text-[#64748b]">
-            <span className="material-symbols-outlined text-[15px] text-[#10b981]">verified</span>
-            <span className="hidden sm:inline">US DOT Operating Carrier Compliant</span>
-          </div>
-        </div>
-
-        {/* Flight Results Stream */}
-        <div className="space-y-3">
-          {isLoading ? (
-            <div className="p-16 text-center space-y-3 rounded-xl bg-white border border-[#e2e8f0] shadow-xs">
-              <div className="w-8 h-8 border-2 border-[#0284c7] border-t-transparent rounded-full animate-spin mx-auto" />
-              <p className="font-headline text-sm font-bold text-[#0b1c30]">
-                Scanning flight dispatch lines & aircraft equipment...
-              </p>
-              <p className="font-mono-telemetry text-xs text-[#64748b]">
-                Parsing ICAO types, composite fuselage metrics, and operating carriers
-              </p>
+        {/* Results Section with Anchor and Scroll Ref */}
+        <div ref={resultsRef} id="flight-results" className="scroll-mt-4 space-y-4">
+          {/* Telemetry Indicator Strip */}
+          <div className="flex flex-wrap items-center justify-between bg-white px-4 py-3 rounded-xl border border-[#e2e8f0] shadow-xs gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#0284c7] animate-pulse" />
+              <span className="font-mono-telemetry text-xs font-bold text-[#0b1c30]">
+                {filteredOffers.length} FLIGHTS SCANNED FOR {searchParams.origin} ✈ {searchParams.destination}
+              </span>
+              <span className="text-[#cbd5e1]">/</span>
+              <span className="font-mono-telemetry text-xs text-[#64748b]">
+                {activeAirframeCount} AIRFRAME MODELS DETECTED
+              </span>
             </div>
-          ) : filteredOffers.length > 0 ? (
-            filteredOffers.map((offer) => (
-              <FlightCard key={offer.id} offer={offer} />
-            ))
-          ) : (
-            <div className="p-12 text-center rounded-xl bg-white border border-[#e2e8f0] shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-full bg-[#eff4ff] text-[#0284c7] flex items-center justify-center mx-auto">
-                <span className="material-symbols-outlined text-[28px]">search_off</span>
+
+            <div className="flex items-center gap-1.5 text-[11px] font-mono-telemetry text-[#64748b]">
+              <span className="material-symbols-outlined text-[15px] text-[#10b981]">verified</span>
+              <span>Live Fare & US DOT Operating Carrier Verified</span>
+            </div>
+          </div>
+
+          {/* Flight Results Stream */}
+          <div className="space-y-3">
+            {isLoading ? (
+              <div className="p-16 text-center space-y-3 rounded-xl bg-white border border-[#e2e8f0] shadow-xs">
+                <div className="w-8 h-8 border-2 border-[#0284c7] border-t-transparent rounded-full animate-spin mx-auto" />
+                <p className="font-headline text-sm font-bold text-[#0b1c30]">
+                  Scanning flight dispatch lines & aircraft equipment for {searchParams.origin} → {searchParams.destination}...
+                </p>
+                <p className="font-mono-telemetry text-xs text-[#64748b]">
+                  Parsing ICAO types, composite fuselage metrics, and operating carriers
+                </p>
               </div>
-              <h3 className="font-headline text-base font-bold text-[#0b1c30]">
-                No Flights Match Your Specific Airframe Criteria
-              </h3>
-              <p className="text-xs text-[#64748b] max-w-md mx-auto">
-                Try relaxing the aircraft spec filters (e.g. including single-aisle aircraft or enabling additional manufacturers).
-              </p>
-              <button
-                type="button"
-                onClick={() =>
-                  setFilters({
-                    manufacturers: [],
-                    families: [],
-                    bodyTypes: [],
-                    compositeOnly: false,
-                    excludeBoeing737Max: false,
-                    chaseA380Or747: false,
-                    acousticChevronsOnly: false,
-                    sub6000FtAltitudeOnly: false,
-                    maxStops: null,
-                    maxPrice: null,
-                    selectedAirlines: [],
-                    sortBy: 'best_spec'
-                  })
-                }
-                className="px-4 py-2 rounded-lg font-mono-telemetry text-xs font-bold bg-[#0F172A] hover:bg-[#1E293B] text-white transition-colors cursor-pointer"
-              >
-                RESET ALL AIRFRAME FILTERS
-              </button>
-            </div>
-          )}
+            ) : filteredOffers.length > 0 ? (
+              filteredOffers.map((offer) => (
+                <FlightCard key={offer.id} offer={offer} />
+              ))
+            ) : (
+              <div className="p-12 text-center rounded-xl bg-white border border-[#e2e8f0] shadow-xs space-y-3">
+                <div className="w-12 h-12 rounded-full bg-[#eff4ff] text-[#0284c7] flex items-center justify-center mx-auto">
+                  <span className="material-symbols-outlined text-[28px]">search_off</span>
+                </div>
+                <h3 className="font-headline text-base font-bold text-[#0b1c30]">
+                  No Flights Match Your Specific Airframe Criteria
+                </h3>
+                <p className="text-xs text-[#64748b] max-w-md mx-auto">
+                  {offers.length} flight(s) were found for {searchParams.origin} → {searchParams.destination}, but your current aircraft filter settings excluded them. Try resetting your airframe filters.
+                </p>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFilters({
+                      manufacturers: [],
+                      families: [],
+                      bodyTypes: [],
+                      compositeOnly: false,
+                      excludeBoeing737Max: false,
+                      chaseA380Or747: false,
+                      acousticChevronsOnly: false,
+                      sub6000FtAltitudeOnly: false,
+                      maxStops: null,
+                      maxPrice: null,
+                      selectedAirlines: [],
+                      sortBy: 'best_spec'
+                    })
+                  }
+                  className="px-4 py-2 rounded-lg font-mono-telemetry text-xs font-bold bg-[#0F172A] hover:bg-[#1E293B] text-white transition-colors cursor-pointer"
+                >
+                  RESET ALL AIRFRAME FILTERS ({offers.length} FLIGHTS AVAILABLE)
+                </button>
+              </div>
+            )}
+          </div>
         </div>
+
+        {/* Featured AvGeek Flight Lines (Inspiration Showcase) */}
+        <FeaturedAvgeekRoutes
+          onSelectRoute={(orig, dest) => {
+            handleSearch({
+              ...searchParams,
+              origin: orig,
+              destination: dest
+            });
+          }}
+        />
       </main>
 
       {/* Rich 4-Column Compliant Footer */}
