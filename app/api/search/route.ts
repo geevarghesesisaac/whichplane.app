@@ -95,17 +95,21 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Multi-Airframe Enrichment: If live search returned fewer than 4 offers,
+    // 3. Multi-Airframe Enrichment: If live search returned fewer than 16 offers,
     // complement with realistic schedule lines for that route so users can compare airframe specs
-    if (offers.length > 0 && offers.length < 4) {
+    if (offers.length > 0 && offers.length < 16) {
       console.log(`[WhichPlane Gateway] Complemented ${offers.length} live offer(s) with multi-airframe schedule lines for airframe comparison`);
       const simulations = generateRealisticFlights(searchParams);
-      const existingAirlines = new Set(offers.map(o => o.segments[0].marketingCarrier.code));
+      const existingFlightNumbers = new Set(
+        offers.map(o => o.segments[0]?.flightNumber?.replace(/\s+/g, '').toUpperCase())
+      );
       for (const sim of simulations) {
-        if (!existingAirlines.has(sim.segments[0].marketingCarrier.code)) {
+        const simNum = sim.segments[0]?.flightNumber?.replace(/\s+/g, '').toUpperCase();
+        if (!existingFlightNumbers.has(simNum)) {
           offers.push(sim);
-          existingAirlines.add(sim.segments[0].marketingCarrier.code);
+          existingFlightNumbers.add(simNum);
         }
+        if (offers.length >= 18) break;
       }
     }
 

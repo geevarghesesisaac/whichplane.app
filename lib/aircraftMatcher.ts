@@ -59,6 +59,7 @@ export const AIRLINE_REGISTRY: Record<string, AirlineInfo> = {
   SV: { name: 'Saudia', logoLetter: 'SV' },
   GF: { name: 'Gulf Air', logoLetter: 'GF' },
   WY: { name: 'Oman Air', logoLetter: 'WY' },
+  FZ: { name: 'Flydubai', logoLetter: 'FZ' },
 
   // Asia & Pacific
   SQ: { name: 'Singapore Airlines', logoLetter: 'SQ' },
@@ -78,6 +79,10 @@ export const AIRLINE_REGISTRY: Record<string, AirlineInfo> = {
   AI: { name: 'Air India', logoLetter: 'AI' },
   '6E': { name: 'IndiGo', logoLetter: '6E' },
   UK: { name: 'Vistara', logoLetter: 'UK' },
+  QP: { name: 'Akasa Air', logoLetter: 'QP' },
+  SG: { name: 'SpiceJet', logoLetter: 'SG' },
+  IX: { name: 'Air India Express', logoLetter: 'IX' },
+  DE: { name: 'Condor', logoLetter: 'DE' },
 
   // Latin America & Africa
   LA: { name: 'LATAM Airlines', logoLetter: 'LA' },
