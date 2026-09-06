@@ -54,80 +54,91 @@ typography:
     fontSize: 48px
     fontWeight: '700'
     lineHeight: 56px
-    letterSpacing: -0.015em
+    letterSpacing: 0.015em
   headline-lg:
     fontFamily: B612
     fontSize: 32px
     fontWeight: '700'
     lineHeight: 40px
-    letterSpacing: -0.015em
+    letterSpacing: 0.015em
   headline-lg-mobile:
     fontFamily: B612
     fontSize: 24px
     fontWeight: '700'
     lineHeight: 32px
-    letterSpacing: -0.01em
+    letterSpacing: 0.01em
   headline-md:
     fontFamily: B612
     fontSize: 22px
     fontWeight: '700'
     lineHeight: 28px
-    letterSpacing: -0.01em
+    letterSpacing: 0.01em
   headline-sm:
     fontFamily: B612
     fontSize: 18px
     fontWeight: '700'
     lineHeight: 24px
-    letterSpacing: -0.005em
+    letterSpacing: 0.01em
   title-md:
-    fontFamily: Helvetica Neue
+    fontFamily: B612
     fontSize: 16px
-    fontWeight: '600'
+    fontWeight: '700'
     lineHeight: 22px
+    letterSpacing: 0.01em
   title-sm:
-    fontFamily: Helvetica Neue
+    fontFamily: B612
     fontSize: 14px
-    fontWeight: '600'
+    fontWeight: '700'
     lineHeight: 20px
+    letterSpacing: 0.01em
   body-lg:
     fontFamily: Helvetica Neue
     fontSize: 16px
     fontWeight: '400'
     lineHeight: 24px
+    letterSpacing: 0.01em
   body-md:
     fontFamily: Helvetica Neue
     fontSize: 14px
     fontWeight: '400'
     lineHeight: 20px
+    letterSpacing: 0.01em
   body-sm:
     fontFamily: Helvetica Neue
     fontSize: 12px
     fontWeight: '400'
-    lineHeight: 16px
-  data-mono-lg:
-    fontFamily: OCR-B
-    fontSize: 18px
-    fontWeight: '600'
-    lineHeight: 22px
-    letterSpacing: -0.02em
-  data-mono-md:
-    fontFamily: OCR-B
-    fontSize: 13px
-    fontWeight: '500'
     lineHeight: 18px
-    letterSpacing: -0.01em
-  data-mono-sm:
+    letterSpacing: 0.01em
+  ticket-stamp-lg:
+    fontFamily: OCR-B
+    fontSize: 36px
+    fontWeight: '700'
+    lineHeight: 40px
+    letterSpacing: 0.08em
+  ticket-stamp-md:
+    fontFamily: OCR-B
+    fontSize: 28px
+    fontWeight: '700'
+    lineHeight: 32px
+    letterSpacing: 0.08em
+  data-ocr-sm:
     fontFamily: OCR-B
     fontSize: 11px
-    fontWeight: '500'
+    fontWeight: '700'
     lineHeight: 14px
-    letterSpacing: 0.02em
+    letterSpacing: 0.06em
   label-caps:
-    fontFamily: OCR-B
+    fontFamily: Helvetica Neue
     fontSize: 10px
     fontWeight: '700'
     lineHeight: 12px
     letterSpacing: 0.08em
+  telemetry-mono:
+    fontFamily: Helvetica Neue
+    fontSize: 11px
+    fontWeight: '600'
+    lineHeight: 16px
+    letterSpacing: 0.045em
 rounded:
   sm: 0.125rem
   DEFAULT: 0.25rem
@@ -168,23 +179,30 @@ The palette draws inspiration from aircraft cockpits, heads-up displays (HUD), a
 - **Secondary (`#0284C7` - Supersonic Cyan / Cobalt):** Active states, interactive affordances, flight path vector paths, aircraft family focus indicators, and focal data triggers.
 - **Tertiary (`#F59E0B` - Avionics Amber):** Functional highlights, alert badges, aircraft transition warnings, prototype status, and limited-seat alerts.
 - **Neutral Palette:** 
-  - Canvas & Base: `#FFFFFF` (pure daylight white) and `#F8FAFC` (cool atmospheric slate).
+  - Canvas & Base: `#FFFFFF` (pure daylight white) and `#F8F9FF` (cool atmospheric slate).
   - Borders & Dividers: `#E2E8F0` (calibrated zinc) and `#CBD5E1`.
-  - Secondary Text & Metadata: `#64748B` (technical muted slate) and `#334155` (graphite slate for secondary headers).
+  - Secondary Text & Metadata: `#64748B` (technical muted slate) and `#45464D` (graphite slate for secondary headers).
   - Status Success: `#10B981` (green beacon).
 
 ## Typography
 
-The typographic system utilizes a tri-font hierarchy:
-1. **Space Grotesk** anchors primary display headings, model name showcases, and marketing entry points with geometric precision and subtle aerodynamic angles.
-2. **Inter** handles narrative readability, descriptive copy, travel policy notices, and standard form inputs.
-3. **JetBrains Mono** surfaces flight operational metrics: IATA/ICAO airport pairs (`LHR → HND`), tail registrations, engine designations (`GE9X`, `Trent XWB`), seat configuration formulas (`1-2-1 / 3-3-3`), flight numbers, and time stamps.
+The typographic system utilizes a curated tri-font hierarchy that balances authentic aeronautical flight instruments with physical boarding pass stationery:
 
-Numbers in flight search matrices must always use tabular figures (`font-variant-numeric: tabular-nums`) to prevent layout shifting across dynamic pricing and schedule filters.
+1. **B612 (Airbus Cockpit Avionics Font)**
+   - **Role:** Page hero titles, display headlines, airframe model names (e.g., *Airbus A350-1000*, *Boeing 747-8*), and tabular flight fares.
+   - **Research & Rationale:** Engineered by Airbus, ENAC, and Université de Toulouse III specifically for flight deck readability under cockpit vibration. It features open counter-forms and generous apertures. Calibrated with strictly non-negative letter-spacing (`0` to `+0.015em`) and line-height `1.25–1.3` to ensure characters never pinch or collide.
+2. **OCR-B (IATA Resolution 722c Boarding Pass Stamp)**
+   - **Role:** Large route airport IATA codes (28px–36px: `JFK`, `LHR`, `SFO`, `SIN`) and ticket flight numbers (`EK0001`, `LH400`, `VS0004`, `UA001`).
+   - **Research & Rationale:** Standardized by ISO 1073-2 and ECMA-11 for optical character recognition and boarding pass ticket coupons. Monospaced with uniform optical weight. Calibrated with expanded tracking (`0.08em`) to deliver the authentic stamped ticket separation without visual glyph clumping. Reserved strictly for ticket elements to prevent over-use.
+3. **Helvetica Neue / Helvetica (Swiss Airline Stationery & System Sans)**
+   - **Role:** Micro-labels, all-caps pill badges (`SUPERJUMBO QUAD`, `QUEEN OF SKIES`, `5,800FT CABIN`), form sector headers (`ORIGIN WAYPOINT`, `CABIN // PAX`), segmented filter controls (`ALL TYPES`, `WIDEBODY (TWIN)`, `NARROWBODY`), technical spec chips, and all narrative body copy.
+   - **Research & Rationale:** The gold standard of international airport signage and airline stationery (used by Lufthansa, Swissair, and American Airlines). Small all-caps micro-text (10px–11px) is calibrated with `+0.06em` to `+0.08em` tracking and vertical padding to prevent word silhouettes from degrading into illegible blocks. Body text uses `letter-spacing: 0.01em; line-height: 1.5` for comfortable reading.
+
+Numbers in flight search matrices and timestamps must always use tabular figures (`font-variant-numeric: tabular-nums`) to prevent layout shifting across dynamic pricing and schedule updates.
 
 ## Layout & Spacing
 
-A 12-column fluid grid system anchored by an 8-point base spatial cadence. Structural cards and micro-indicators may drop to 4px increments (`space-xs`) for dense telemetry modules.
+A 12-column fluid grid system anchored by an 8-point base spatial cadence. Structural cards and micro-indicators drop to 4px increments (`space-xs`) for dense telemetry modules.
 
 - **Desktop (1024px+):** 12 columns, 24px gutters, maximum container width of 1280px. Split layouts feature fixed flight filters and equipment sub-selectors (320px sidebar) pinned adjacent to fluid flight result feeds.
 - **Tablet (768px – 1023px):** 8 columns, 20px gutters. Filters collapse into a technical modal drawer with rapid toggle badges.
@@ -196,7 +214,7 @@ Vertical spacing maintains tight cohesion between related metrics (e.g., 4px bet
 
 This design system avoids heavy blurred skeuomorphic drop shadows in favor of **Calibrated Technical Layers** with crisp micro-borders and directional ambient illumination:
 
-- **Base Layer (Level 0):** Background foundation (`#F8FAFC`). Flat, un-elevated canvas.
+- **Base Layer (Level 0):** Background foundation (`#F8F9FF`). Flat, un-elevated canvas.
 - **Instrument Surface (Level 1):** Standard search cards, leg summaries, and filter blocks. Uses pure `#FFFFFF` fill bounded by a 1px micro-border (`#E2E8F0`) and an imperceptible ambient shadow: `0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.02)`.
 - **Hover & Selected Equipment State (Level 2):** Flight cards under inspection or active aircraft nodes elevate slightly with a sharper boundary: `0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04)` and border shift to `#CBD5E1` (or `#0284C7` if active).
 - **Overlays, Drawers & Avionics Popovers (Level 3):** Aircraft seat configuration maps, technical spec drawers, and tail registry sheets: `0 20px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.04)`.
@@ -205,39 +223,39 @@ This design system avoids heavy blurred skeuomorphic drop shadows in favor of **
 
 The design system adopts **Level 1 (Soft)** roundedness. Crisp geometry reflects aeronautical engineering: sharp, machined, and purposeful rather than overly rounded or whimsical.
 
-- **Primary Cards & Panels:** `0.375rem` (6px) or `0.5rem` (8px).
-- **Data Chips, Status Badges & Aviation Tags:** `0.25rem` (4px) to retain structural rigidity and tabular alignment.
+- **Primary Cards & Panels:** `0.5rem` (8px) or `0.75rem` (12px).
+- **Data Chips, Status Badges & Aviation Tags:** `0.25rem` (4px) or `0.375rem` (6px) with `px-2 py-0.5` padding to retain structural rigidity and tabular alignment.
 - **Pill Filters (Interactive Selectors):** Explicit full-radius caps (`rounded-full` / 9999px) are reserved strictly for interactive toggle pills (e.g., equipment category filter buttons: *Widebody*, *Upper Deck*, *Twin-Aisle*) to differentiate actionable toggles from non-interactive metadata badges.
 
 ## Components
 
 ### Buttons & Interactive Controls
-- **Primary Flight Action:** Deep Stratosphere (`#0F172A`) solid background with pure white text, 8px radius, height 40px/48px, subtle hover transition to `#1E293B`.
+- **Primary Flight Action:** Deep Stratosphere (`#0F172A`) solid background with pure white text, 8px radius, height 40px/48px, B612 / Helvetica Neue Bold with `0.02em` tracking, subtle hover transition to `#1E293B`.
 - **Secondary / Action CTA:** Vibrant Supersonic Cyan (`#0284C7`) background with white typography, designed for booking and flight path exploration.
-- **Technical Ghost Button:** 1px border (`#E2E8F0`), transparent background, Inter 14px SemiBold, JetBrains Mono supplemental data tag.
+- **Technical Ghost Button:** 1px border (`#E2E8F0`), transparent background, Helvetica Neue 12px SemiBold, with supplemental telemetry tag.
 
 ### Aircraft & Route Badges
-- **Fuselage / Model Badge:** High-contrast, micro-bordered rectangle (`#F1F5F9` background, `#334155` text, 1px `#CBD5E1` border). Uses `JetBrains Mono` 11px uppercase (e.g., `A350-900 | ULTRA-LONG HAUL`).
+- **Fuselage / Model Badge:** High-contrast, micro-bordered rectangle (`#F1F5F9` background, `#334155` text, 1px `#CBD5E1` border). Uses `Helvetica Neue` (`.label-caps`) 10px uppercase with `0.08em` tracking (e.g., `A350-1000 | FLAGSHIP`).
 - **Cabin Architecture Pill:** Tinted indicator with subtle color signifiers:
-  - *Widebody / Twin Aisle:* Cyan wash (`#E0F2FE` background, `#0369A1` text).
+  - *Widebody / Twin Aisle:* Cyan wash (`#EFF4FF` background, `#0284C7` text, `#CCE5FF` border).
   - *Double Deck / Rare Fleet:* Amber wash (`#FEF3C7` background, `#B45309` text, `#FDE68A` border).
-  - *Carbon Composite (B787 / A350):* Emerald wash (`#ECFDF5` background, `#047857` text).
+  - *Carbon Composite (B787 / A350):* Emerald wash (`#ECFDF5` background, `#047857` text, `#A7F3D0` border).
 
 ### Flight Leg Timelines
 - Horizontal progress track rendered in `#E2E8F0` with solid `#0284C7` vector indicators at waypoints. 
 - Transfer/layover stops feature a 10px hollow dot revealing equipment change warnings in tertiary amber (`#F59E0B`) if the connection involves downgauging to regional equipment.
-- Monospaced flight duration (`09H 45M`) and route codes aligned above and below the timeline node.
+- Monospaced flight duration (`09H 45M`) and route codes aligned above and below the timeline node: route codes styled in `OCR-B` (`36px` / `28px`, `tracking-[0.08em]`).
 
 ### Input Fields & Technical Dropdowns
 - Crisp 1px border (`#CBD5E1`) focusing to a 1.5px `#0284C7` ring. 
-- Integrated leading prefix badges (e.g., `FROM`, `TO`, `AIRFRAME:`) styled in uppercase JetBrains Mono (`label-caps`).
+- Integrated leading prefix badges (e.g., `ORIGIN WAYPOINT`, `DESTINATION WAYPOINT`, `TRAVEL DATE`) styled in uppercase Helvetica Neue (`.label-caps`, `10px`, `tracking-[0.08em]`).
 
 ### Result Cards
 - Multi-tier structured card:
-  - **Top Row:** Carrier, equipment flagship badge, and direct fare.
-  - **Middle Row:** Time, route timeline, layover node, tail type code.
-  - **Bottom Deck (Technical Spec Bar):** Monospaced spec summary highlighting Seat Pitch (`34"`), Wi-Fi Generation (`Ka-Band Satellite`), Seat Model (`Collins Horizon`), and Engine Variant (`RR Trent 1000`).
+  - **Top Row:** Carrier, equipment flagship badge, and direct fare in B612 Bold (`font-tabular`).
+  - **Middle Row:** Time in B612, route timeline with OCR-B airport codes (`JFK ⇄ LHR`), layover node, tail type code.
+  - **Bottom Deck (Technical Spec Bar):** Spec summary chips highlighting Seat Pitch (`34"`), Wi-Fi Generation (`Ka-Band Satellite`), Tail Cam, and Engine Variant (`RR Trent XWB`).
 
-use the following refrence
+use the following reference:
 
-D:\Git\Which Plane\whichplane.app\stitch_whichplane_aircraft_flight_search_reference\filelist.txt
+`D:\Git\Which Plane\whichplane.app\stitch_whichplane_aircraft_flight_search_reference\filelist.txt`
