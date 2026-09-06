@@ -87,7 +87,7 @@ export interface FlightSegment {
 export interface FlightOffer {
   id: string;
   searchId?: string;
-  source: 'duffel_live' | 'duffel_test' | 'verified_simulation';
+  source: 'travelpayouts_live' | 'duffel_live' | 'duffel_test' | 'verified_simulation';
   price: {
     amount: number;
     currency: string;

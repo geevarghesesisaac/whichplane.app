@@ -59,15 +59,27 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ## 🔑 Server-Side Flight Data Gateway
 
-WhichPlane operates as a centralized metasearch engine (like Skyscanner or Google Flights). End-users never carry or provide API keys. All airline data feeds are securely resolved server-side through Next.js route handlers.
+WhichPlane operates as a centralized commercial metasearch aggregator (like Skyscanner or Google Flights). End-users never carry or provide API keys. All airline data feeds are securely resolved server-side through Next.js route handlers.
 
-To connect WhichPlane to live real-world airline booking engines in production, set your centralized server token in `.env.local` (or hosting environment variables):
+### Option A: 100% Free Travelpayouts Flight Data (Recommended)
+WhichPlane includes native integration with the **Travelpayouts (Aviasales v3) Flight Data API**:
+- **100% Free API access** for registered affiliate partners.
+- **Zero per-search fees** and **no credit card required**.
+- **Monetized Outbound Links**: Earn 50%–70% affiliate commission share on user flight bookings.
 
+Add your credentials to `.env.local`:
+```env
+TRAVELPAYOUTS_TOKEN=your_free_travelpayouts_api_token
+TRAVELPAYOUTS_MARKER=your_affiliate_marker_id
+```
+
+### Option B: Duffel GDS API (Optional)
+If you operate with a Duffel wholesale account:
 ```env
 DUFFEL_ACCESS_TOKEN=duffel_live_YOUR_TOKEN_HERE
 ```
 
-*When no server token is configured (such as during local front-end development or testing), WhichPlane's built-in simulation engine automatically activates to ensure the entire flight discovery UI and aircraft taxonomy remain fully operational without breaking.*
+*When no external server tokens are configured (such as during initial local development or testing), WhichPlane's high-fidelity simulation engine automatically activates to ensure the entire flight discovery UI and aircraft taxonomy remain fully operational without breaking.*
 
 ---
 
