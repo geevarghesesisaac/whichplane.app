@@ -99,7 +99,7 @@ export default function FlightSearchForm({
               <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-wider uppercase">
                 ORIGIN WAYPOINT
               </span>
-              <span className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+              <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
                 {origin}
               </span>
               <span className="text-xs text-[#45464d] truncate font-medium">
@@ -130,7 +130,7 @@ export default function FlightSearchForm({
                     className="w-full text-left px-2.5 py-1.5 rounded hover:bg-[#eff4ff] flex items-center justify-between text-xs text-[#0b1c30] transition-colors"
                   >
                     <div>
-                      <span className="font-mono-telemetry font-bold text-[#0284c7] mr-2">{a.code}</span>
+                      <span className="font-ocr font-bold text-[#0284c7] mr-2 text-sm">{a.code}</span>
                       <span className="font-medium">{a.city}</span>
                       <span className="text-[#64748b] ml-1 text-[11px]">({a.name})</span>
                     </div>
@@ -160,7 +160,7 @@ export default function FlightSearchForm({
               <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-wider uppercase">
                 DESTINATION WAYPOINT
               </span>
-              <span className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+              <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
                 {destination}
               </span>
               <span className="text-xs text-[#45464d] truncate font-medium">

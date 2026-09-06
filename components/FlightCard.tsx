@@ -100,9 +100,14 @@ export default function FlightCard({ offer }: FlightCardProps) {
             <span className="font-display text-lg sm:text-xl font-bold text-[#0b1c30]">
               {formatTime(primarySegment.departureTime)}
             </span>
-            <span className="font-mono-telemetry text-xs font-semibold text-[#64748b]">
-              {primarySegment.origin.code} {primarySegment.origin.terminal || 'T4'}
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-ocr text-base font-bold text-[#0b1c30] tracking-wider">
+                {primarySegment.origin.code}
+              </span>
+              <span className="font-body text-[11px] text-[#64748b]">
+                {primarySegment.origin.terminal || 'T4'}
+              </span>
+            </div>
           </div>
 
           {/* Vector Progress Bar */}
@@ -131,9 +136,14 @@ export default function FlightCard({ offer }: FlightCardProps) {
               </span>
               <span className="font-mono-telemetry text-[10px] text-[#ba1a1a] font-bold">+1</span>
             </div>
-            <span className="font-mono-telemetry text-xs font-semibold text-[#64748b]">
-              {lastSegment.destination.code} {lastSegment.destination.terminal || 'T3'}
-            </span>
+            <div className="flex items-center justify-end gap-1.5">
+              <span className="font-ocr text-base font-bold text-[#0b1c30] tracking-wider">
+                {lastSegment.destination.code}
+              </span>
+              <span className="font-body text-[11px] text-[#64748b]">
+                {lastSegment.destination.terminal || 'T3'}
+              </span>
+            </div>
           </div>
         </div>
 

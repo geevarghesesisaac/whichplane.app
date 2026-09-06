@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  /* Authentic Boarding Pass Typography System (Option A) */
-  /* Display & Headlines: Helvetica Neue Bold */
-  /* Telemetry, Codes & Specs: OCR-B */
-  /* Body & Form Inputs: Inter */
+  /* Typography System */
+  /* 1. Main Headings & Site Titles: Helvetica Neue Bold (Crisp Swiss Modernism) */
   --font-helvetica: 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+
+  /* 2. Boarding Pass Optical Stamps: OCR-B (Only for Big Airport Codes like SFO, SIN, and Ticket IDs) */
   --font-ocr: 'OCR-B', 'OCR B Std', 'OCRB', var(--font-space-mono), 'Courier New', monospace;
-  --font-inter-base: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 3. Avionics Body & Small Micro-Labels: B612 (Airbus Cockpit Avionics Font) */
+  --font-b612-base: var(--font-b612), 'B612', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* AeroPrecision Color Palette */
   --surface: #f8f9ff;
@@ -48,13 +50,13 @@
 body {
   background-color: var(--surface);
   color: var(--on-surface);
-  font-family: var(--font-inter-base);
+  font-family: var(--font-b612-base);
   min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-/* Typography Utility Classes — Authentic Boarding Pass */
+/* 1. Main Page Headings & Site Titles (Helvetica Neue / Helvetica Bold) */
 .font-display {
   font-family: var(--font-helvetica);
   letter-spacing: -0.02em;
@@ -65,14 +67,21 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* 2. Authentic Boarding Pass OCR-B Stamp (Big Airport Codes SFO, SIN & Ticket Identifiers) */
+.font-ocr {
+  font-family: var(--font-ocr);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+/* 3. Small Micro-Labels, Pill Badges, Filter Toggles & Body Text (Airbus B612 Avionics) */
 .font-body {
-  font-family: var(--font-inter-base);
+  font-family: var(--font-b612-base);
 }
 
 .font-mono-telemetry {
-  font-family: var(--font-ocr);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
+  font-family: var(--font-b612-base);
+  letter-spacing: 0.015em;
 }
 
 /* Tabular figures for aviation times & prices */

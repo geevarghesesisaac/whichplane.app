@@ -66,13 +66,13 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
             <div className="flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                  <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
                     {segment.origin.code}
                   </span>
                   <span className="material-symbols-outlined text-[#0284c7] text-[20px]">
                     trending_flat
                   </span>
-                  <span className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                  <span className="font-ocr text-3xl sm:text-4xl font-bold text-[#0b1c30] tracking-wider">
                     {segment.destination.code}
                   </span>
                 </div>

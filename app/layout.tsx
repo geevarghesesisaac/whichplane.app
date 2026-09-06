@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { Inter, Space_Mono } from 'next/font/google';
+import { B612, Space_Mono } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
+const b612 = B612({
+  variable: '--font-b612',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '700'],
 });
 
 const spaceMono = Space_Mono({
@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceMono.variable} h-full antialiased light`}
+      className={`${b612.variable} ${spaceMono.variable} h-full antialiased light`}
     >
       <head>
         <link

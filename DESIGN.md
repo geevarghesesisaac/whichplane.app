@@ -80,27 +80,27 @@ typography:
     lineHeight: 24px
     letterSpacing: -0.005em
   title-md:
-    fontFamily: Inter
+    fontFamily: B612
     fontSize: 16px
     fontWeight: '600'
     lineHeight: 22px
   title-sm:
-    fontFamily: Inter
+    fontFamily: B612
     fontSize: 14px
     fontWeight: '600'
     lineHeight: 20px
   body-lg:
-    fontFamily: Inter
+    fontFamily: B612
     fontSize: 16px
     fontWeight: '400'
     lineHeight: 24px
   body-md:
-    fontFamily: Inter
+    fontFamily: B612
     fontSize: 14px
     fontWeight: '400'
     lineHeight: 20px
   body-sm:
-    fontFamily: Inter
+    fontFamily: B612
     fontSize: 12px
     fontWeight: '400'
     lineHeight: 16px
