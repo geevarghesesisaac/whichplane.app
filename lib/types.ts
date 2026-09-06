@@ -9,23 +9,36 @@ export type CabinClass = 'economy' | 'premium_economy' | 'business' | 'first';
 export type AircraftConfidence = 'confirmed_at_search_time' | 'typically_operates';
 
 export interface AircraftType {
-  id: string; // IATA code or canonical key (e.g., '380', '789', '359', '7M8', '748')
-  name: string; // e.g. "Airbus A380-800"
-  shortName: string; // e.g. "A380"
+  id: string; // IATA code or canonical key (e.g. '380', '789', '351', '7M8', '748')
+  icaoCode: string; // ICAO code (e.g. 'A388', 'B789', 'A35K', 'B748')
+  name: string; // e.g. "Airbus A350-1000 XWB"
+  shortName: string; // e.g. "A350-1000"
   manufacturer: Manufacturer;
-  family: string; // e.g. "A380", "787 Dreamliner", "737 MAX", "A350", "747 Queen of the Skies"
+  family: string; // e.g. "A350", "787 Dreamliner", "A380", "777", "747 Queen of the Skies"
   bodyType: BodyType;
-  isComposite: boolean; // 787 & A350 lower cabin altitude (6,000ft) & higher humidity
-  cabinAltitudeFt?: number; // e.g. 6000 for composite, 8000 for standard aluminum
-  humidityPercent?: string; // e.g. "Up to 20-25%" vs "10-15%"
+  isComposite: boolean;
+  compositePercent?: string; // e.g. "53% Carbon Composite"
+  cabinAltitudeFt?: number; // e.g. 5800, 6000, 8000
+  acousticRating?: string; // e.g. "68 dB Quiet"
+  humidityPercent?: string; // e.g. "20-25%"
   productionStatus: ProductionStatus;
-  seatingTypicalLayout?: string; // e.g. "3-4-3 (Main deck) / 2-4-2 (Upper deck)" or "3-3-3" or "3-3"
+  seatingTypicalLayout?: string;
   aisles: 1 | 2;
+  engineVariants: string[]; // e.g. ["Rolls-Royce Trent XWB-97"]
+  wakeTurbulence: 'SUPER HEAVY' | 'HEAVY' | 'MEDIUM' | 'LIGHT';
+  wingspan: string; // e.g. "64.75 m (212 ft 5 in)"
+  maxPassengers: number; // e.g. 480
   funFacts: string[];
   whyFlyThis: string;
-  retirementRisk?: string; // e.g. "Production ended 2021; retiring across multiple fleets"
-  iconType: 'quad_jet_double_deck' | 'twin_wide' | 'quad_wide' | 'narrow' | 'regional';
-  primaryAirlines?: string[];
+  retirementRisk?: string;
+  primaryAirlines: string[];
+  heroImageUrl: string;
+  subdeckSchematic?: {
+    upperDeckName?: string;
+    upperDeckDesc?: string;
+    mainDeckName?: string;
+    mainDeckDesc?: string;
+  };
 }
 
 export interface FlightSegment {
@@ -49,17 +62,25 @@ export interface FlightSegment {
   marketingCarrier: {
     code: string;
     name: string;
-    logoUrl?: string;
+    logoLetter?: string;
   };
   operatingCarrier: {
     code: string;
     name: string;
+    isCodeshare?: boolean;
+    codeshareNotice?: string;
   };
   aircraftIataCode: string;
   aircraftName: string;
   aircraft: AircraftType;
   confidence: AircraftConfidence;
   confidenceNote?: string;
+  confidencePercent?: number; // e.g. 98
+  tailRegistration?: string; // e.g. "G-VLUX 'Red Velvet'"
+  seatPitch?: string; // e.g. '34"'
+  seatModel?: string; // e.g. 'Collins Horizon'
+  wifiGeneration?: string; // e.g. 'Ka-Band Satellite'
+  engineVariant?: string; // e.g. 'RR Trent XWB-97'
   cabinClass: CabinClass;
 }
 
@@ -103,11 +124,12 @@ export interface FilterState {
   compositeOnly: boolean;
   excludeBoeing737Max: boolean;
   chaseA380Or747: boolean;
-  newGenOnly: boolean; // 787, A350, A321neo, 737 MAX, A220
-  maxStops: number | null; // null = any, 0 = non-stop, 1 = max 1 stop
+  acousticChevronsOnly: boolean;
+  sub6000FtAltitudeOnly: boolean;
+  maxStops: number | null;
   maxPrice: number | null;
   selectedAirlines: string[];
-  sortBy: 'price_asc' | 'duration_asc' | 'departure_time' | 'widebody_first' | 'newest_aircraft';
+  sortBy: 'best_spec' | 'price_asc' | 'duration_asc' | 'departure_time';
 }
 
 export interface Airport {

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-primary-container': '#7c839b', 'on-tertiary': '#ffffff', 'on-primary': '#ffffff', 'on-tertiary-fixed': '#2a1700', 'on-surface-variant': '#45464d', 'surface-container-highest': '#d3e4fe', 'tertiary-fixed': '#ffddb8', 'error': '#ba1a1a', 'on-surface': '#0b1c30', 'outline': '#76777d', 'secondary': '#006398', 'surface': '#f8f9ff', 'tertiary-container': '#2a1700', 'on-primary-fixed-variant': '#3f465c', 'on-background': '#0b1c30', 'secondary-fixed-dim': '#93ccff', 'surface-tint': '#565e74', 'surface-container': '#e5eeff', 'surface-container-high': '#dce9ff', 'on-error': '#ffffff', 'tertiary-fixed-dim': '#ffb95f', 'primary-fixed': '#dae2fd', 'primary': '#000000', 'secondary-fixed': '#cce5ff', 'surface-dim': '#cbdbf5', 'on-primary-fixed': '#131b2e', 'surface-variant': '#d3e4fe', 'on-tertiary-container': '#b87500', 'primary-container': '#131b2e', 'on-error-container': '#93000a', 'tertiary': '#000000', 'on-tertiary-fixed-variant': '#653e00', 'outline-variant': '#c6c6cd', 'on-secondary-container': '#00476e', 'error-container': '#ffdad6', 'secondary-container': '#5bb8fe', 'surface-bright': '#f8f9ff', 'on-secondary-fixed-variant': '#004b73', 'surface-container-low': '#eff4ff', 'on-secondary': '#ffffff', 'on-secondary-fixed': '#001d31', 'inverse-primary': '#bec6e0', 'surface-container-lowest': '#ffffff', 'background': '#f8f9ff', 'inverse-surface': '#213145', 'inverse-on-surface': '#eaf1ff', 'primary-fixed-dim': '#bec6e0' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'space-4xl': '4rem', 'space-xl': '1.5rem', 'space-2xl': '2rem', 'gutter-desktop': '2rem', 'space-sm': '0.5rem', 'space-md': '0.75rem', 'space-xs': '0.25rem', 'space-3xl': '3rem', 'gutter-mobile': '1rem', 'gutter-tablet': '1.5rem', 'space-lg': '1rem', 'space-xxs': '0.125rem', 'max-width-content': '1280px' }, fontFamily: { 'headline-sm': ['Space Grotesk'], 'data-mono-md': ['JetBrains Mono'], 'data-mono-sm': ['JetBrains Mono'], 'display-lg': ['Space Grotesk'], 'body-md': ['Inter'], 'body-lg': ['Inter'], 'headline-lg-mobile': ['Space Grotesk'], 'headline-lg': ['Space Grotesk'], 'label-caps': ['JetBrains Mono'], 'title-md': ['Inter'], 'data-mono-lg': ['JetBrains Mono'], 'title-sm': ['Inter'], 'body-sm': ['Inter'], 'headline-md': ['Space Grotesk'] }, fontSize: { 'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '-0.005em', fontWeight: '600' }], 'data-mono-md': ['13px', { lineHeight: '18px', letterSpacing: '-0.01em', fontWeight: '500' }], 'data-mono-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'display-lg': ['48px', { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }], 'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }], 'headline-lg-mobile': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '700' }], 'headline-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.015em', fontWeight: '700' }], 'label-caps': ['10px', { lineHeight: '12px', letterSpacing: '0.08em', fontWeight: '700' }], 'title-md': ['16px', { lineHeight: '22px', fontWeight: '600' }], 'data-mono-lg': ['18px', { lineHeight: '22px', letterSpacing: '-0.02em', fontWeight: '600' }], 'title-sm': ['14px', { lineHeight: '20px', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }], 'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f8f9ff;color:#0b1c30;overscroll-behavior-y:none;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 2rem);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-secondary selection:text-on-secondary"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="Navigate back" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="WhichPlane Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VgyX3Xcn5ApbF6137AQA3yKAz_VrCeLORNEPY37d4D2MmdOE7XEGUvI38048uL1JAuGQsAcs8O6exadyZgTdQLDUi2OaY-mbL2Op9A-TS6tV2BxJunoQPjSWIoMiijWrGfisCO9SvQ3ouWJdDj4XbYUu0tJh7cddNNn5ANoYj3ogrT2rGRAw8HNTfBOvyK5ZwMeQzajVjeDEMNgL1yGH0-_6Yi5COC3q-dTqiP1EUKsedX6LgMQhyR-PSJ"/><h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate max-w-[180px]">Flight Detail</h1></div><div class="flex items-center gap-space-xs"><div class="w-11 h-11 flex items-center justify-center rounded-full"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ih2Jbp6Wj1Orq8CjtvfGWWD9ideU_w998_SYp4-dDYOaOV0mflkkDCnGuZ5Ncz_DVxuXFW_OVn9xIUybRm38Koa4XZJLrAJN8xrcHx4UipxuQ8Z8v85wQ1k58FoWgGl5vgLEFoQgBfTUMaCE25c2UBlzNFCnSfwJTzN5tNXLHDwA85PHMk69cL2qArQyodWFqdIE6o93NddkdD2GiW7wPEtugT9sWpH3xn1bCp9UgPS2vC-MadaDyQ"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface px-gutter-mobile flex-1 min-h-screen"><div class="flex flex-col w-full space-y-space-xl">
+<!-- Contextual Breadcrumb & Live Flight Telemetry Badges -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<a class="inline-flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface transition-colors py-space-xs" href="#explorer">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="font-body-sm text-body-sm font-semibold tracking-wide">FLEET DATABASE</span>
+</a>
+<div class="flex items-center gap-space-xs">
+<span class="bg-surface-container-high text-on-surface font-label-caps text-label-caps px-space-sm py-space-xxs rounded-lg">
+        ICAO: A388
+      </span>
+<span class="bg-error-container text-on-error-container font-label-caps text-label-caps px-space-sm py-space-xxs rounded-lg flex items-center gap-space-xxs">
+<span class="material-symbols-outlined text-[12px]">warning</span>
+        WAKE: SUPER HEAVY
+      </span>
+</div>
+</div>
+<!-- Hero Airframe Showcase Card -->
+<div class="relative w-full rounded-full overflow-hidden shadow-md bg-surface-container-lowest">
+<div class="relative w-full h-72 sm:h-80 overflow-hidden">
+<img alt="Airbus A380-800 Banking in Golden Sunset" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcqzhp9VFS03wyEvOCs0T1TGKRFH3cIhbNl5ORVRex4D5lh3wgiHSehiGAxTMVNqa3AfGRWfczCjMc1-K-NcrcPSdbuRGRB4KjqFsTzMBzO8W8T-7QlHItvdBJ12dPs-O5uc8q-OoScb9U0U8bW4PagQeS5DYfbzROal-51hvIgiuQWX2YNin9l-3EdpHJc50kFewDyuw8cnx33vkKTKPRZ_H49RwQEE5Qg74ahMwUJ5LrximynMTJSg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent"></div>
+<!-- Top floating technical pill -->
+<div class="absolute top-space-md left-space-md flex flex-wrap gap-space-xs">
+<span class="bg-secondary-container/90 backdrop-blur-md text-on-secondary-container font-label-caps text-label-caps px-space-sm py-space-xxs rounded-full">
+          DOUBLE-DECKER FLAGSHIP
+        </span>
+<span class="bg-surface-container-lowest/80 backdrop-blur-md text-on-surface font-label-caps text-label-caps px-space-sm py-space-xxs rounded-full">
+          HEX CODE: 0x3C498F
+        </span>
+</div>
+<!-- Aircraft Titles over Hero Base -->
+<div class="absolute bottom-space-md inset-x-space-md flex flex-col gap-space-xxs text-on-primary">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-mono-sm text-data-mono-sm text-secondary-fixed tracking-wider">AIRBUS COMMERCIAL AIRCRAFT</span>
+<span class="w-1 h-1 rounded-full bg-secondary-fixed"></span>
+<span class="font-data-mono-sm text-data-mono-sm text-secondary-fixed">MSN 001-272</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile tracking-tight font-bold">Airbus A380-800</h1>
+<p class="font-body-md text-body-md text-surface-container-highest italic">“The Superjumbo” · Queen of the Modern Skies</p>
+</div>
+</div>
+<!-- Sub-hero Technical Metadata Bar -->
+<div class="p-space-md sm:p-space-lg flex flex-col gap-space-sm bg-surface-container-lowest">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container px-space-sm py-space-xxs rounded-lg">
+          MANUFACTURER: AIRBUS S.A.S. (TOULOUSE, FRANCE)
+        </span>
+<span class="font-label-caps text-label-caps text-secondary bg-surface-container-highest px-space-sm py-space-xxs rounded-lg">
+          TWIN-AISLE DOUBLE-DECK WIDEBODY
+        </span>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container px-space-sm py-space-xxs rounded-lg">
+          GLARE &amp; AL-LI COMPOSITE (25%)
+        </span>
+</div>
+<!-- Production Amber Status Callout -->
+<div class="p-space-md rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[20px] shrink-0 text-on-tertiary-fixed-variant">archive</span>
+<div class="flex flex-col">
+<span class="font-data-mono-sm text-data-mono-sm uppercase tracking-wider font-bold text-on-tertiary-fixed-variant">Fleet Life Cycle Status</span>
+<p class="font-body-sm text-body-sm leading-snug">
+<strong>Discontinued from Production</strong> — Final airframe delivered Dec 16, 2021 (MSN 272 / A6-EVS to Emirates). Active airline service anticipated through 2038+.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Specification Bento Strip -->
+<div class="grid grid-cols-2 gap-space-xs">
+<!-- Stat 1 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">MAX PASSENGERS</span>
+<span class="material-symbols-outlined text-[18px]">airline_seat_recline_extra</span>
+</div>
+<div class="mt-space-md">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">615 Max</span>
+<p class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">484 typical 4-class</p>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">WINGSPAN &amp; AREA</span>
+<span class="material-symbols-outlined text-[18px]">width</span>
+</div>
+<div class="mt-space-md">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">79.75 m</span>
+<p class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">261 ft 8 in · 845 m²</p>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">CABIN ALTITUDE</span>
+<span class="material-symbols-outlined text-[18px]">air</span>
+</div>
+<div class="mt-space-md">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">6,100 ft</span>
+<p class="font-data-mono-sm text-data-mono-sm text-secondary">Whisper 59 dB ambient</p>
+</div>
+</div>
+<!-- Stat 4 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">PROPULSION PODS</span>
+<span class="material-symbols-outlined text-[18px]">content_paste_search</span>
+</div>
+<div class="mt-space-md">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">4x Turbofans</span>
+<p class="font-data-mono-sm text-data-mono-sm text-on-surface-variant truncate">EA GP7200 / Trent 900</p>
+</div>
+</div>
+</div>
+<!-- Interactive Cabin Deck Explorer Micro-widget -->
+<div class="p-space-md sm:p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-secondary">CROSS-SECTION SCHEMATIC</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Dual-Deck Architecture</h2>
+</div>
+<div class="flex bg-surface-container rounded-lg p-space-xxs">
+<button class="px-space-sm py-space-xxs rounded-lg font-data-mono-sm text-data-mono-sm font-semibold bg-surface-container-lowest text-on-surface shadow-sm transition-all" id="btn-upper" onclick="switchDeck('upper')">Upper Deck</button>
+<button class="px-space-sm py-space-xxs rounded-lg font-data-mono-sm text-data-mono-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all" id="btn-main" onclick="switchDeck('main')">Main Deck</button>
+</div>
+</div>
+<!-- Upper Deck Description -->
+<div class="flex flex-col gap-space-sm transition-opacity duration-200" id="deck-upper-content">
+<div class="flex items-center gap-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<div class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[20px]">bathtub</span>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-title-sm text-title-sm text-on-surface">First &amp; Business Sanctuaries</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hosts onboard shower spas (Emirates), cocktail lounges, and 1-2-1 direct-aisle access suites.</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="bg-surface-container p-space-xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant block">USABLE WIDTH</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-on-surface">5.92 m</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant block">TYPICAL LAYOUT</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-on-surface">1-2-1 / 2-4-2</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant block">PRESSURIZATION</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-on-surface">8.9 psi</span>
+</div>
+</div>
+</div>
+<!-- Main Deck Description (Hidden by default) -->
+<div class="hidden flex-col gap-space-sm transition-opacity duration-200" id="deck-main-content">
+<div class="flex items-center gap-space-sm p-space-sm bg-surface-container-low rounded-lg">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-[20px]">airline_seat_flat</span>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-title-sm text-title-sm text-on-surface">Main Widebody Hull</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The widest passenger cabin in commercial history. 10-abreast Economy seating with industry-leading 18.5" seat pans.</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="bg-surface-container p-space-xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant block">USABLE WIDTH</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-on-surface">6.54 m</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant block">TYPICAL LAYOUT</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-on-surface">3-4-3 Coach</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant block">CARGO CAPACITY</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-on-surface">184 m³</span>
+</div>
+</div>
+</div>
+</div>
+<!-- AvGeek Fun Facts Section -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-secondary">AIRCRAFT ENCYCLOPEDIA</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">AvGeek Flagship Trivia</h2>
+</div>
+<span class="material-symbols-outlined text-[24px] text-secondary">flight_takeoff</span>
+</div>
+<div class="grid grid-cols-1 gap-space-sm">
+<!-- Fact 1 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0 mt-space-xxs">
+<span class="material-symbols-outlined text-[22px]">hotel</span>
+</div>
+<div class="flex flex-col gap-space-xxs min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">“The Flying Hotel” Onboard Luxury</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Pioneered true hotel-level hospitality: Emirates installed twin motorized first-class shower spas and a horseshoe horseshoe cocktail bar; Singapore Airlines created modular private double-bed suites; and Etihad developed "The Residence" — a 3-room penthouse in the sky with dedicated butler.
+          </p>
+</div>
+</div>
+<!-- Fact 2 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface shrink-0 mt-space-xxs">
+<span class="material-symbols-outlined text-[22px]">volume_off</span>
+</div>
+<div class="flex flex-col gap-space-xxs min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Ultra-Quiet Cockpit Acoustics</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Cruising at 39,000 feet, the A380 cabin register sits at roughly 59 dB — 50% quieter than a Boeing 747-400. During certification, test captains famously noted hearing cockpit crew whispers across the flight deck, necessitating custom white-noise tuning.
+          </p>
+</div>
+</div>
+<!-- Fact 3 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container shrink-0 mt-space-xxs">
+<span class="material-symbols-outlined text-[22px]">airwave</span>
+</div>
+<div class="flex flex-col gap-space-xxs min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Massive Wingtip Vortices (“Super Heavy”)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Its massive 575-tonne maximum takeoff weight generates wake turbulence so pronounced that ICAO established a dedicated class: “Super Heavy”. Following aircraft require an enforced separation distance of up to 8 nautical miles during final approach.
+          </p>
+</div>
+</div>
+<!-- Fact 4 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface shrink-0 mt-space-xxs">
+<span class="material-symbols-outlined text-[22px]">mode_fan</span>
+</div>
+<div class="flex flex-col gap-space-xxs min-w-0">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Complete Air Volume Refresh in 3 Minutes</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            The massive 1,570 cubic meter cabin utilizes high-efficiency hospital-grade HEPA circulation loops that completely exchange, scrub, and replenish all air across both decks every 180 seconds.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Operators Still Flying the A380 Section -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-secondary">ACTIVE OPERATORS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Airlines Still Flying the Superjumbo</h2>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">8 Carriers</span>
+</div>
+<!-- Carrier Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- Emirates -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Emirates</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">EK</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">116 Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Largest operator by far. Features Onboard Bar Lounge &amp; First Class Shower Spas on all long-haul routes from Dubai Hub (DXB).</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: DUBAI INTL (DXB)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">PREMIUM FLAGSHIP</span>
+</div>
+</div>
+<!-- Singapore Airlines -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Singapore Airlines</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">SQ</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">12 Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">A380 launch customer (2007). Famous for standalone Upper Deck First Class Suites with double-bed joins.</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: CHANGI AIRPORT (SIN)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">KANGAROO ROUTE</span>
+</div>
+</div>
+<!-- British Airways -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">British Airways</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">BA</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">12 Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Workhorse for high-demand transatlantic routes connecting London Heathrow to JFK, MIA, LAX, and SFO.</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: HEATHROW (LHR)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">CLUB WORLD</span>
+</div>
+</div>
+<!-- Qantas -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Qantas</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">QF</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">10 Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Refurbished with Marc Newson-designed upper lounge deck. Deployed across Sydney-LAX and Melbourne-London.</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: SYDNEY (SYD)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">TRANSPACIFIC</span>
+</div>
+</div>
+<!-- All Nippon Airways -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">ANA All Nippon</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">NH</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">3 Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Iconic "Flying Honu" sea turtle liveries (Lani, Kai, and Ka La). Exclusively flies the premium Tokyo to Hawaii route.</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: TOKYO NARITA (NRT)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">FLYING HONU</span>
+</div>
+</div>
+<!-- Qatar Airways -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Qatar Airways</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">QR</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">8 Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Re-entered service for ultra-dense trunk connections to London Heathrow, Paris CDG, and Sydney from Doha.</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: DOHA HAMAD (DOH)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">AL SAFWA SUITES</span>
+</div>
+</div>
+<!-- Lufthansa -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Lufthansa</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">LH</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">8 Reactivated</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pulled out of long-term desert storage at Teruel to relieve capacity strain on Munich flagship routes to North America.</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: MUNICH (MUC)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">BAVARIA BASE</span>
+</div>
+</div>
+<!-- Korean & Asiana -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Korean Air / Asiana</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-data-mono-sm text-data-mono-sm px-space-xs rounded">KE / OZ</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">10 Combined</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Operating transpacific departures from Seoul Incheon to LAX, JFK, and Bangkok during high-yield seasons.</p>
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps">HUB: SEOUL INCHEON (ICN)</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">CELESTIAL BAR</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Routes You Can Still Catch This Aircraft On -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-secondary">FLIGHT LOCATOR MATRIX</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Active Routes to Fly the A380</h2>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">route</span>
+</div>
+<!-- Route Cards Stack -->
+<div class="flex flex-col gap-space-sm">
+<!-- Route 1 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">London (LHR)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_forward</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Dubai (DXB)</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">From $580</span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps bg-surface-container px-space-xs py-space-xxs rounded">EMIRATES · EK 002 / 030</span>
+<span class="font-data-mono-sm text-data-mono-sm">6x Daily</span>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-space-xxs hover:bg-surface-tint transition-colors">
+<span>Find Flights</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Route 2 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">New York (JFK)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_forward</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">London (LHR)</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">From $642</span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps bg-surface-container px-space-xs py-space-xxs rounded">BRITISH AIRWAYS · BA 178</span>
+<span class="font-data-mono-sm text-data-mono-sm">Daily Nonstop</span>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-space-xxs hover:bg-surface-tint transition-colors">
+<span>Find Flights</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Route 3 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Sydney (SYD)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_forward</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Los Angeles (LAX)</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">From $1,120</span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps bg-surface-container px-space-xs py-space-xxs rounded">QANTAS · QF 11</span>
+<span class="font-data-mono-sm text-data-mono-sm">13h 50m Transpacific</span>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-space-xxs hover:bg-surface-tint transition-colors">
+<span>Find Flights</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Route 4 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Singapore (SIN)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_forward</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">London (LHR)</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">From $890</span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps bg-surface-container px-space-xs py-space-xxs rounded">SINGAPORE AIRLINES · SQ 308 / 322</span>
+<span class="font-data-mono-sm text-data-mono-sm">2x Daily</span>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-space-xxs hover:bg-surface-tint transition-colors">
+<span>Find Flights</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Route 5 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Tokyo (NRT)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_forward</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Honolulu (HNL)</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">From $740</span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps bg-surface-container px-space-xs py-space-xxs rounded">ANA · NH 184 "FLYING HONU"</span>
+<span class="font-data-mono-sm text-data-mono-sm">Resort Special</span>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-space-xxs hover:bg-surface-tint transition-colors">
+<span>Find Flights</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Route 6 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Munich (MUC)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_forward</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface">New York (JFK)</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">From $695</span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps bg-surface-container px-space-xs py-space-xxs rounded">LUFTHANSA · LH 410</span>
+<span class="font-data-mono-sm text-data-mono-sm">Daily Flagship</span>
+</div>
+<button class="px-space-md py-space-xs bg-primary text-on-primary rounded-lg font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-space-xxs hover:bg-surface-tint transition-colors">
+<span>Find Flights</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom CTA & AvGeek Passport Action Bar -->
+<div class="p-space-lg bg-surface-container rounded-full flex flex-col gap-space-md text-on-surface shadow-sm">
+<div class="flex flex-col gap-space-xxs">
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider font-bold">AVGEEK PASSPORT LOGBOOK</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Flown on the Superjumbo?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Add the Airbus A380-800 to your personal WhichPlane logged aircraft fleet. Stamp your tail badge and track your total double-decker flight hours.
+      </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-space-xs">
+<button class="flex-1 py-space-md px-space-lg bg-secondary text-on-secondary rounded-xl font-data-mono-md text-data-mono-md font-semibold flex items-center justify-center gap-space-xs hover:bg-secondary/90 transition-all shadow-sm" id="passport-btn" onclick="togglePassport()">
+<span class="material-symbols-outlined text-[18px]" id="passport-icon">add_task</span>
+<span id="passport-text">Log A380 to My Passport</span>
+</button>
+<button class="py-space-md px-space-lg bg-primary text-on-primary rounded-xl font-data-mono-md text-data-mono-md font-semibold flex items-center justify-center gap-space-xs hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[18px]">travel_explore</span>
+<span>Search All A380 Flights</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  function switchDeck(deck) {
+    const upperContent = document.getElementById('deck-upper-content');
+    const mainContent = document.getElementById('deck-main-content');
+    const btnUpper = document.getElementById('btn-upper');
+    const btnMain = document.getElementById('btn-main');
+
+    if (deck === 'upper') {
+      upperContent.classList.remove('hidden');
+      upperContent.classList.add('flex');
+      mainContent.classList.add('hidden');
+      mainContent.classList.remove('flex');
+
+      btnUpper.className = "px-space-sm py-space-xxs rounded-lg font-data-mono-sm text-data-mono-sm font-semibold bg-surface-container-lowest text-on-surface shadow-sm transition-all";
+      btnMain.className = "px-space-sm py-space-xxs rounded-lg font-data-mono-sm text-data-mono-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all";
+    } else {
+      mainContent.classList.remove('hidden');
+      mainContent.classList.add('flex');
+      upperContent.classList.add('hidden');
+      upperContent.classList.remove('flex');
+
+      btnMain.className = "px-space-sm py-space-xxs rounded-lg font-data-mono-sm text-data-mono-sm font-semibold bg-surface-container-lowest text-on-surface shadow-sm transition-all";
+      btnUpper.className = "px-space-sm py-space-xxs rounded-lg font-data-mono-sm text-data-mono-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all";
+    }
+  }
+
+  let isLogged = false;
+  function togglePassport() {
+    isLogged = !isLogged;
+    const btnText = document.getElementById('passport-text');
+    const btnIcon = document.getElementById('passport-icon');
+    const btn = document.getElementById('passport-btn');
+
+    if (isLogged) {
+      btnText.innerText = "Logged to Passport (1 Flight)";
+      btnIcon.innerText = "verified";
+      btn.classList.remove('bg-secondary');
+      btn.classList.add('bg-primary-container', 'text-on-primary');
+    } else {
+      btnText.innerText = "Log A380 to My Passport";
+      btnIcon.innerText = "add_task";
+      btn.classList.add('bg-secondary');
+      btn.classList.remove('bg-primary-container', 'text-on-primary');
+    }
+  }
+</script></main></body></html>

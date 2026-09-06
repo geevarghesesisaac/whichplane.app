@@ -4,160 +4,231 @@ import { lookupAircraft } from '@/data/aircraft';
 interface RouteArchetype {
   airlineCode: string;
   airlineName: string;
+  airlineLogoLetter: string;
   flightNumber: string;
   aircraftCode: string;
-  aircraftName: string;
   operatingCarrierName: string;
+  isCodeshare?: boolean;
+  codeshareNotice?: string;
   basePrice: number;
   durationMins: number;
   departureHour: number;
   departureMinute: number;
   confidence: 'confirmed_at_search_time' | 'typically_operates';
-  confidenceNote?: string;
-  hasSeatMap?: boolean;
+  confidencePercent: number;
+  confidenceNote: string;
+  tailRegistration: string;
+  seatPitch: string;
+  seatModel: string;
+  wifiGeneration: string;
+  engineVariant: string;
+  hasSeatMap: boolean;
 }
 
-// Curated authentic real-world scheduled route schedules by route pairs
 export const FAMOUS_AIRCRAFT_ROUTES: Record<string, RouteArchetype[]> = {
-  // DXB <-> LHR (Capital of A380s!)
-  'DXB-LHR': [
-    {
-      airlineCode: 'EK',
-      airlineName: 'Emirates',
-      flightNumber: 'EK 001',
-      aircraftCode: '380',
-      aircraftName: 'Airbus A380-800 Superjumbo',
-      operatingCarrierName: 'Emirates',
-      basePrice: 840,
-      durationMins: 470,
-      departureHour: 7,
-      departureMinute: 45,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Operates on scheduled A380 3-class configuration with onboard lounge.',
-      hasSeatMap: true
-    },
-    {
-      airlineCode: 'EK',
-      airlineName: 'Emirates',
-      flightNumber: 'EK 003',
-      aircraftCode: '380',
-      aircraftName: 'Airbus A380-800 Superjumbo',
-      operatingCarrierName: 'Emirates',
-      basePrice: 890,
-      durationMins: 465,
-      departureHour: 14,
-      departureMinute: 15,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Emirates iconic double-decker scheduled daily.',
-      hasSeatMap: true
-    },
-    {
-      airlineCode: 'BA',
-      airlineName: 'British Airways',
-      flightNumber: 'BA 106',
-      aircraftCode: '351',
-      aircraftName: 'Airbus A350-1000',
-      operatingCarrierName: 'British Airways',
-      basePrice: 795,
-      durationMins: 480,
-      departureHour: 1,
-      departureMinute: 30,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Airbus A350 Club Suite with sliding doors.',
-      hasSeatMap: true
-    },
-    {
-      airlineCode: 'EK',
-      airlineName: 'Emirates',
-      flightNumber: 'EK 029',
-      aircraftCode: '77W',
-      aircraftName: 'Boeing 777-300ER',
-      operatingCarrierName: 'Emirates',
-      basePrice: 720,
-      durationMins: 475,
-      departureHour: 9,
-      departureMinute: 40,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Boeing "Game Changer" First Class Suites available on select airframes.',
-      hasSeatMap: true
-    }
-  ],
-
   // JFK <-> LHR (High-density prestige transatlantic)
   'JFK-LHR': [
     {
-      airlineCode: 'BA',
-      airlineName: 'British Airways',
-      flightNumber: 'BA 178',
-      aircraftCode: '351',
-      aircraftName: 'Airbus A350-1000',
-      operatingCarrierName: 'British Airways',
-      basePrice: 680,
-      durationMins: 420,
-      departureHour: 8,
-      departureMinute: 15,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Composite A350 widebody with 6,000 ft cabin altitude advantage.',
-      hasSeatMap: true
-    },
-    {
       airlineCode: 'VS',
       airlineName: 'Virgin Atlantic',
+      airlineLogoLetter: 'VA',
       flightNumber: 'VS 004',
       aircraftCode: '351',
-      aircraftName: 'Airbus A350-1000',
       operatingCarrierName: 'Virgin Atlantic Airways',
-      basePrice: 695,
-      durationMins: 415,
+      isCodeshare: false,
+      basePrice: 684,
+      durationMins: 435, // 7h 15m
       departureHour: 18,
       departureMinute: 30,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Featuring "The Loft" Upper Class social lounge on A350.',
+      confidencePercent: 98,
+      confidenceNote: 'Airframe tail registration locked on flight line. Operational swaps on <2% of scheduled sectors.',
+      tailRegistration: 'G-VLUX "Red Velvet"',
+      seatPitch: '34" Pitch (Main) / 78" Bed',
+      seatModel: 'Safran Cirrus Suite',
+      wifiGeneration: 'Viasat 2 Ka-Band',
+      engineVariant: 'RR Trent XWB-97',
       hasSeatMap: true
     },
     {
-      airlineCode: 'VS',
-      airlineName: 'Virgin Atlantic',
-      flightNumber: 'VS 046',
+      airlineCode: 'BA',
+      airlineName: 'British Airways',
+      airlineLogoLetter: 'BA',
+      flightNumber: 'BA 178',
       aircraftCode: '789',
-      aircraftName: 'Boeing 787-9 Dreamliner',
-      operatingCarrierName: 'Virgin Atlantic Airways',
-      basePrice: 640,
-      durationMins: 425,
-      departureHour: 21,
-      departureMinute: 0,
+      operatingCarrierName: 'British Airways',
+      isCodeshare: false,
+      basePrice: 642,
+      durationMins: 425, // 7h 05m
+      departureHour: 8,
+      departureMinute: 15,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Composite fuselage with electrochromic dimming windows.',
+      confidencePercent: 96,
+      confidenceNote: 'Daytime transatlantic arrival. 6,000-ft optimized pressurization.',
+      tailRegistration: 'G-ZBKM',
+      seatPitch: '33" Pitch (Main) / Club Suite',
+      seatModel: 'Collins Horizon Suite',
+      wifiGeneration: '.air High-Speed Satellite',
+      engineVariant: 'RR Trent 1000 with Chevrons',
+      hasSeatMap: true
+    },
+    {
+      airlineCode: 'BA',
+      airlineName: 'British Airways',
+      airlineLogoLetter: 'BA',
+      flightNumber: 'BA 112',
+      aircraftCode: '351',
+      operatingCarrierName: 'British Airways',
+      isCodeshare: false,
+      basePrice: 710,
+      durationMins: 430,
+      departureHour: 19,
+      departureMinute: 45,
+      confidence: 'confirmed_at_search_time',
+      confidencePercent: 97,
+      confidenceNote: 'Airbus Airspace cabin with Club Suite with sliding doors.',
+      tailRegistration: 'G-XWBA',
+      seatPitch: '34" Pitch (Main)',
+      seatModel: 'Collins Super Diamond',
+      wifiGeneration: 'Ka-Band Satellite',
+      engineVariant: 'RR Trent XWB-97',
       hasSeatMap: true
     },
     {
       airlineCode: 'AA',
       airlineName: 'American Airlines',
+      airlineLogoLetter: 'AA',
       flightNumber: 'AA 100',
       aircraftCode: '77W',
-      aircraftName: 'Boeing 777-300ER',
       operatingCarrierName: 'American Airlines Inc.',
+      isCodeshare: true,
+      codeshareNotice: 'BA 1502 Codeshare',
       basePrice: 650,
       durationMins: 430,
       departureHour: 19,
       departureMinute: 10,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Flagship Boeing 777 widebody service.',
+      confidencePercent: 94,
+      confidenceNote: 'Flagship Boeing 777-300ER service with GE90 twin turbofans.',
+      tailRegistration: 'N736AT',
+      seatPitch: '32" Pitch (Main) / Flagship Suite',
+      seatModel: 'Safran Aries',
+      wifiGeneration: 'Panasonic Ku-Band',
+      engineVariant: 'GE90-115B (115,000 lbf)',
       hasSeatMap: true
     },
     {
       airlineCode: 'B6',
       airlineName: 'JetBlue',
+      airlineLogoLetter: 'B6',
       flightNumber: 'B6 007',
       aircraftCode: '32Q',
-      aircraftName: 'Airbus A321neo / LR',
       operatingCarrierName: 'JetBlue Airways',
+      isCodeshare: false,
       basePrice: 590,
-      durationMins: 435,
+      durationMins: 440,
       departureHour: 22,
       departureMinute: 15,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Narrowbody transatlantic with Mint Suite with privacy doors.',
+      confidencePercent: 95,
+      confidenceNote: 'Single-aisle transatlantic with Mint Suite with privacy doors.',
+      tailRegistration: 'N2105J',
+      seatPitch: '33" Even More Space',
+      seatModel: 'Thompson VantageSOLO',
+      wifiGeneration: 'Free High-Speed Fly-Fi',
+      engineVariant: 'Pratt & Whitney PW1100G-JM',
+      hasSeatMap: true
+    }
+  ],
+
+  // DXB <-> LHR (Capital of A380s!)
+  'DXB-LHR': [
+    {
+      airlineCode: 'EK',
+      airlineName: 'Emirates',
+      airlineLogoLetter: 'EK',
+      flightNumber: 'EK 001',
+      aircraftCode: '380',
+      operatingCarrierName: 'Emirates',
+      isCodeshare: false,
+      basePrice: 840,
+      durationMins: 470,
+      departureHour: 7,
+      departureMinute: 45,
+      confidence: 'confirmed_at_search_time',
+      confidencePercent: 99,
+      confidenceNote: 'Scheduled daily A380 Superjumbo with onboard shower spa & lounge.',
+      tailRegistration: 'A6-EVS (Final A380 Built)',
+      seatPitch: '33-34" Economy / 79" Flat Bed',
+      seatModel: 'Emirates Custom Suite',
+      wifiGeneration: 'OnAir Satellite Wi-Fi',
+      engineVariant: 'Engine Alliance GP7200',
+      hasSeatMap: true
+    },
+    {
+      airlineCode: 'EK',
+      airlineName: 'Emirates',
+      airlineLogoLetter: 'EK',
+      flightNumber: 'EK 003',
+      aircraftCode: '380',
+      operatingCarrierName: 'Emirates',
+      isCodeshare: false,
+      basePrice: 890,
+      durationMins: 465,
+      departureHour: 14,
+      departureMinute: 15,
+      confidence: 'confirmed_at_search_time',
+      confidencePercent: 99,
+      confidenceNote: 'Double-decker flagship operation with 59 dB whisper quiet ambient.',
+      tailRegistration: 'A6-EEA',
+      seatPitch: '33" Pitch',
+      seatModel: 'Recaro CL3710',
+      wifiGeneration: 'Inmarsat GX Aviation',
+      engineVariant: 'Engine Alliance GP7200',
+      hasSeatMap: true
+    },
+    {
+      airlineCode: 'BA',
+      airlineName: 'British Airways',
+      airlineLogoLetter: 'BA',
+      flightNumber: 'BA 106',
+      aircraftCode: '351',
+      operatingCarrierName: 'British Airways',
+      isCodeshare: false,
+      basePrice: 795,
+      durationMins: 480,
+      departureHour: 1,
+      departureMinute: 30,
+      confidence: 'confirmed_at_search_time',
+      confidencePercent: 96,
+      confidenceNote: 'Carbon composite A350 widebody with 5,800 ft cabin altitude.',
+      tailRegistration: 'G-XWBD',
+      seatPitch: '34" Pitch (Main)',
+      seatModel: 'Collins Club Suite',
+      wifiGeneration: 'Ka-Band Satellite',
+      engineVariant: 'RR Trent XWB-97',
+      hasSeatMap: true
+    },
+    {
+      airlineCode: 'EK',
+      airlineName: 'Emirates',
+      airlineLogoLetter: 'EK',
+      flightNumber: 'EK 029',
+      aircraftCode: '77W',
+      operatingCarrierName: 'Emirates',
+      isCodeshare: false,
+      basePrice: 720,
+      durationMins: 475,
+      departureHour: 9,
+      departureMinute: 40,
+      confidence: 'confirmed_at_search_time',
+      confidencePercent: 95,
+      confidenceNote: 'Boeing 777 Game Changer suites available.',
+      tailRegistration: 'A6-EQH',
+      seatPitch: '33" Pitch',
+      seatModel: 'Rockwell Collins',
+      wifiGeneration: 'High-Speed Broadband',
+      engineVariant: 'GE90-115B',
       hasSeatMap: true
     }
   ],
@@ -167,150 +238,120 @@ export const FAMOUS_AIRCRAFT_ROUTES: Record<string, RouteArchetype[]> = {
     {
       airlineCode: 'LH',
       airlineName: 'Lufthansa',
+      airlineLogoLetter: 'LH',
       flightNumber: 'LH 400',
       aircraftCode: '748',
-      aircraftName: 'Boeing 747-8 Intercontinental',
       operatingCarrierName: 'Deutsche Lufthansa AG',
+      isCodeshare: false,
       basePrice: 820,
       durationMins: 525,
       departureHour: 11,
       departureMinute: 0,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Rare 747 Queen of the Skies! Row 1 is in the nose cone ahead of the flight deck.',
+      confidencePercent: 97,
+      confidenceNote: 'Rare Boeing 747 Queen of the Skies! Row 1 is in the nose cone ahead of flight deck.',
+      tailRegistration: 'D-ABYM "Bayern"',
+      seatPitch: '32" Economy / Upper Deck 2-2',
+      seatModel: 'Zodiac Aerospace',
+      wifiGeneration: 'FlyNet Broadband',
+      engineVariant: 'GEnx-2B67 with Chevrons',
       hasSeatMap: true
     },
     {
       airlineCode: 'SQ',
       airlineName: 'Singapore Airlines',
+      airlineLogoLetter: 'SQ',
       flightNumber: 'SQ 026',
       aircraftCode: '77W',
-      aircraftName: 'Boeing 777-300ER',
       operatingCarrierName: 'Singapore Airlines',
+      isCodeshare: false,
       basePrice: 790,
       durationMins: 520,
       departureHour: 8,
       departureMinute: 35,
       confidence: 'confirmed_at_search_time',
+      confidencePercent: 98,
       confidenceNote: 'Fifth-freedom transatlantic flight with world-renowned service.',
+      tailRegistration: '9V-SWT',
+      seatPitch: '34" Pitch (Main)',
+      seatModel: 'Jamco / Stelia',
+      wifiGeneration: 'SITA Ka-Band',
+      engineVariant: 'GE90-115B',
       hasSeatMap: true
     },
     {
       airlineCode: 'DE',
       airlineName: 'Condor',
+      airlineLogoLetter: 'DE',
       flightNumber: 'DE 2016',
       aircraftCode: '339',
-      aircraftName: 'Airbus A330-900neo',
       operatingCarrierName: 'Condor Flugdienst GmbH',
+      isCodeshare: false,
       basePrice: 610,
       durationMins: 535,
       departureHour: 12,
       departureMinute: 20,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: '2-4-2 economy seating geometry with striped livery.',
+      confidencePercent: 94,
+      confidenceNote: '2-4-2 economy seating geometry with striped livery and zero middle seat pairs.',
+      tailRegistration: 'D-ANRA',
+      seatPitch: '32" Economy / 2-4-2',
+      seatModel: 'Safran Airspace',
+      wifiGeneration: 'FlyCondor Satellite',
+      engineVariant: 'RR Trent 7000',
       hasSeatMap: true
     }
   ],
 
-  // SFO <-> SIN (The epic Transpacific Long Haul)
+  // SFO <-> SIN (Ultra-Long Haul Transpacific)
   'SFO-SIN': [
     {
       airlineCode: 'SQ',
       airlineName: 'Singapore Airlines',
+      airlineLogoLetter: 'SQ',
       flightNumber: 'SQ 031',
       aircraftCode: '359',
-      aircraftName: 'Airbus A350-900ULR',
       operatingCarrierName: 'Singapore Airlines',
+      isCodeshare: false,
       basePrice: 1150,
       durationMins: 1010,
       departureHour: 9,
       departureMinute: 30,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Non-stop ultra-long-haul on composite A350. Highest comfort cabin pressure.',
+      confidencePercent: 99,
+      confidenceNote: 'Non-stop ultra-long-haul on composite A350. Highest comfort cabin pressure (5,800 ft).',
+      tailRegistration: '9V-SGA (A350-900ULR)',
+      seatPitch: '38" Premium Economy / 78" Bed',
+      seatModel: 'Safran / Jamco',
+      wifiGeneration: 'Inmarsat GX High-Speed',
+      engineVariant: 'RR Trent XWB-84',
       hasSeatMap: true
     },
     {
       airlineCode: 'UA',
       airlineName: 'United Airlines',
+      airlineLogoLetter: 'UA',
       flightNumber: 'UA 001',
       aircraftCode: '789',
-      aircraftName: 'Boeing 787-9 Dreamliner',
       operatingCarrierName: 'United Airlines Inc.',
+      isCodeshare: false,
       basePrice: 990,
       durationMins: 1025,
       departureHour: 23,
       departureMinute: 15,
       confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Direct transpacific Dreamliner with Polaris business class.',
-      hasSeatMap: true
-    }
-  ],
-
-  // Domestic US route: JFK <-> LAX (Includes MAX, neo, and widebody contrast)
-  'JFK-LAX': [
-    {
-      airlineCode: 'B6',
-      airlineName: 'JetBlue',
-      flightNumber: 'B6 523',
-      aircraftCode: '32Q',
-      aircraftName: 'Airbus A321neo',
-      operatingCarrierName: 'JetBlue Airways',
-      basePrice: 289,
-      durationMins: 360,
-      departureHour: 7,
-      departureMinute: 0,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Airspace cabin with free high-speed Fly-Fi.',
-      hasSeatMap: true
-    },
-    {
-      airlineCode: 'AA',
-      airlineName: 'American Airlines',
-      flightNumber: 'AA 003',
-      aircraftCode: '32Q',
-      aircraftName: 'Airbus A321T (Transcontinental)',
-      operatingCarrierName: 'American Airlines Inc.',
-      basePrice: 320,
-      durationMins: 365,
-      departureHour: 9,
-      departureMinute: 30,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Dedicated 3-class transcontinental config (First, Business, Main).',
-      hasSeatMap: true
-    },
-    {
-      airlineCode: 'DL',
-      airlineName: 'Delta Air Lines',
-      flightNumber: 'DL 420',
-      aircraftCode: '764',
-      aircraftName: 'Boeing 767-400ER',
-      operatingCarrierName: 'Delta Air Lines Inc.',
-      basePrice: 310,
-      durationMins: 370,
-      departureHour: 15,
-      departureMinute: 45,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Widebody 2-3-2 transcon service with twin aisles.',
-      hasSeatMap: true
-    },
-    {
-      airlineCode: 'UA',
-      airlineName: 'United Airlines',
-      flightNumber: 'UA 1290',
-      aircraftCode: '7M9',
-      aircraftName: 'Boeing 737 MAX 9',
-      operatingCarrierName: 'United Airlines Inc.',
-      basePrice: 245,
-      durationMins: 375,
-      departureHour: 18,
-      departureMinute: 15,
-      confidence: 'confirmed_at_search_time',
-      confidenceNote: 'Boeing 737 MAX with CFM LEAP-1B engines and Sky Interior.',
+      confidencePercent: 97,
+      confidenceNote: 'Direct transpacific Dreamliner with Polaris business class suites.',
+      tailRegistration: 'N2749U',
+      seatPitch: '34" Economy Plus',
+      seatModel: 'Safran Polaris',
+      wifiGeneration: 'United Wi-Fi (Viasat)',
+      engineVariant: 'GEnx-1B with Chevrons',
       hasSeatMap: true
     }
   ]
 };
 
-// Generic realistic flight builder if route not in preset dictionary
 export function generateRealisticFlights(params: SearchParams): FlightOffer[] {
   const routeKey = `${params.origin.toUpperCase()}-${params.destination.toUpperCase()}`;
   const reverseKey = `${params.destination.toUpperCase()}-${params.origin.toUpperCase()}`;
@@ -318,96 +359,111 @@ export function generateRealisticFlights(params: SearchParams): FlightOffer[] {
   let archetypes = FAMOUS_AIRCRAFT_ROUTES[routeKey] || FAMOUS_AIRCRAFT_ROUTES[reverseKey];
 
   if (!archetypes) {
-    // Dynamically generate an engaging mix of aircraft for any arbitrary pair
+    // Dynamic fallback matching major widebodies and narrowbodies
     archetypes = [
+      {
+        airlineCode: 'VS',
+        airlineName: 'Virgin Atlantic',
+        airlineLogoLetter: 'VA',
+        flightNumber: 'VS 004',
+        aircraftCode: '351',
+        operatingCarrierName: 'Virgin Atlantic Airways',
+        basePrice: 684,
+        durationMins: 435,
+        departureHour: 18,
+        departureMinute: 30,
+        confidence: 'confirmed_at_search_time',
+        confidencePercent: 98,
+        confidenceNote: 'Locked on flight line. Operational swaps on <2% of scheduled long-haul sectors.',
+        tailRegistration: 'G-VLUX "Red Velvet"',
+        seatPitch: '34" Pitch / 78" Bed',
+        seatModel: 'Safran Cirrus',
+        wifiGeneration: 'Ka-Band Satellite',
+        engineVariant: 'RR Trent XWB-97',
+        hasSeatMap: true
+      },
       {
         airlineCode: 'BA',
         airlineName: 'British Airways',
-        flightNumber: 'BA 245',
-        aircraftCode: '351',
-        aircraftName: 'Airbus A350-1000',
+        airlineLogoLetter: 'BA',
+        flightNumber: 'BA 178',
+        aircraftCode: '789',
         operatingCarrierName: 'British Airways',
-        basePrice: 710,
-        durationMins: 490,
-        departureHour: 10,
+        basePrice: 642,
+        durationMins: 425,
+        departureHour: 8,
         departureMinute: 15,
         confidence: 'confirmed_at_search_time',
-        confidenceNote: 'Flagship composite twin-aisle widebody.',
-        hasSeatMap: true
-      },
-      {
-        airlineCode: 'UA',
-        airlineName: 'United Airlines',
-        flightNumber: 'UA 871',
-        aircraftCode: '789',
-        aircraftName: 'Boeing 787-9 Dreamliner',
-        operatingCarrierName: 'United Airlines Inc.',
-        basePrice: 685,
-        durationMins: 505,
-        departureHour: 13,
-        departureMinute: 45,
-        confidence: 'confirmed_at_search_time',
-        confidenceNote: 'Composite fuselage with 6,000 ft cabin altitude.',
-        hasSeatMap: true
-      },
-      {
-        airlineCode: 'DL',
-        airlineName: 'Delta Air Lines',
-        flightNumber: 'DL 120',
-        aircraftCode: '339',
-        aircraftName: 'Airbus A330-900neo',
-        operatingCarrierName: 'Delta Air Lines Inc.',
-        basePrice: 630,
-        durationMins: 515,
-        departureHour: 16,
-        departureMinute: 30,
-        confidence: 'confirmed_at_search_time',
-        confidenceNote: '2-4-2 economy layout with Trent 7000 engines.',
-        hasSeatMap: true
-      },
-      {
-        airlineCode: 'AA',
-        airlineName: 'American Airlines',
-        flightNumber: 'AA 704',
-        aircraftCode: '7M8',
-        aircraftName: 'Boeing 737 MAX 8',
-        operatingCarrierName: 'American Airlines Inc.',
-        basePrice: 520,
-        durationMins: 530,
-        departureHour: 19,
-        departureMinute: 10,
-        confidence: 'confirmed_at_search_time',
-        confidenceNote: 'CFM LEAP-1B engines with split-scimitar winglets.',
+        confidencePercent: 96,
+        confidenceNote: 'Daytime arrival with 6,000-ft optimized pressurization.',
+        tailRegistration: 'G-ZBKM',
+        seatPitch: '33" Pitch',
+        seatModel: 'Collins Horizon',
+        wifiGeneration: '.air Satellite',
+        engineVariant: 'RR Trent 1000 with Chevrons',
         hasSeatMap: true
       },
       {
         airlineCode: 'LH',
         airlineName: 'Lufthansa',
-        flightNumber: 'LH 418',
+        airlineLogoLetter: 'LH',
+        flightNumber: 'LH 400',
         aircraftCode: '748',
-        aircraftName: 'Boeing 747-8 Intercontinental',
         operatingCarrierName: 'Deutsche Lufthansa AG',
-        basePrice: 940,
-        durationMins: 480,
+        basePrice: 820,
+        durationMins: 525,
         departureHour: 11,
         departureMinute: 0,
         confidence: 'confirmed_at_search_time',
+        confidencePercent: 97,
         confidenceNote: 'Four-engine Queen of the Skies.',
+        tailRegistration: 'D-ABYM',
+        seatPitch: '32" Economy / 2-2 Hump',
+        seatModel: 'Zodiac Aerospace',
+        wifiGeneration: 'FlyNet Broadband',
+        engineVariant: 'GEnx-2B67 with Chevrons',
         hasSeatMap: true
       },
       {
         airlineCode: 'EK',
         airlineName: 'Emirates',
-        flightNumber: 'EK 203',
+        airlineLogoLetter: 'EK',
+        flightNumber: 'EK 001',
         aircraftCode: '380',
-        aircraftName: 'Airbus A380-800 Superjumbo',
         operatingCarrierName: 'Emirates',
-        basePrice: 890,
+        basePrice: 840,
         durationMins: 470,
-        departureHour: 8,
+        departureHour: 7,
+        departureMinute: 45,
+        confidence: 'confirmed_at_search_time',
+        confidencePercent: 99,
+        confidenceNote: 'Full double-deck A380 service with onboard lounge.',
+        tailRegistration: 'A6-EVS',
+        seatPitch: '34" Economy',
+        seatModel: 'Emirates Custom',
+        wifiGeneration: 'OnAir Satellite',
+        engineVariant: 'Engine Alliance GP7200',
+        hasSeatMap: true
+      },
+      {
+        airlineCode: 'UA',
+        airlineName: 'United Airlines',
+        airlineLogoLetter: 'UA',
+        flightNumber: 'UA 1290',
+        aircraftCode: '7M8',
+        operatingCarrierName: 'United Airlines Inc.',
+        basePrice: 480,
+        durationMins: 450,
+        departureHour: 16,
         departureMinute: 20,
         confidence: 'confirmed_at_search_time',
-        confidenceNote: 'Full double-deck A380 service.',
+        confidencePercent: 92,
+        confidenceNote: 'Single-aisle narrowbody with CFM LEAP-1B engines.',
+        tailRegistration: 'N27251',
+        seatPitch: '30" Economy',
+        seatModel: 'Collins Meridian',
+        wifiGeneration: 'United Wi-Fi',
+        engineVariant: 'CFM LEAP-1B with Chevrons',
         hasSeatMap: true
       }
     ];
@@ -440,12 +496,14 @@ export function generateRealisticFlights(params: SearchParams): FlightOffer[] {
       origin: {
         code: params.origin.toUpperCase(),
         name: `${params.origin.toUpperCase()} Airport`,
-        city: params.origin.toUpperCase()
+        city: params.origin.toUpperCase(),
+        terminal: params.origin.toUpperCase() === 'JFK' ? 'T4' : 'T1'
       },
       destination: {
         code: params.destination.toUpperCase(),
         name: `${params.destination.toUpperCase()} Airport`,
-        city: params.destination.toUpperCase()
+        city: params.destination.toUpperCase(),
+        terminal: params.destination.toUpperCase() === 'LHR' ? 'T3' : 'T2'
       },
       departureTime: depDate.toISOString(),
       arrivalTime: arrDate.toISOString(),
@@ -453,21 +511,29 @@ export function generateRealisticFlights(params: SearchParams): FlightOffer[] {
       flightNumber: arch.flightNumber,
       marketingCarrier: {
         code: arch.airlineCode,
-        name: arch.airlineName
+        name: arch.airlineName,
+        logoLetter: arch.airlineLogoLetter
       },
       operatingCarrier: {
         code: arch.airlineCode,
-        name: arch.operatingCarrierName
+        name: arch.operatingCarrierName,
+        isCodeshare: arch.isCodeshare,
+        codeshareNotice: arch.codeshareNotice
       },
       aircraftIataCode: arch.aircraftCode,
-      aircraftName: arch.aircraftName,
+      aircraftName: aircraft.name,
       aircraft: aircraft,
       confidence: arch.confidence,
       confidenceNote: arch.confidenceNote,
+      confidencePercent: arch.confidencePercent,
+      tailRegistration: arch.tailRegistration,
+      seatPitch: arch.seatPitch,
+      seatModel: arch.seatModel,
+      wifiGeneration: arch.wifiGeneration,
+      engineVariant: arch.engineVariant,
       cabinClass: params.cabinClass || 'economy'
     };
 
-    // Deep-link URLs
     const googleFlightsUrl = `https://www.google.com/travel/flights?q=flights%20from%20${params.origin.toUpperCase()}%20to%20${params.destination.toUpperCase()}%20on%20${params.departureDate}`;
 
     return {

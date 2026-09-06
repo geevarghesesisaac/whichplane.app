@@ -1,39 +1,46 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space-grotesk',
   subsets: ['latin'],
+  weight: ['500', '600', '700'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
-  title: 'WhichPlane — Fly The Plane You Actually Want To Fly',
+  title: 'WhichPlane — AV-OPS Flight Search & Aircraft Equipment Discovery',
   description:
-    'Aircraft-first flight search and discovery. Filter by composite widebodies (A350/787), exclude 737 MAX, chase the remaining A380 and 747 routes, and verify equipment confidence.',
+    'Search flights prioritizing aircraft equipment, composite cabin comfort (A350/787), fuselage geometry, and technical fleet intelligence.',
   keywords: [
     'flight search',
     'aircraft type',
     'airbus a380',
     'boeing 747',
     'boeing 787 dreamliner',
-    'airbus a350',
+    'airbus a350-1000',
     'exclude 737 max',
     'avgeek',
-    'airline fleet',
     'cabin altitude',
     'whichplane'
   ],
-  authors: [{ name: 'Creddio' }],
+  authors: [{ name: 'Creddio Platforms' }],
   openGraph: {
     title: 'WhichPlane — Flight Search by Aircraft Type & Cabin Comfort',
     description:
-      'Search flights prioritizing aircraft type, composite cabin comfort (787/A350), and equipment confidence.',
+      'Search flights prioritizing aircraft equipment, composite cabin comfort (787/A350), and equipment confidence.',
     url: 'https://whichplane.app',
     siteName: 'WhichPlane',
     type: 'website'
@@ -48,9 +55,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased light`}
     >
-      <body className="min-h-full flex flex-col bg-[#080c14] text-slate-100 font-sans">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#f8f9ff] text-[#0b1c30] font-sans">
         {children}
       </body>
     </html>

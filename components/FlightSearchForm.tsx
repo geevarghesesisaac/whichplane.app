@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { SearchParams, CabinClass } from '@/lib/types';
 import { MAJOR_AIRPORTS, findAirport } from '@/data/airports';
-import { PlaneTakeoff, PlaneLanding, Calendar, Users, ArrowRightLeft, Search, Sparkles } from 'lucide-react';
 
 interface FlightSearchFormProps {
   onSearch: (params: SearchParams) => void;
@@ -24,7 +23,7 @@ export default function FlightSearchForm({
   const [cabinClass, setCabinClass] = useState<CabinClass>(initialParams.cabinClass || 'economy');
   const [passengers, setPassengers] = useState(initialParams.passengers || 1);
 
-  // Dropdown states for airport search
+  // Airport dropdown search state
   const [originQuery, setOriginQuery] = useState('');
   const [destQuery, setDestQuery] = useState('');
   const [showOriginDropdown, setShowOriginDropdown] = useState(false);
@@ -49,7 +48,7 @@ export default function FlightSearchForm({
     });
   };
 
-  const handlePreset = (orig: string, dest: string) => {
+  const handleLoadCurated = (orig: string, dest: string) => {
     setOrigin(orig);
     setDestination(dest);
     onSearch({
@@ -61,92 +60,79 @@ export default function FlightSearchForm({
     });
   };
 
-  const originAirports = findAirport(originQuery);
-  const destAirports = findAirport(destQuery);
+  const originAirport = MAJOR_AIRPORTS.find(a => a.code === origin) || { city: 'New York', name: 'Kennedy Intl' };
+  const destAirport = MAJOR_AIRPORTS.find(a => a.code === destination) || { city: 'London', name: 'Heathrow Airport' };
+
+  const originList = findAirport(originQuery);
+  const destList = findAirport(destQuery);
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
-      {/* Search Container */}
+    <div className="w-full space-y-4">
+      {/* Interactive Route & Itinerary Card */}
       <form
         onSubmit={handleSubmit}
-        className="rounded-3xl bg-slate-900/90 border border-slate-700/80 p-6 backdrop-blur-2xl shadow-2xl relative z-20 space-y-4"
+        className="bg-white rounded-xl shadow-xs border border-[#e2e8f0] p-4 sm:p-5 flex flex-col gap-3 relative"
       >
-        {/* Top Controls: Cabin Class & Passengers */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-2 border-b border-slate-800/80 text-xs font-medium text-slate-300">
-          <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
-            {(['economy', 'premium_economy', 'business', 'first'] as CabinClass[]).map(c => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setCabinClass(c)}
-                className={`px-3 py-1.5 rounded-lg capitalize transition-all ${
-                  cabinClass === c
-                    ? 'bg-sky-500 text-slate-950 font-bold shadow'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                {c.replace('_', ' ')}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-sky-400" />
-            <span className="text-slate-400">Travelers:</span>
-            <select
-              value={passengers}
-              onChange={(e) => setPassengers(Number(e.target.value))}
-              className="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-sky-500"
-            >
-              {[1, 2, 3, 4, 5, 6].map(num => (
-                <option key={num} value={num}>
-                  {num} Adult{num > 1 ? 's' : ''}
-                </option>
-              ))}
-            </select>
+        {/* Card Header Telemetry Tag */}
+        <div className="flex items-center justify-between pb-1 border-b border-[#f1f5f9]">
+          <span className="font-mono-telemetry text-[10px] font-bold text-[#0284c7] uppercase tracking-wider flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#0284c7] animate-pulse" />
+            FLIGHT TELEMETRY SECTOR
+          </span>
+          <div className="flex items-center gap-1 bg-[#eff4ff] px-2 py-0.5 rounded text-[#45464d] font-mono-telemetry text-[11px] border border-[#dce9ff]">
+            <span>RT</span>
+            <span className="text-[#cbd5e1]">/</span>
+            <span>{passengers} PAX</span>
+            <span className="text-[#cbd5e1]">/</span>
+            <span className="font-bold text-[#0284c7] uppercase">{cabinClass.replace('_', ' ')}</span>
           </div>
         </div>
 
-        {/* Inputs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-          {/* Origin */}
-          <div className="md:col-span-4 relative">
-            <label className="text-[11px] font-semibold text-slate-400 block mb-1">
-              Departure Airport
-            </label>
-            <div className="relative">
-              <PlaneTakeoff className="w-4 h-4 text-sky-400 absolute left-3.5 top-3.5" />
-              <input
-                type="text"
-                value={origin}
-                onChange={(e) => {
-                  setOrigin(e.target.value.toUpperCase());
-                  setOriginQuery(e.target.value);
-                  setShowOriginDropdown(true);
-                }}
-                onFocus={() => setShowOriginDropdown(true)}
-                placeholder="Airport code (e.g. JFK)"
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-950 border border-slate-700/80 text-sm text-white font-bold placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-              />
+        {/* Origin & Destination Split Node */}
+        <div className="flex items-center justify-between gap-2 sm:gap-3 relative">
+          {/* Origin Node */}
+          <div className="relative flex-1">
+            <div
+              onClick={() => setShowOriginDropdown(true)}
+              className="bg-[#eff4ff] hover:bg-[#e5eeff] border border-[#dce9ff] p-3 rounded-lg text-left transition-colors flex flex-col cursor-pointer"
+            >
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-wider uppercase">
+                ORIGIN WAYPOINT
+              </span>
+              <span className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                {origin}
+              </span>
+              <span className="text-xs text-[#45464d] truncate font-medium">
+                {originAirport.city} ({originAirport.name})
+              </span>
             </div>
 
-            {/* Dropdown Autocomplete */}
+            {/* Dropdown */}
             {showOriginDropdown && (
-              <div className="absolute left-0 right-0 top-full mt-1.5 max-h-56 overflow-y-auto rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl z-50 p-1.5 space-y-1">
-                {originAirports.map(a => (
+              <div className="absolute left-0 right-0 top-full mt-1.5 max-h-60 overflow-y-auto rounded-lg bg-white border border-[#cbd5e1] shadow-xl z-50 p-1.5 space-y-1">
+                <input
+                  type="text"
+                  placeholder="Search airport or city..."
+                  value={originQuery}
+                  onChange={(e) => setOriginQuery(e.target.value)}
+                  className="w-full px-2.5 py-1.5 rounded text-xs border border-[#cbd5e1] mb-1 font-mono-telemetry focus:outline-none focus:border-[#0284c7]"
+                  autoFocus
+                />
+                {originList.map(a => (
                   <button
                     key={a.code}
                     type="button"
                     onClick={() => {
                       setOrigin(a.code);
                       setShowOriginDropdown(false);
+                      setOriginQuery('');
                     }}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 flex items-center justify-between text-xs text-slate-200 transition-colors"
+                    className="w-full text-left px-2.5 py-1.5 rounded hover:bg-[#eff4ff] flex items-center justify-between text-xs text-[#0b1c30] transition-colors"
                   >
                     <div>
-                      <span className="font-extrabold text-sky-400 mr-2">{a.code}</span>
-                      <span className="text-white font-medium">{a.city}</span>
-                      <span className="text-slate-400 ml-1 text-[11px]">({a.name})</span>
+                      <span className="font-mono-telemetry font-bold text-[#0284c7] mr-2">{a.code}</span>
+                      <span className="font-medium">{a.city}</span>
+                      <span className="text-[#64748b] ml-1 text-[11px]">({a.name})</span>
                     </div>
                     <span>{a.flag}</span>
                   </button>
@@ -155,56 +141,59 @@ export default function FlightSearchForm({
             )}
           </div>
 
-          {/* Swap Button */}
-          <div className="md:col-span-1 flex justify-center pt-5 md:pt-0">
-            <button
-              type="button"
-              onClick={handleSwap}
-              className="p-2.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-sky-500/50 hover:bg-slate-800 text-slate-400 hover:text-white transition-all transform hover:rotate-180 duration-200"
-              title="Swap origin and destination"
-            >
-              <ArrowRightLeft className="w-4 h-4" />
-            </button>
-          </div>
+          {/* Swap Waypoint Button */}
+          <button
+            type="button"
+            onClick={handleSwap}
+            aria-label="Swap route origin and destination"
+            className="w-9 h-9 rounded-full bg-[#e5eeff] hover:bg-[#0284c7] hover:text-white text-[#0284c7] flex items-center justify-center shadow-xs shrink-0 transition-all active:rotate-180 cursor-pointer border border-[#cce5ff]"
+          >
+            <span className="material-symbols-outlined text-[18px]">sync_alt</span>
+          </button>
 
-          {/* Destination */}
-          <div className="md:col-span-4 relative">
-            <label className="text-[11px] font-semibold text-slate-400 block mb-1">
-              Destination Airport
-            </label>
-            <div className="relative">
-              <PlaneLanding className="w-4 h-4 text-sky-400 absolute left-3.5 top-3.5" />
-              <input
-                type="text"
-                value={destination}
-                onChange={(e) => {
-                  setDestination(e.target.value.toUpperCase());
-                  setDestQuery(e.target.value);
-                  setShowDestDropdown(true);
-                }}
-                onFocus={() => setShowDestDropdown(true)}
-                placeholder="Airport code (e.g. LHR)"
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-950 border border-slate-700/80 text-sm text-white font-bold placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-              />
+          {/* Destination Node */}
+          <div className="relative flex-1">
+            <div
+              onClick={() => setShowDestDropdown(true)}
+              className="bg-[#eff4ff] hover:bg-[#e5eeff] border border-[#dce9ff] p-3 rounded-lg text-left transition-colors flex flex-col cursor-pointer"
+            >
+              <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] tracking-wider uppercase">
+                DESTINATION WAYPOINT
+              </span>
+              <span className="font-display text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                {destination}
+              </span>
+              <span className="text-xs text-[#45464d] truncate font-medium">
+                {destAirport.city} ({destAirport.name})
+              </span>
             </div>
 
-            {/* Dropdown Autocomplete */}
+            {/* Dropdown */}
             {showDestDropdown && (
-              <div className="absolute left-0 right-0 top-full mt-1.5 max-h-56 overflow-y-auto rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl z-50 p-1.5 space-y-1">
-                {destAirports.map(a => (
+              <div className="absolute left-0 right-0 top-full mt-1.5 max-h-60 overflow-y-auto rounded-lg bg-white border border-[#cbd5e1] shadow-xl z-50 p-1.5 space-y-1">
+                <input
+                  type="text"
+                  placeholder="Search airport or city..."
+                  value={destQuery}
+                  onChange={(e) => setDestQuery(e.target.value)}
+                  className="w-full px-2.5 py-1.5 rounded text-xs border border-[#cbd5e1] mb-1 font-mono-telemetry focus:outline-none focus:border-[#0284c7]"
+                  autoFocus
+                />
+                {destList.map(a => (
                   <button
                     key={a.code}
                     type="button"
                     onClick={() => {
                       setDestination(a.code);
                       setShowDestDropdown(false);
+                      setDestQuery('');
                     }}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 flex items-center justify-between text-xs text-slate-200 transition-colors"
+                    className="w-full text-left px-2.5 py-1.5 rounded hover:bg-[#eff4ff] flex items-center justify-between text-xs text-[#0b1c30] transition-colors"
                   >
                     <div>
-                      <span className="font-extrabold text-sky-400 mr-2">{a.code}</span>
-                      <span className="text-white font-medium">{a.city}</span>
-                      <span className="text-slate-400 ml-1 text-[11px]">({a.name})</span>
+                      <span className="font-mono-telemetry font-bold text-[#0284c7] mr-2">{a.code}</span>
+                      <span className="font-medium">{a.city}</span>
+                      <span className="text-[#64748b] ml-1 text-[11px]">({a.name})</span>
                     </div>
                     <span>{a.flag}</span>
                   </button>
@@ -212,82 +201,188 @@ export default function FlightSearchForm({
               </div>
             )}
           </div>
+        </div>
 
+        {/* Date, Cabin & Flight Vector Bar */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
           {/* Date Picker */}
-          <div className="md:col-span-3">
-            <label className="text-[11px] font-semibold text-slate-400 block mb-1">
-              Departure Date
-            </label>
-            <div className="relative">
-              <Calendar className="w-4 h-4 text-sky-400 absolute left-3.5 top-3.5" />
+          <div className="flex items-center gap-2 bg-[#eff4ff] border border-[#dce9ff] px-3 py-2 rounded-lg">
+            <span className="material-symbols-outlined text-[18px] text-[#0284c7]">calendar_today</span>
+            <div className="flex flex-col min-w-0 flex-1">
+              <span className="font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">TRAVEL DATE</span>
               <input
                 type="date"
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
-                className="w-full pl-10 pr-3 py-2.5 rounded-2xl bg-slate-950 border border-slate-700/80 text-sm text-white font-bold focus:outline-none focus:border-sky-500 [color-scheme:dark]"
+                className="font-mono-telemetry text-xs font-bold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer"
               />
             </div>
           </div>
-        </div>
 
-        {/* Submit & Avgeek Quick Route Presets */}
-        <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-          {/* Quick Route Shortcuts */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              Avgeek Presets:
-            </span>
-            <button
-              type="button"
-              onClick={() => handlePreset('DXB', 'LHR')}
-              className="px-2.5 py-1 rounded-xl text-xs bg-slate-950 border border-slate-800 hover:border-indigo-500/50 hover:bg-indigo-950/30 text-indigo-300 transition-colors"
-            >
-              👑 DXB ⇄ LHR (A380)
-            </button>
-            <button
-              type="button"
-              onClick={() => handlePreset('FRA', 'JFK')}
-              className="px-2.5 py-1 rounded-xl text-xs bg-slate-950 border border-slate-800 hover:border-amber-500/50 hover:bg-amber-950/30 text-amber-300 transition-colors"
-            >
-              👑 FRA ⇄ JFK (747-8)
-            </button>
-            <button
-              type="button"
-              onClick={() => handlePreset('JFK', 'LHR')}
-              className="px-2.5 py-1 rounded-xl text-xs bg-slate-950 border border-slate-800 hover:border-sky-500/50 hover:bg-sky-950/30 text-sky-300 transition-colors"
-            >
-              ✨ JFK ⇄ LHR (A350/787)
-            </button>
-            <button
-              type="button"
-              onClick={() => handlePreset('SFO', 'SIN')}
-              className="px-2.5 py-1 rounded-xl text-xs bg-slate-950 border border-slate-800 hover:border-emerald-500/50 hover:bg-emerald-950/30 text-emerald-300 transition-colors"
-            >
-              🌿 SFO ⇄ SIN (18h ULR)
-            </button>
+          {/* Cabin Class & Pax */}
+          <div className="flex items-center gap-2 bg-[#eff4ff] border border-[#dce9ff] px-3 py-2 rounded-lg">
+            <span className="material-symbols-outlined text-[18px] text-[#0284c7]">airline_seat_recline_normal</span>
+            <div className="flex flex-col min-w-0 flex-1">
+              <span className="font-mono-telemetry text-[9px] font-bold text-[#64748b] uppercase">CABIN // PAX</span>
+              <div className="flex items-center gap-2">
+                <select
+                  value={cabinClass}
+                  onChange={(e) => setCabinClass(e.target.value as CabinClass)}
+                  className="font-mono-telemetry text-xs font-semibold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer capitalize"
+                >
+                  <option value="economy">Economy</option>
+                  <option value="premium_economy">Prem Economy</option>
+                  <option value="business">Business</option>
+                  <option value="first">First Class</option>
+                </select>
+                <select
+                  value={passengers}
+                  onChange={(e) => setPassengers(Number(e.target.value))}
+                  className="font-mono-telemetry text-xs font-semibold text-[#0b1c30] bg-transparent focus:outline-none cursor-pointer"
+                >
+                  {[1, 2, 3, 4, 5, 6].map(n => (
+                    <option key={n} value={n}>{n} Pax</option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
 
-          {/* Search Button */}
+          {/* Submit Action */}
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full sm:w-auto px-6 py-2.5 rounded-2xl text-sm font-bold bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white transition-all shadow-lg shadow-sky-500/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="w-full bg-[#0F172A] hover:bg-[#1E293B] text-white px-5 py-2.5 rounded-lg font-headline text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {isLoading ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span>Searching Equipment...</span>
+                <span className="font-mono-telemetry text-xs">SCANNING RADAR...</span>
               </>
             ) : (
               <>
-                <Search className="w-4 h-4" />
-                <span>Search Flights by Aircraft</span>
+                <span className="material-symbols-outlined text-[18px]">search</span>
+                <span>Scan Flight Equipment</span>
               </>
             )}
           </button>
         </div>
       </form>
+
+      {/* Curated AvGeek Itineraries Module */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between px-1">
+          <span className="font-mono-telemetry text-[10px] font-bold text-[#64748b] uppercase tracking-wider flex items-center gap-1.5">
+            <span className="material-symbols-outlined text-[14px] text-[#0284c7]">trending_up</span>
+            Curated AvGeek Itineraries
+          </span>
+          <span className="font-mono-telemetry text-[11px] text-[#0284c7] font-semibold">
+            INSTANT SCAN
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          {/* Card 1: A380 */}
+          <div
+            onClick={() => handleLoadCurated('DXB', 'LHR')}
+            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
+                  SUPERJUMBO QUAD
+                </span>
+                <span className="font-mono-telemetry text-[10px] text-[#64748b]">EK0001</span>
+              </div>
+              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+                A380 Over the Atlantic
+              </h4>
+              <p className="text-[11px] text-[#45464d] mt-0.5">DXB ⇄ LHR • Emirates Double Decker with Lounge</p>
+            </div>
+            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
+              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$840</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Card 2: 747-8 Queen */}
+          <div
+            onClick={() => handleLoadCurated('FRA', 'JFK')}
+            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
+                  QUEEN OF SKIES
+                </span>
+                <span className="font-mono-telemetry text-[10px] text-[#64748b]">LH400</span>
+              </div>
+              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+                Boeing 747-8 Intercontinental
+              </h4>
+              <p className="text-[11px] text-[#45464d] mt-0.5">FRA ⇄ JFK • Upper Deck & Nose Cone Flights</p>
+            </div>
+            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
+              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$820</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Card 3: A350-1000 XWB */}
+          <div
+            onClick={() => handleLoadCurated('JFK', 'LHR')}
+            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#ecfdf5] text-[#047857] border border-[#a7f3d0]">
+                  5,800FT CABIN
+                </span>
+                <span className="font-mono-telemetry text-[10px] text-[#64748b]">VS0004</span>
+              </div>
+              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+                Airbus A350-1000 Flagship
+              </h4>
+              <p className="text-[11px] text-[#45464d] mt-0.5">JFK ⇄ LHR • Carbon Composite Trent XWB</p>
+            </div>
+            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
+              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$684</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Card 4: 787 Dreamliner */}
+          <div
+            onClick={() => handleLoadCurated('SFO', 'SIN')}
+            className="bg-white rounded-lg border border-[#e2e8f0] p-3 hover:border-[#0284c7] transition-all shadow-xs cursor-pointer group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-mono-telemetry text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#eff4ff] text-[#0284c7] border border-[#cce5ff]">
+                  DIMMABLE WINDOWS
+                </span>
+                <span className="font-mono-telemetry text-[10px] text-[#64748b]">UA001</span>
+              </div>
+              <h4 className="font-headline text-xs font-bold text-[#0b1c30] group-hover:text-[#0284c7] transition-colors">
+                Dreamliner Ultra Long-Haul
+              </h4>
+              <p className="text-[11px] text-[#45464d] mt-0.5">SFO ⇄ SIN • 17h Non-Stop HEPA Filtration</p>
+            </div>
+            <div className="pt-2 mt-2 border-t border-[#f1f5f9] flex items-center justify-between text-[11px]">
+              <span className="font-mono-telemetry font-bold text-[#0b1c30]">$990</span>
+              <span className="font-mono-telemetry text-[#0284c7] font-bold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                LOAD AIRFRAME <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

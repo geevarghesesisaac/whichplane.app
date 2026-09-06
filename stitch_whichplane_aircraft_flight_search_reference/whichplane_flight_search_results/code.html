@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-primary-container': '#7c839b', 'on-tertiary': '#ffffff', 'on-primary': '#ffffff', 'on-tertiary-fixed': '#2a1700', 'on-surface-variant': '#45464d', 'surface-container-highest': '#d3e4fe', 'tertiary-fixed': '#ffddb8', 'error': '#ba1a1a', 'on-surface': '#0b1c30', 'outline': '#76777d', 'secondary': '#006398', 'surface': '#f8f9ff', 'tertiary-container': '#2a1700', 'on-primary-fixed-variant': '#3f465c', 'on-background': '#0b1c30', 'secondary-fixed-dim': '#93ccff', 'surface-tint': '#565e74', 'surface-container': '#e5eeff', 'surface-container-high': '#dce9ff', 'on-error': '#ffffff', 'tertiary-fixed-dim': '#ffb95f', 'primary-fixed': '#dae2fd', 'primary': '#000000', 'secondary-fixed': '#cce5ff', 'surface-dim': '#cbdbf5', 'on-primary-fixed': '#131b2e', 'surface-variant': '#d3e4fe', 'on-tertiary-container': '#b87500', 'primary-container': '#131b2e', 'on-error-container': '#93000a', 'tertiary': '#000000', 'on-tertiary-fixed-variant': '#653e00', 'outline-variant': '#c6c6cd', 'on-secondary-container': '#00476e', 'error-container': '#ffdad6', 'secondary-container': '#5bb8fe', 'surface-bright': '#f8f9ff', 'on-secondary-fixed-variant': '#004b73', 'surface-container-low': '#eff4ff', 'on-secondary': '#ffffff', 'on-secondary-fixed': '#001d31', 'inverse-primary': '#bec6e0', 'surface-container-lowest': '#ffffff', 'background': '#f8f9ff', 'inverse-surface': '#213145', 'inverse-on-surface': '#eaf1ff', 'primary-fixed-dim': '#bec6e0' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'space-4xl': '4rem', 'space-xl': '1.5rem', 'space-2xl': '2rem', 'gutter-desktop': '2rem', 'space-sm': '0.5rem', 'space-md': '0.75rem', 'space-xs': '0.25rem', 'space-3xl': '3rem', 'gutter-mobile': '1rem', 'gutter-tablet': '1.5rem', 'space-lg': '1rem', 'space-xxs': '0.125rem', 'max-width-content': '1280px' }, fontFamily: { 'headline-sm': ['Space Grotesk'], 'data-mono-md': ['JetBrains Mono'], 'data-mono-sm': ['JetBrains Mono'], 'display-lg': ['Space Grotesk'], 'body-md': ['Inter'], 'body-lg': ['Inter'], 'headline-lg-mobile': ['Space Grotesk'], 'headline-lg': ['Space Grotesk'], 'label-caps': ['JetBrains Mono'], 'title-md': ['Inter'], 'data-mono-lg': ['JetBrains Mono'], 'title-sm': ['Inter'], 'body-sm': ['Inter'], 'headline-md': ['Space Grotesk'] }, fontSize: { 'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '-0.005em', fontWeight: '600' }], 'data-mono-md': ['13px', { lineHeight: '18px', letterSpacing: '-0.01em', fontWeight: '500' }], 'data-mono-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'display-lg': ['48px', { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }], 'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }], 'headline-lg-mobile': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '700' }], 'headline-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.015em', fontWeight: '700' }], 'label-caps': ['10px', { lineHeight: '12px', letterSpacing: '0.08em', fontWeight: '700' }], 'title-md': ['16px', { lineHeight: '22px', fontWeight: '600' }], 'data-mono-lg': ['18px', { lineHeight: '22px', letterSpacing: '-0.02em', fontWeight: '600' }], 'title-sm': ['14px', { lineHeight: '20px', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }], 'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f8f9ff;color:#0b1c30;overscroll-behavior-y:none;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 2rem);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-secondary selection:text-on-secondary"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="Navigate back" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="WhichPlane Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VgyX3Xcn5ApbF6137AQA3yKAz_VrCeLORNEPY37d4D2MmdOE7XEGUvI38048uL1JAuGQsAcs8O6exadyZgTdQLDUi2OaY-mbL2Op9A-TS6tV2BxJunoQPjSWIoMiijWrGfisCO9SvQ3ouWJdDj4XbYUu0tJh7cddNNn5ANoYj3ogrT2rGRAw8HNTfBOvyK5ZwMeQzajVjeDEMNgL1yGH0-_6Yi5COC3q-dTqiP1EUKsedX6LgMQhyR-PSJ"/><h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate max-w-[180px]">Flight Detail</h1></div><div class="flex items-center gap-space-xs"><div class="w-11 h-11 flex items-center justify-center rounded-full"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ih2Jbp6Wj1Orq8CjtvfGWWD9ideU_w998_SYp4-dDYOaOV0mflkkDCnGuZ5Ncz_DVxuXFW_OVn9xIUybRm38Koa4XZJLrAJN8xrcHx4UipxuQ8Z8v85wQ1k58FoWgGl5vgLEFoQgBfTUMaCE25c2UBlzNFCnSfwJTzN5tNXLHDwA85PHMk69cL2qArQyodWFqdIE6o93NddkdD2GiW7wPEtugT9sWpH3xn1bCp9UgPS2vC-MadaDyQ"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface px-gutter-mobile flex-1 min-h-screen"><div class="flex flex-col w-full pb-10">
+<!-- FLIGHT SEARCH METADATA STRIP -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-md">
+<div class="flex items-center justify-between gap-space-xs mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-data-mono-lg text-data-mono-lg font-bold tracking-tight text-on-surface">JFK</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">flight_takeoff</span>
+<span class="font-data-mono-lg text-data-mono-lg font-bold tracking-tight text-on-surface">LHR</span>
+<span class="bg-secondary-container/30 text-on-secondary-container px-2 py-0.5 rounded text-[11px] font-label-caps uppercase ml-1">Roundtrip</span>
+</div>
+<button aria-label="Edit Search" class="bg-surface-container-low hover:bg-surface-container text-secondary p-1.5 rounded-lg flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-md text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">calendar_today</span>
+<span>Oct 24 – Nov 01</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">person</span>
+<span>1 Passenger</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-outline">airline_seat_recline_normal</span>
+<span>Econ / Prem Econ</span>
+</div>
+</div>
+<!-- Telemetry Bar -->
+<div class="mt-space-sm pt-space-xs flex items-center justify-between bg-surface-container-low px-space-sm py-1.5 rounded-lg">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface font-semibold">28 FLIGHTS FOUND</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">6 AIRFRAME MODELS</span>
+</div>
+</section>
+<!-- SORT BAR & FILTER TRIGGER BAR -->
+<section class="flex flex-col gap-space-xs mb-space-md">
+<!-- Active Sort Dropdown Card -->
+<div class="flex items-center justify-between bg-surface-container-lowest px-space-md py-2.5 rounded-xl shadow-sm">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-secondary text-[20px]">sort</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Sort Telemetry</span>
+<span class="font-headline-sm text-[13px] leading-tight font-semibold text-on-surface truncate">Best Aircraft Spec (A350 / 787 / A380)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px]">expand_more</span>
+</div>
+<!-- Filter Toggle Strip / Chips -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-0.5">
+<!-- Main Filter Trigger Button with Active Count -->
+<button class="flex items-center gap-1.5 bg-primary text-on-primary px-3 py-2 rounded-lg font-title-sm text-title-sm shadow-sm whitespace-nowrap active:scale-95 transition-transform" onclick="toggleFilterDrawer()">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Filters</span>
+<span class="w-4 h-4 rounded-full bg-secondary text-on-secondary font-data-mono-sm text-[10px] flex items-center justify-center font-bold">4</span>
+</button>
+<!-- Specialist Pill: Composite Only (Active) -->
+<button class="flex items-center gap-1 bg-secondary-container/40 text-on-secondary-container px-3 py-2 rounded-lg font-title-sm text-title-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[16px] text-secondary">eco</span>
+<span>Composite Only</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span>
+</button>
+<!-- Specialist Pill: Exclude 737 MAX (Active) -->
+<button class="flex items-center gap-1 bg-surface-container-high text-on-surface px-3 py-2 rounded-lg font-title-sm text-title-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[16px] text-error">gpp_bad</span>
+<span>Exclude 737 MAX</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<!-- Body Type Quick Pill -->
+<button class="flex items-center gap-1 bg-surface-container-lowest text-on-surface px-3 py-2 rounded-lg font-title-sm text-title-sm whitespace-nowrap shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">flight_class</span>
+<span>Widebody (Twin Aisle)</span>
+</button>
+</div>
+</section>
+<!-- COLLAPSIBLE DETAILED FILTERS ACCORDION -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-md flex flex-col gap-space-md transition-all" id="filter-drawer">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Aviation Equipment Filters</h2>
+</div>
+<button class="font-data-mono-sm text-data-mono-sm text-secondary hover:underline uppercase font-bold">Reset All</button>
+</div>
+<!-- Quick Airframe Specials -->
+<div class="grid grid-cols-1 gap-space-xs">
+<!-- Composite Benefit Filter -->
+<label class="flex items-center justify-between p-2.5 bg-surface-container-low rounded-lg cursor-pointer">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">altitude</span>
+</div>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-semibold">Composite Airframes Only</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">A350 &amp; B787 (Cabin altitude &lt; 6,000ft, &gt;16% humidity)</div>
+</div>
+</div>
+<input checked="" class="w-4 h-4 rounded text-secondary accent-secondary cursor-pointer" type="checkbox"/>
+</label>
+<!-- Exclude 737 MAX Filter -->
+<label class="flex items-center justify-between p-2.5 bg-surface-container-low rounded-lg cursor-pointer">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-semibold">Exclude Boeing 737 MAX</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">Filter out all 737 MAX 8 &amp; 9 equipment automatically</div>
+</div>
+</div>
+<input checked="" class="w-4 h-4 rounded accent-secondary cursor-pointer" type="checkbox"/>
+</label>
+</div>
+<!-- Fuselage Body Type Toggle -->
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider block mb-1.5">Fuselage Architecture</span>
+<div class="grid grid-cols-3 gap-1.5 p-1 bg-surface-container-low rounded-lg">
+<button class="py-1.5 rounded text-center font-title-sm text-title-sm bg-primary text-on-primary font-semibold shadow-xs">Twin Aisle</button>
+<button class="py-1.5 rounded text-center font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface font-medium">Single Aisle</button>
+<button class="py-1.5 rounded text-center font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface font-medium">Any Type</button>
+</div>
+</div>
+<!-- Aircraft Family Badges Multi-select -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Equipment Sub-Family</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">3 Selected</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<button class="px-2.5 py-1.5 rounded-lg bg-secondary text-on-secondary font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-1">
+<span>Airbus A350</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-secondary text-on-secondary font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-1">
+<span>Boeing 787</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-secondary text-on-secondary font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-1">
+<span>Airbus A380</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container text-on-surface font-data-mono-sm text-data-mono-sm font-medium">Boeing 777</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container text-on-surface font-data-mono-sm text-data-mono-sm font-medium">Airbus A330neo</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container text-on-surface font-data-mono-sm text-data-mono-sm font-medium">Boeing 747-8</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container-high text-outline font-data-mono-sm text-data-mono-sm font-medium line-through">Boeing 737 MAX</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container text-on-surface font-data-mono-sm text-data-mono-sm font-medium">Airbus A320neo</button>
+</div>
+</div>
+<!-- Stops Filter -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Flight Routing:</span>
+</div>
+<div class="flex items-center gap-1 font-data-mono-sm text-data-mono-sm">
+<span class="bg-primary text-on-primary px-2 py-0.5 rounded font-semibold">Nonstop (12)</span>
+<span class="bg-surface-container text-on-surface px-2 py-0.5 rounded">1 Stop (14)</span>
+<span class="bg-surface-container text-on-surface px-2 py-0.5 rounded">2+ (2)</span>
+</div>
+</div>
+</section>
+<!-- FLIGHT RESULTS LIST -->
+<div class="flex flex-col gap-space-md">
+<!-- FLIGHT CARD 1: Virgin Atlantic A350-1000 -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-sm relative overflow-hidden">
+<!-- Flagship Spec Top Tag -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-error flex items-center justify-center text-on-error font-headline-sm text-xs font-black">
+            VA
+          </div>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-semibold">Virgin Atlantic</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant">VS4 • Direct</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">$684</div>
+<div class="font-data-mono-sm text-[10px] text-on-surface-variant">ROUNDTRIP</div>
+</div>
+</div>
+<!-- Aerodynamic Airframe Hero Badge -->
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">airlines</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-bold tracking-tight">Airbus A350-1000 XWB</span>
+<span class="bg-secondary text-on-secondary px-1.5 py-0.2 rounded font-label-caps text-[9px] uppercase font-bold">Twin Aisle</span>
+</div>
+<div class="font-body-sm text-[11px] text-secondary truncate font-medium">Aerodynamic Flagship • Sub-6,000ft Cabin Altitude</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+</div>
+<!-- Route Timeline -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">18:30</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">JFK T4</span>
+</div>
+<div class="flex-1 px-4 flex flex-col items-center">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant mb-1">7h 15m nonstop</span>
+<div class="w-full flex items-center relative">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="h-0.5 flex-1 bg-secondary-container"></div>
+<span class="material-symbols-outlined text-secondary text-[14px] absolute left-1/2 -translate-x-1/2">flight</span>
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+</div>
+<span class="font-data-mono-sm text-[10px] text-secondary font-semibold mt-1">3,451 NM • HIGH EFFICIENCY</span>
+</div>
+<div class="flex flex-col text-right">
+<div class="flex items-center justify-end gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">06:45</span>
+<span class="font-data-mono-sm text-[10px] text-error font-bold">+1</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">LHR T3</span>
+</div>
+</div>
+<!-- Technical Spec Bar (Moments of Delight) -->
+<div class="bg-surface-container-lowest pt-2 flex flex-wrap items-center gap-1.5">
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">layers</span> 53% Carbon Composite
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">volume_down</span> Trent XWB Ultra-Quiet
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">air</span> 5,800ft Cabin Altitude
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">videocam</span> Live HD Tail Cam
+        </span>
+</div>
+<!-- Call to Action -->
+<div class="flex items-center justify-between pt-2">
+<button class="font-title-sm text-title-sm text-secondary hover:underline flex items-center gap-1 font-semibold">
+<span>Airframe Specs &amp; Seat Map</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg font-title-sm text-title-sm font-medium transition-colors">
+          Select Flight
+        </button>
+</div>
+</article>
+<!-- FLIGHT CARD 2: British Airways Boeing 787-9 Dreamliner -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-headline-sm text-xs font-black">
+            BA
+          </div>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-semibold">British Airways</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant">BA178 • Daytime Flight</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">$642</div>
+<div class="font-data-mono-sm text-[10px] text-on-surface-variant">ROUNDTRIP</div>
+</div>
+</div>
+<!-- Aircraft Badge -->
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">flight</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-bold tracking-tight">Boeing 787-9 Dreamliner</span>
+<span class="bg-secondary text-on-secondary px-1.5 py-0.2 rounded font-label-caps text-[9px] uppercase font-bold">Composite</span>
+</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant truncate font-medium">Gentle Cabin Pressure • Dynamic HEPA Filtration</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[18px]">wb_twilight</span>
+</div>
+<!-- Route Timeline -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">08:15</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">JFK T7</span>
+</div>
+<div class="flex-1 px-4 flex flex-col items-center">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant mb-1">7h 05m nonstop</span>
+<div class="w-full flex items-center relative">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="h-0.5 flex-1 bg-surface-container-highest"></div>
+<span class="material-symbols-outlined text-secondary text-[14px] absolute left-1/2 -translate-x-1/2">flight</span>
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+</div>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant font-medium mt-1">DAYTIME ARRIVAL</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">20:20</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">LHR T5</span>
+</div>
+</div>
+<!-- Technical Spec Bar -->
+<div class="bg-surface-container-lowest pt-2 flex flex-wrap items-center gap-1.5">
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">blur_on</span> Dimmable Windows
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">water_drop</span> Higher Cabin Humidity
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">4g_mobiledata</span> GEnx-1B Engines
+        </span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="font-title-sm text-title-sm text-secondary hover:underline flex items-center gap-1 font-semibold">
+<span>Airframe Specs &amp; Seat Map</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg font-title-sm text-title-sm font-medium transition-colors">
+          Select Flight
+        </button>
+</div>
+</article>
+<!-- FLIGHT CARD 3: Airbus A380 Superjumbo (Aviation Enthusiast Highlight) -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-sm relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-headline-sm text-xs font-black">
+            BA
+          </div>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-semibold">British Airways</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant">BA112 • Double Deck</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">$715</div>
+<div class="font-data-mono-sm text-[10px] text-on-surface-variant">ROUNDTRIP</div>
+</div>
+</div>
+<!-- Rare Fleet / Double Deck Special Badge -->
+<div class="bg-tertiary-fixed/30 rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">flight_class</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-bold tracking-tight">Airbus A380-800 Superjumbo</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-1.5 py-0.2 rounded font-label-caps text-[9px] uppercase font-bold">Double Deck</span>
+</div>
+<div class="font-body-sm text-[11px] text-on-tertiary-fixed-variant truncate font-medium">Upper Deck 2-4-2 Config • Rare Quadrant Heavy</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-[18px]">stars</span>
+</div>
+<!-- Route Timeline -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">19:00</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">JFK T7</span>
+</div>
+<div class="flex-1 px-4 flex flex-col items-center">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant mb-1">7h 10m nonstop</span>
+<div class="w-full flex items-center relative">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="h-0.5 flex-1 bg-surface-container-highest"></div>
+<span class="material-symbols-outlined text-secondary text-[14px] absolute left-1/2 -translate-x-1/2">flight</span>
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+</div>
+<span class="font-data-mono-sm text-[10px] text-tertiary-container font-semibold mt-1">MAXIMUM CABIN STABILITY</span>
+</div>
+<div class="flex flex-col text-right">
+<div class="flex items-center justify-end gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">07:10</span>
+<span class="font-data-mono-sm text-[10px] text-error font-bold">+1</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">LHR T5</span>
+</div>
+</div>
+<!-- Technical Spec Bar -->
+<div class="bg-surface-container-lowest pt-2 flex flex-wrap items-center gap-1.5">
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-tertiary-container">hearing</span> 59 dB Whisper Cabin
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-tertiary-container">hourglass_empty</span> Endangered Airframe
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-tertiary-container">straighten</span> Massive 34" Pitch Row
+        </span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="font-title-sm text-title-sm text-secondary hover:underline flex items-center gap-1 font-semibold">
+<span>Upper Deck Availability</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg font-title-sm text-title-sm font-medium transition-colors">
+          Select Flight
+        </button>
+</div>
+</article>
+<!-- FLIGHT CARD 4: Air France AF023 (1-Stop Multi-Segment Airframes) -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-headline-sm text-xs font-black">
+            AF
+          </div>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-semibold">Air France</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant">AF023 + AF1680 • 1 Stop CDG</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">$590</div>
+<div class="font-data-mono-sm text-[10px] text-on-surface-variant">ROUNDTRIP</div>
+</div>
+</div>
+<!-- Multi-Segment Airframe Pills -->
+<div class="grid grid-cols-2 gap-1.5">
+<div class="bg-surface-container-low rounded-lg p-2">
+<div class="font-label-caps text-[9px] text-on-surface-variant uppercase">Segment 1: Transatlantic</div>
+<div class="font-data-mono-sm text-[12px] font-bold text-on-surface">Boeing 777-300ER</div>
+<div class="font-body-sm text-[10px] text-secondary">Widebody • Twin Aisle</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2">
+<div class="font-label-caps text-[9px] text-on-surface-variant uppercase">Segment 2: European Leg</div>
+<div class="font-data-mono-sm text-[12px] font-bold text-on-surface">Airbus A220-300</div>
+<div class="font-body-sm text-[10px] text-secondary">Quiet 2-3 Architecture</div>
+</div>
+</div>
+<!-- Route Timeline with Layover Node -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">16:30</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">JFK T1</span>
+</div>
+<div class="flex-1 px-3 flex flex-col items-center">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant mb-1">9h 15m (1h 20m CDG)</span>
+<div class="w-full flex items-center relative">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="h-0.5 flex-1 bg-surface-container-highest"></div>
+<!-- Equipment Change Layover Waypoint -->
+<div class="w-3 h-3 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+</div>
+<div class="h-0.5 flex-1 bg-surface-container-highest"></div>
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+</div>
+<span class="font-data-mono-sm text-[9px] text-on-surface-variant font-medium mt-1">EQUIPMENT TRANSITION AT PARIS</span>
+</div>
+<div class="flex flex-col text-right">
+<div class="flex items-center justify-end gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">08:45</span>
+<span class="font-data-mono-sm text-[10px] text-error font-bold">+1</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">LHR T4</span>
+</div>
+</div>
+<!-- Technical Spec Bar -->
+<div class="bg-surface-container-lowest pt-2 flex flex-wrap items-center gap-1.5">
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">wifi</span> High-Speed Satellite
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">power</span> USB-C + Universal AC
+        </span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="font-title-sm text-title-sm text-secondary hover:underline flex items-center gap-1 font-semibold">
+<span>Connection Details</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg font-title-sm text-title-sm font-medium transition-colors">
+          Select Flight
+        </button>
+</div>
+</article>
+<!-- FLIGHT CARD 5: Norse Atlantic Z0701 (Budget Composite) -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-headline-sm text-xs font-black">
+            N0
+          </div>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-semibold">Norse Atlantic</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant">Z0701 • Nonstop Redeye</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-sm text-headline-sm text-secondary font-bold">$419</div>
+<div class="font-data-mono-sm text-[10px] text-on-surface-variant">ROUNDTRIP</div>
+</div>
+</div>
+<!-- Aircraft Badge -->
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">flight</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-bold tracking-tight">Boeing 787-9 Dreamliner</span>
+<span class="bg-surface-container-highest text-on-surface px-1.5 py-0.2 rounded font-label-caps text-[9px] uppercase font-bold">Low Fare</span>
+</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant truncate font-medium">Budget Long-Haul Composite Airframe</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">savings</span>
+</div>
+<!-- Route Timeline -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">22:55</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">JFK T7</span>
+</div>
+<div class="flex-1 px-4 flex flex-col items-center">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant mb-1">6h 55m nonstop</span>
+<div class="w-full flex items-center relative">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="h-0.5 flex-1 bg-surface-container-highest"></div>
+<span class="material-symbols-outlined text-secondary text-[14px] absolute left-1/2 -translate-x-1/2">flight</span>
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+</div>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant font-medium mt-1">FAST OVERNIGHT CROSSING</span>
+</div>
+<div class="flex flex-col text-right">
+<div class="flex items-center justify-end gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">10:50</span>
+<span class="font-data-mono-sm text-[10px] text-error font-bold">+1</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant font-medium">LGW S</span>
+</div>
+</div>
+<!-- Technical Spec Bar -->
+<div class="bg-surface-container-lowest pt-2 flex flex-wrap items-center gap-1.5">
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">flight_class</span> Modern Widebody
+        </span>
+<span class="bg-surface-container px-2 py-1 rounded font-data-mono-sm text-[10px] text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">wb_sunny</span> Mood Lighting
+        </span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="font-title-sm text-title-sm text-secondary hover:underline flex items-center gap-1 font-semibold">
+<span>Flight Info &amp; Baggage</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg font-title-sm text-title-sm font-medium transition-colors">
+          Select Flight
+        </button>
+</div>
+</article>
+</div>
+<!-- Micro-interaction for filter accordion toggle -->
+<script>
+    function toggleFilterDrawer() {
+      const drawer = document.getElementById('filter-drawer');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+  </script>
+</div></main></body></html>
