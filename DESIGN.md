@@ -50,31 +50,31 @@ colors:
   surface-variant: '#d3e4fe'
 typography:
   display-lg:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 48px
     fontWeight: '700'
     lineHeight: 56px
     letterSpacing: -0.02em
   headline-lg:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 32px
     fontWeight: '700'
     lineHeight: 40px
     letterSpacing: -0.015em
   headline-lg-mobile:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 24px
     fontWeight: '700'
     lineHeight: 32px
     letterSpacing: -0.01em
   headline-md:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 22px
     fontWeight: '600'
     lineHeight: 28px
     letterSpacing: -0.01em
   headline-sm:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 18px
     fontWeight: '600'
     lineHeight: 24px
@@ -105,25 +105,25 @@ typography:
     fontWeight: '400'
     lineHeight: 16px
   data-mono-lg:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: OCR-B
     fontSize: 18px
     fontWeight: '600'
     lineHeight: 22px
     letterSpacing: -0.02em
   data-mono-md:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: OCR-B
     fontSize: 13px
     fontWeight: '500'
     lineHeight: 18px
     letterSpacing: -0.01em
   data-mono-sm:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: OCR-B
     fontSize: 11px
     fontWeight: '500'
     lineHeight: 14px
     letterSpacing: 0.02em
   label-caps:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: OCR-B
     fontSize: 10px
     fontWeight: '700'
     lineHeight: 12px

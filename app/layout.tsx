@@ -50,7 +50,6 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${spaceMono.variable} h-full antialiased light`}
-      data-font-mode="authentic"
     >
       <head>
         <link
