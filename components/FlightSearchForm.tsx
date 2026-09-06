@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SearchParams, CabinClass } from '@/lib/types';
 import { getAirport, findAirport } from '@/data/airports';
 
@@ -44,11 +44,31 @@ export default function FlightSearchForm({
   const [cabinClass, setCabinClass] = useState<CabinClass>('economy');
   const [passengers, setPassengers] = useState(1);
 
-  // Dropdown Autocomplete States
+  // Dropdown Autocomplete States & Refs
   const [showOriginDropdown, setShowOriginDropdown] = useState(false);
   const [showDestDropdown, setShowDestDropdown] = useState(false);
   const [originQuery, setOriginQuery] = useState('');
   const [destQuery, setDestQuery] = useState('');
+
+  const originRef = useRef<HTMLDivElement>(null);
+  const destRef = useRef<HTMLDivElement>(null);
+
+  // Reliable click-outside handler using React refs (No full-screen blur backdrop)
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (originRef.current && !originRef.current.contains(event.target as Node)) {
+        setShowOriginDropdown(false);
+      }
+      if (destRef.current && !destRef.current.contains(event.target as Node)) {
+        setShowDestDropdown(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSwap = () => {
     const temp = origin;
@@ -91,21 +111,10 @@ export default function FlightSearchForm({
 
   return (
     <div className="w-full space-y-4">
-      {/* Backdrop for closing dropdowns on outside click */}
-      {(showOriginDropdown || showDestDropdown) && (
-        <div
-          className="fixed inset-0 z-40 bg-black/10 backdrop-blur-[1px]"
-          onClick={() => {
-            setShowOriginDropdown(false);
-            setShowDestDropdown(false);
-          }}
-        />
-      )}
-
       {/* Interactive Route & Itinerary Card */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-xl shadow-xs border border-[#e2e8f0] p-4 sm:p-5 flex flex-col gap-3 relative z-30"
+        className="bg-white rounded-xl shadow-xs border border-[#e2e8f0] p-4 sm:p-5 flex flex-col gap-3 relative"
       >
         {/* Card Header Telemetry Tag & Roundtrip Toggle */}
         <div className="flex flex-wrap items-center justify-between pb-2 border-b border-[#f1f5f9] gap-2">
@@ -154,7 +163,10 @@ export default function FlightSearchForm({
         {/* Origin & Destination Split Node */}
         <div className="flex items-center justify-between gap-2 sm:gap-3 relative">
           {/* Origin Node */}
-          <div className="relative flex-1">
+          <div
+            ref={originRef}
+            className={`relative flex-1 ${showOriginDropdown ? 'z-50' : 'z-10'}`}
+          >
             <div
               onClick={() => {
                 setShowOriginDropdown(true);
@@ -173,7 +185,7 @@ export default function FlightSearchForm({
               </span>
             </div>
 
-            {/* Dropdown */}
+            {/* Origin Dropdown */}
             {showOriginDropdown && (
               <div className="absolute left-0 right-0 top-full mt-1.5 max-h-72 overflow-y-auto rounded-lg bg-white border border-[#cbd5e1] shadow-2xl z-50 p-2 space-y-1">
                 <input
@@ -181,6 +193,16 @@ export default function FlightSearchForm({
                   placeholder="Type airport code or city (e.g. London, DEL, SFO)..."
                   value={originQuery}
                   onChange={(e) => setOriginQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setShowOriginDropdown(false);
+                    } else if (e.key === 'Enter' && originList.length > 0) {
+                      e.preventDefault();
+                      setOrigin(originList[0].code);
+                      setShowOriginDropdown(false);
+                      setOriginQuery('');
+                    }
+                  }}
                   className="w-full px-2.5 py-2 rounded text-xs border border-[#cbd5e1] mb-1 font-mono-telemetry focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7]"
                   autoFocus
                 />
@@ -191,18 +213,20 @@ export default function FlightSearchForm({
                   <button
                     key={a.code}
                     type="button"
-                    onClick={() => {
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       setOrigin(a.code);
                       setShowOriginDropdown(false);
                       setOriginQuery('');
                     }}
-                    className="w-full text-left px-2.5 py-1.5 rounded hover:bg-[#eff4ff] flex items-center justify-between text-xs text-[#0b1c30] transition-colors cursor-pointer group"
+                    className="w-full text-left px-2.5 py-2 rounded hover:bg-[#eff4ff] active:bg-[#dbeafe] flex items-center justify-between text-xs text-[#0b1c30] transition-colors cursor-pointer group"
                   >
                     <div className="truncate pr-2">
                       <span className="font-ocr font-bold text-[#0284c7] group-hover:text-[#0b1c30] mr-2 text-sm tracking-[0.06em]">
                         {a.code}
                       </span>
-                      <span className="font-medium text-[#0b1c30]">{a.city}</span>
+                      <span className="font-semibold text-[#0b1c30]">{a.city}</span>
                       <span className="text-[#64748b] ml-1 text-[11px] truncate">({a.name})</span>
                     </div>
                     <span className="text-sm shrink-0">{a.flag}</span>
@@ -223,7 +247,10 @@ export default function FlightSearchForm({
           </button>
 
           {/* Destination Node */}
-          <div className="relative flex-1">
+          <div
+            ref={destRef}
+            className={`relative flex-1 ${showDestDropdown ? 'z-50' : 'z-10'}`}
+          >
             <div
               onClick={() => {
                 setShowDestDropdown(true);
@@ -242,7 +269,7 @@ export default function FlightSearchForm({
               </span>
             </div>
 
-            {/* Dropdown */}
+            {/* Destination Dropdown */}
             {showDestDropdown && (
               <div className="absolute left-0 right-0 top-full mt-1.5 max-h-72 overflow-y-auto rounded-lg bg-white border border-[#cbd5e1] shadow-2xl z-50 p-2 space-y-1">
                 <input
@@ -250,6 +277,16 @@ export default function FlightSearchForm({
                   placeholder="Type airport code or city (e.g. Dubai, Tokyo, CDG)..."
                   value={destQuery}
                   onChange={(e) => setDestQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setShowDestDropdown(false);
+                    } else if (e.key === 'Enter' && destList.length > 0) {
+                      e.preventDefault();
+                      setDestination(destList[0].code);
+                      setShowDestDropdown(false);
+                      setDestQuery('');
+                    }
+                  }}
                   className="w-full px-2.5 py-2 rounded text-xs border border-[#cbd5e1] mb-1 font-mono-telemetry focus:outline-none focus:border-[#0284c7] focus:ring-1 focus:ring-[#0284c7]"
                   autoFocus
                 />
@@ -260,18 +297,20 @@ export default function FlightSearchForm({
                   <button
                     key={a.code}
                     type="button"
-                    onClick={() => {
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       setDestination(a.code);
                       setShowDestDropdown(false);
                       setDestQuery('');
                     }}
-                    className="w-full text-left px-2.5 py-1.5 rounded hover:bg-[#eff4ff] flex items-center justify-between text-xs text-[#0b1c30] transition-colors cursor-pointer group"
+                    className="w-full text-left px-2.5 py-2 rounded hover:bg-[#eff4ff] active:bg-[#dbeafe] flex items-center justify-between text-xs text-[#0b1c30] transition-colors cursor-pointer group"
                   >
                     <div className="truncate pr-2">
                       <span className="font-ocr font-bold text-[#0284c7] group-hover:text-[#0b1c30] mr-2 text-sm tracking-[0.06em]">
                         {a.code}
                       </span>
-                      <span className="font-medium text-[#0b1c30]">{a.city}</span>
+                      <span className="font-semibold text-[#0b1c30]">{a.city}</span>
                       <span className="text-[#64748b] ml-1 text-[11px] truncate">({a.name})</span>
                     </div>
                     <span className="text-sm shrink-0">{a.flag}</span>
