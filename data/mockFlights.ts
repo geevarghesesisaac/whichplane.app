@@ -2303,7 +2303,11 @@ export function generateRealisticFlights(params: SearchParams): FlightOffer[] {
       cabinClass: params.cabinClass || 'economy'
     };
 
-    const googleFlightsUrl = `https://www.google.com/travel/flights?q=flights%20from%20${origCode}%20to%20${destCode}%20on%20${params.departureDate}`;
+    const depDateStr = params.departureDate || new Date().toISOString().split('T')[0];
+    const dateParts = depDateStr.split('-');
+    const ddmm = dateParts.length === 3 ? `${dateParts[2]}${dateParts[1]}` : '2309';
+    const marker = process.env.TRAVELPAYOUTS_MARKER || process.env.NEXT_PUBLIC_TRAVELPAYOUTS_MARKER || '774431';
+    const affiliateBookingUrl = `https://www.aviasales.com/search/${origCode}${ddmm}${destCode}${params.passengers || 1}?marker=${encodeURIComponent(marker)}`;
 
     return {
       id: `off_${arch.flightNumber.replace(/\s+/g, '')}_${Date.now()}_${index}`,
@@ -2322,7 +2326,7 @@ export function generateRealisticFlights(params: SearchParams): FlightOffer[] {
       containsBoeing737Max: aircraft.family === '737 MAX',
       containsA380: aircraft.family === 'A380',
       contains747: aircraft.family.includes('747'),
-      bookingUrl: googleFlightsUrl,
+      bookingUrl: affiliateBookingUrl,
       directAirlineUrl: `https://www.google.com/search?q=${encodeURIComponent(`${arch.airlineName} book flight ${origCode} to ${destCode}`)}`,
       deeplinkType: 'airline_direct',
       hasSeatMap: arch.hasSeatMap

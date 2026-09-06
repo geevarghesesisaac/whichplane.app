@@ -207,7 +207,7 @@ export default function FlightCard({ offer }: FlightCardProps) {
           <a
             href={offer.bookingUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer sponsored"
             className="bg-[#0F172A] hover:bg-[#1E293B] text-white px-4 py-2 rounded-lg font-headline text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer tracking-[0.03em]"
           >
             <span>Select Flight</span>

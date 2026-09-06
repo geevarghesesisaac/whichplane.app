@@ -158,7 +158,13 @@ export async function searchDuffelFlights(
       const allAircraft = allSegments.map(s => s.aircraft);
       const amountNum = parseFloat(offer.total_amount) || 500;
 
-      const googleFlightsUrl = `https://www.google.com/travel/flights?q=flights%20from%20${params.origin.toUpperCase()}%20to%20${params.destination.toUpperCase()}%20on%20${params.departureDate}`;
+      const origCode = params.origin.toUpperCase();
+      const destCode = params.destination.toUpperCase();
+      const depDateStr = params.departureDate || new Date().toISOString().split('T')[0];
+      const dateParts = depDateStr.split('-');
+      const ddmm = dateParts.length === 3 ? `${dateParts[2]}${dateParts[1]}` : '2309';
+      const marker = process.env.TRAVELPAYOUTS_MARKER || process.env.NEXT_PUBLIC_TRAVELPAYOUTS_MARKER || '774431';
+      const affiliateBookingUrl = `https://www.aviasales.com/search/${origCode}${ddmm}${destCode}${params.passengers || 1}?marker=${encodeURIComponent(marker)}`;
 
       const currency = offer.total_currency || 'USD';
       let formattedPrice = `$${Math.round(amountNum).toLocaleString()}`;
@@ -189,7 +195,7 @@ export async function searchDuffelFlights(
         containsBoeing737Max: allAircraft.some(a => a.family === '737 MAX'),
         containsA380: allAircraft.some(a => a.family === 'A380'),
         contains747: allAircraft.some(a => a.family.includes('747')),
-        bookingUrl: googleFlightsUrl,
+        bookingUrl: affiliateBookingUrl,
         directAirlineUrl: `https://www.google.com/search?q=${encodeURIComponent(`${allSegments[0]?.operatingCarrier.name} book flight ${params.origin} to ${params.destination}`)}`,
         deeplinkType: 'airline_direct',
         hasSeatMap: true

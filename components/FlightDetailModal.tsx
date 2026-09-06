@@ -249,7 +249,7 @@ export default function FlightDetailModal({ isOpen, onClose, offer }: FlightDeta
             <a
               href={offer.bookingUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer sponsored"
               className="bg-[#0F172A] hover:bg-[#1E293B] text-white px-5 py-2 rounded-lg font-headline text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>Book with {segment.operatingCarrier.name}</span>
