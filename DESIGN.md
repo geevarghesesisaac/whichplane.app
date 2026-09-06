@@ -50,57 +50,57 @@ colors:
   surface-variant: '#d3e4fe'
 typography:
   display-lg:
-    fontFamily: Helvetica Neue
+    fontFamily: B612
     fontSize: 48px
     fontWeight: '700'
     lineHeight: 56px
-    letterSpacing: -0.02em
+    letterSpacing: -0.015em
   headline-lg:
-    fontFamily: Helvetica Neue
+    fontFamily: B612
     fontSize: 32px
     fontWeight: '700'
     lineHeight: 40px
     letterSpacing: -0.015em
   headline-lg-mobile:
-    fontFamily: Helvetica Neue
+    fontFamily: B612
     fontSize: 24px
     fontWeight: '700'
     lineHeight: 32px
     letterSpacing: -0.01em
   headline-md:
-    fontFamily: Helvetica Neue
+    fontFamily: B612
     fontSize: 22px
-    fontWeight: '600'
+    fontWeight: '700'
     lineHeight: 28px
     letterSpacing: -0.01em
   headline-sm:
-    fontFamily: Helvetica Neue
+    fontFamily: B612
     fontSize: 18px
-    fontWeight: '600'
+    fontWeight: '700'
     lineHeight: 24px
     letterSpacing: -0.005em
   title-md:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 16px
     fontWeight: '600'
     lineHeight: 22px
   title-sm:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 14px
     fontWeight: '600'
     lineHeight: 20px
   body-lg:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 16px
     fontWeight: '400'
     lineHeight: 24px
   body-md:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 14px
     fontWeight: '400'
     lineHeight: 20px
   body-sm:
-    fontFamily: B612
+    fontFamily: Helvetica Neue
     fontSize: 12px
     fontWeight: '400'
     lineHeight: 16px
