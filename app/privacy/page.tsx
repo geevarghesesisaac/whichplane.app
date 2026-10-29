@@ -94,7 +94,7 @@ export default function PrivacyPage() {
               If you have questions or concerns regarding this Privacy Policy, please contact our team at:
             </p>
             <div className="p-3 bg-[#f8f9fc] border border-[#e2e8f0] rounded-lg font-mono-telemetry text-xs text-[#0b1c30]">
-              Email: contact@creddio.co • Project: WhichPlane
+              Project: WhichPlane (Educational Open-Source Exploration)
             </div>
           </section>
         </div>
