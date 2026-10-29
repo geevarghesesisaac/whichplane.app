@@ -29,7 +29,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-xs text-[#64748b] leading-relaxed">
-              Fly the plane you actually want to fly. WhichPlane is the world&apos;s first aircraft-first flight metasearch aggregator, putting cabin altitude, composite airframes, and acoustics on equal footing with price and schedule.
+              Fly on the plane you actually want to fly. WhichPlane is the world&apos;s first aircraft-first flight metasearch aggregator, putting cabin altitude, composite airframes, and acoustics on equal footing with price and schedule.
             </p>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#eff4ff] border border-[#dce9ff] text-[11px] font-mono-telemetry font-semibold text-[#0284c7]">
               <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />

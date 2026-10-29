@@ -1,6 +1,6 @@
-# WhichPlane — whichplane.app ✈️
+# WhichPlane - whichplane.app ✈️
 
-> **Fly the plane you actually want to fly.**
+> **Fly on the plane you actually want to fly.**
 
 WhichPlane is an aircraft-first flight search and discovery platform that puts **aircraft type, cabin comfort, and equipment confidence** on equal footing with price and schedule.
 
@@ -30,30 +30,6 @@ WhichPlane is an aircraft-first flight search and discovery platform that puts *
 - **Duffel API + Zero-Config Realistic Simulation**:
   - Queries Duffel Flight API natively when `DUFFEL_ACCESS_TOKEN` is provided.
   - Automatically falls back to high-fidelity route simulations matching authentic airline fleet schedules when running offline or without an API key.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ (tested on Node v24)
-- npm, pnpm, or yarn
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Creddio-Platforms/whichplane.app.git
-cd whichplane.app
-
-# Install dependencies
-npm install
-
-# Run the local development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ---
 
