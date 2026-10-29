@@ -50,7 +50,6 @@ export const metadata: Metadata = {
     title: 'WhichPlane — Flight Search by Aircraft Type & Cabin Comfort',
     description:
       'Search flights prioritizing aircraft equipment, composite cabin comfort (787/A350), and equipment confidence.',
-    url: 'https://whichplane.app',
     siteName: 'WhichPlane',
     type: 'website'
   }

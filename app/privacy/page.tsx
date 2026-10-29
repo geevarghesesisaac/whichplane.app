@@ -21,7 +21,7 @@ export default function PrivacyPage() {
             Privacy Policy & Cookie Disclosures
           </h1>
           <p className="text-xs text-[#64748b] font-mono-telemetry">
-            Last Updated: September 2026 • Applies to whichplane.app and related services
+            Last Updated: September 2026 • Applies to WhichPlane and related services
           </p>
         </div>
 
@@ -31,10 +31,10 @@ export default function PrivacyPage() {
               1. Overview & Our Core Privacy Commitment
             </h2>
             <p>
-              WhichPlane (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates the flight metasearch aggregator platform located at <strong>whichplane.app</strong>. We respect your privacy and are committed to transparent data practices. 
+              WhichPlane (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates the flight metasearch discovery platform known as <strong>WhichPlane</strong>. We respect your privacy and are committed to transparent data practices. 
             </p>
             <p className="p-3 bg-[#eff4ff] border border-[#dce9ff] rounded-lg text-[#0b1c30] font-medium">
-              🛡️ <strong>We Never Collect Payment or Passenger Identity Data:</strong> WhichPlane is a pure search and comparison tool. We do not process transactions, we do not store credit card details, and we do not request passport numbers or sensitive traveler profiles. All purchases take place directly on third-party airline or travel agency booking sites.
+              🛡️ <strong>We Never Collect Payment or Passenger Identity Data:</strong> WhichPlane is a search and discovery demonstration. We do not process transactions, we do not store credit card details, and we do not request passport numbers or sensitive traveler profiles. All purchases take place directly on third-party airline or travel agency booking sites.
             </p>
           </section>
 
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
               4. Third-Party Links & External Platforms
             </h2>
             <p>
-              WhichPlane contains links to third-party airline websites, global distribution systems, and online travel agencies. Once you click an outbound link and leave whichplane.app, your activities and purchases are governed exclusively by that third party&apos;s privacy policy and terms of service. We encourage you to review their policies prior to completing transactions.
+              WhichPlane contains links to third-party airline websites, global distribution systems, and online travel agencies. Once you click an outbound link and leave WhichPlane, your activities and purchases are governed exclusively by that third party&apos;s privacy policy and terms of service. We encourage you to review their policies prior to completing transactions.
             </p>
           </section>
 
@@ -91,10 +91,10 @@ export default function PrivacyPage() {
               6. Contact Us
             </h2>
             <p>
-              If you have questions or concerns regarding this Privacy Policy, please contact our data team at:
+              If you have questions or concerns regarding this Privacy Policy, please contact our team at:
             </p>
             <div className="p-3 bg-[#f8f9fc] border border-[#e2e8f0] rounded-lg font-mono-telemetry text-xs text-[#0b1c30]">
-              Email: privacy@creddio.in • Project: WhichPlane (whichplane.app)
+              Email: contact@creddio.co • Project: WhichPlane
             </div>
           </section>
         </div>

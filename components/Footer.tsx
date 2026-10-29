@@ -29,7 +29,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-xs text-[#64748b] leading-relaxed">
-              Fly on the plane you actually want to fly. WhichPlane is the world&apos;s first aircraft-first flight metasearch aggregator, putting cabin altitude, composite airframes, and acoustics on equal footing with price and schedule.
+              Fly on the plane you actually want to fly. WhichPlane is an aircraft-first flight discovery concept, putting cabin altitude, composite airframes, and acoustics on equal footing with price and schedule.
             </p>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#eff4ff] border border-[#dce9ff] text-[11px] font-mono-telemetry font-semibold text-[#0284c7]">
               <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
@@ -140,20 +140,20 @@ export default function Footer() {
             </ul>
             <div className="pt-1">
               <span className="text-[11px] text-[#64748b] font-mono-telemetry block">
-                Partner of Aviasales & Travelpayouts
+                Educational Demonstration
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mandatory FTC & Legal Disclosure Strip */}
+      {/* Mandatory Legal & Disclaimer Strip */}
       <div className="border-t border-[#f1f5f9] bg-[#f8f9fc] py-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto space-y-3 text-[11px] leading-relaxed text-[#64748b]">
           <div className="flex items-start gap-2.5">
             <span className="material-symbols-outlined text-[16px] text-[#0284c7] shrink-0 mt-0.5">info</span>
             <p>
-              <strong className="text-[#0b1c30]">Affiliate & Metasearch Disclosure:</strong> WhichPlane (whichplane.app) is an independent flight metasearch aggregator. We compare live commercial airfares and physical aircraft equipment lines across global airlines and online travel agencies. When you click on outbound flight links and make a booking, we may earn an affiliate commission at zero additional cost to you. WhichPlane does not sell tickets, handle passenger payments, or act as a travel agency.
+              <strong className="text-[#0b1c30]">Hobby Project &amp; Inactive Status:</strong> WhichPlane is an independent educational hobby project and aircraft discovery demonstration. It is not an active travel booking service. Users are not intended to purchase flights through this platform, and WhichPlane does not sell tickets, process payments, or assume liability for travel arrangements.
             </p>
           </div>
 

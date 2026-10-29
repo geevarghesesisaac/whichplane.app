@@ -258,4 +258,4 @@ The design system adopts **Level 1 (Soft)** roundedness. Crisp geometry reflects
 
 use the following reference:
 
-`D:\Git\Which Plane\whichplane.app\stitch_whichplane_aircraft_flight_search_reference\filelist.txt`
+`D:\Git\Which Plane\stitch_whichplane_aircraft_flight_search_reference\filelist.txt`

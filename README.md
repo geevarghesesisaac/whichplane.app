@@ -1,8 +1,11 @@
-# WhichPlane - whichplane.app ✈️
+# WhichPlane ✈️
 
 > **Fly on the plane you actually want to fly.**
 
-WhichPlane is an aircraft-first flight search and discovery platform that puts **aircraft type, cabin comfort, and equipment confidence** on equal footing with price and schedule.
+WhichPlane is an aircraft-first flight search and discovery exploration platform that puts **aircraft type, cabin comfort, and equipment confidence** on equal footing with price and schedule.
+
+> [!NOTE]
+> **Hobby / Educational Project Disclaimer**: WhichPlane is an independent, non-commercial hobbyist research and educational project. It is currently inactive for commercial bookings, and users are not intended to purchase flights through this platform. WhichPlane holds no responsibility or liability for flight schedules, pricing, or third-party airline services.
 
 ---
 
@@ -35,7 +38,7 @@ WhichPlane is an aircraft-first flight search and discovery platform that puts *
 
 ## 🔑 Server-Side Flight Data Gateway
 
-WhichPlane operates as a centralized commercial metasearch aggregator (like Skyscanner or Google Flights). End-users never carry or provide API keys. All airline data feeds are securely resolved server-side through Next.js route handlers.
+WhichPlane operates as a centralized metasearch discovery aggregator. End-users never carry or provide API keys. All airline data feeds are securely resolved server-side through Next.js route handlers.
 
 ### Option A: 100% Free Travelpayouts Flight Data (Recommended)
 WhichPlane includes native integration with the **Travelpayouts (Aviasales v3) Flight Data API**:
@@ -62,6 +65,7 @@ DUFFEL_ACCESS_TOKEN=duffel_live_YOUR_TOKEN_HERE
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 16 (App Router with Turbopack)
+- **Deployment**: Cloudflare Workers (via OpenNext & Wrangler)
 - **Language**: TypeScript
 - **Design System**: AeroPrecision (Daylight Aviation Canvas `#F8F9FF` & Obsidian Stratosphere `#0F172A`)
 - **Typography**: B612 (Airbus Avionics Cockpit) + OCR-B (Boarding Pass Stamps) + Helvetica Neue (Stationery & Micro-Labels)

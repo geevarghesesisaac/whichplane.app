@@ -21,17 +21,17 @@ export default function TermsPage() {
             Terms of Service & Metasearch Disclaimer
           </h1>
           <p className="text-xs text-[#64748b] font-mono-telemetry">
-            Last Updated: September 2026 • Applies to whichplane.app
+            Last Updated: September 2026 • Applies to WhichPlane
           </p>
         </div>
 
         <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e2e8f0] shadow-xs space-y-6 text-xs sm:text-sm text-[#45464d] leading-relaxed">
           <section className="space-y-2">
             <h2 className="font-headline text-base font-bold text-[#0b1c30]">
-              1. Acceptance of Terms
+              1. Acceptance of Terms & Hobby Status
             </h2>
             <p>
-              By accessing or using WhichPlane (<strong>whichplane.app</strong>), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+              By accessing or using WhichPlane (<strong>WhichPlane</strong>), you acknowledge and agree that this is an independent, non-commercial educational demonstration and hobbyist project. WhichPlane is currently inactive as a commercial booking service, and users are not intended or expected to complete travel transactions through this platform.
             </p>
           </section>
 
@@ -40,7 +40,7 @@ export default function TermsPage() {
               2. Metasearch Aggregator Role (Not a Travel Agency)
             </h2>
             <p>
-              WhichPlane is an <strong>independent flight metasearch discovery engine</strong>. We aggregate and display aircraft airframe specifications, flight schedules, and estimated fares provided by airlines and partner distribution networks.
+              WhichPlane is an <strong>independent flight metasearch discovery concept</strong>. We display aircraft airframe specifications, flight schedules, and estimated fares provided by airlines and partner distribution networks.
             </p>
             <p className="p-3 bg-[#eff4ff] border border-[#dce9ff] rounded-lg text-[#0b1c30] font-medium">
               ✈️ <strong>No Ticket Sales or Customer Payments:</strong> WhichPlane does not sell flight tickets, does not establish fares, does not issue boarding passes, and does not accept or process payments. All flight bookings, changes, cancellations, baggage fees, and customer service inquiries are handled solely by the operating airline or third-party booking vendor where your purchase is finalized.
@@ -70,10 +70,10 @@ export default function TermsPage() {
 
           <section className="space-y-2">
             <h2 className="font-headline text-base font-bold text-[#0b1c30]">
-              5. Limitation of Liability
+              5. Limitation of Liability & Non-Responsibility
             </h2>
             <p>
-              To the fullest extent permitted by law, WhichPlane and its operators shall not be liable for any direct, indirect, punitive, or consequential damages resulting from flight delays, missed connections, cancellations, equipment substitutions, or issues arising from transactions made with third-party airlines or travel agencies.
+              To the fullest extent permitted by law, WhichPlane and its operators shall not be liable for any direct, indirect, punitive, or consequential damages resulting from flight delays, missed connections, cancellations, equipment substitutions, or issues arising from transactions made with third-party airlines or travel agencies. WhichPlane is provided &quot;as is&quot; without any warranty of any kind.
             </p>
           </section>
 
@@ -94,7 +94,7 @@ export default function TermsPage() {
               For legal inquiries regarding these Terms of Service, please reach out to:
             </p>
             <div className="p-3 bg-[#f8f9fc] border border-[#e2e8f0] rounded-lg font-mono-telemetry text-xs text-[#0b1c30]">
-              Email: legal@creddio.in • WhichPlane Platform
+              Email: contact@creddio.co • Project: WhichPlane
             </div>
           </section>
         </div>

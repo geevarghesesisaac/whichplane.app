@@ -13,7 +13,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-[#F8F9FF] flex flex-col justify-between">
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
         {/* Hero Section */}
         <div className="space-y-4 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#eff4ff] border border-[#dce9ff] text-xs font-mono-telemetry font-bold text-[#0284c7]">
@@ -28,6 +28,27 @@ export default function AboutPage() {
           </p>
         </div>
 
+        {/* Prominent Hobby & Non-Commercial Disclaimer */}
+        <div className="bg-[#fffbeb] border-2 border-[#fcd34d] rounded-2xl p-6 sm:p-7 shadow-xs space-y-3">
+          <div className="flex items-center gap-2.5 text-[#b45309]">
+            <span className="material-symbols-outlined text-[24px]">warning</span>
+            <h2 className="font-headline text-base sm:text-lg font-bold uppercase tracking-wide">
+              Important Disclaimer: Hobby Project & Inactive Status
+            </h2>
+          </div>
+          <div className="space-y-2.5 text-xs sm:text-sm text-[#92400e] leading-relaxed">
+            <p>
+              <strong>Hobby &amp; Educational Project:</strong> WhichPlane is an independent, non-commercial hobbyist concept and open research project created solely for educational exploration of aircraft taxonomy, aviation telemetry, and cabin comfort metrics.
+            </p>
+            <p>
+              <strong>Currently Inactive / No Booking Functionality:</strong> WhichPlane is <strong>currently inactive as a commercial service</strong>. Users are <strong>not intended or expected to book flights through this platform</strong>.
+            </p>
+            <p>
+              <strong>No Responsibility or Liability:</strong> WhichPlane is not a travel agency, airline broker, or ticketing merchant. We do not sell airline tickets, issue reservations, or process payments. We hold <strong>absolutely no responsibility, liability, or warranty</strong> for any flight schedules, fare quotes, equipment substitutions, or third-party transactions. All data and route schedules are provided strictly for demonstration purposes.
+            </p>
+          </div>
+        </div>
+
         {/* The 4 Aviation Pillars */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1: Cabin Altitude */}
@@ -36,7 +57,7 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-[24px]">air</span>
             </div>
             <h3 className="font-headline text-lg font-bold text-[#0b1c30]">
-              1. Cabin Pressurization & Jet Lag
+              1. Cabin Pressurization &amp; Jet Lag
             </h3>
             <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
               Older aluminum airliners (like Boeing 777-200s or A330s) are pressurized to 8,000 feet because higher pressure causes metal fatigue and structural oxidation. Carbon-composite aircraft like the <strong>Airbus A350</strong> and <strong>Boeing 787 Dreamliner</strong> are pressurized to <strong>5,800–6,000 feet</strong>. Your body absorbs 8% more oxygen, measurably reducing headaches, dehydration, and transatlantic exhaustion.
@@ -49,7 +70,7 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-[24px]">humidity_mid</span>
             </div>
             <h3 className="font-headline text-lg font-bold text-[#0b1c30]">
-              2. Cabin Humidity & Fresh Air
+              2. Cabin Humidity &amp; Fresh Air
             </h3>
             <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
               Metal airframes rust if the air is humid, forcing airlines to pump bone-dry air (often under 10% humidity). Composite aircraft don&apos;t rust, allowing cabin air conditioning systems to maintain <strong>20% to 25% relative humidity</strong>. You wake up after an 11-hour flight with clear eyes, moist skin, and no scratchy throat.
@@ -62,7 +83,7 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-[24px]">volume_down</span>
             </div>
             <h3 className="font-headline text-lg font-bold text-[#0b1c30]">
-              3. Cabin Acoustics & Engine Sound
+              3. Cabin Acoustics &amp; Engine Sound
             </h3>
             <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
               Continuous low-frequency engine drone causes profound cognitive fatigue. The <strong>Airbus A380 Superjumbo</strong> is the quietest passenger aircraft ever flown at <strong>59 dB</strong> in cruise. Modern serrated chevron engines (like GEnx on the 787) reduce acoustic decibels by 50% compared to legacy turbofans.
@@ -75,7 +96,7 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-[24px]">shield_check</span>
             </div>
             <h3 className="font-headline text-lg font-bold text-[#0b1c30]">
-              4. Traveler Sentiment & Bucket Lists
+              4. Traveler Sentiment &amp; Bucket Lists
             </h3>
             <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
               Whether you want to <strong>exclude the Boeing 737 MAX</strong> for safety peace of mind, chase the remaining routes for the double-decker <strong>Airbus A380</strong> and <strong>Boeing 747 Queen of the Skies</strong> before they retire, or pick the Airbus A330 for its 2-4-2 couple seats, WhichPlane gives you complete control over your airframe.
@@ -92,10 +113,10 @@ export default function AboutPage() {
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
-            WhichPlane is a <strong>pure metasearch aggregator</strong>, identical to Google Flights or Skyscanner. We do not sell airline tickets, we do not handle customer credit cards, and we never add booking fees. 
+            WhichPlane is modeled as an <strong>aircraft metasearch aggregator</strong>. We do not sell airline tickets, we do not handle customer credit cards, and we never process passenger transactions.
           </p>
           <p className="text-xs sm:text-sm text-[#64748b] leading-relaxed">
-            When you find a flight on an aircraft you love, clicking <strong>&quot;Select Flight&quot;</strong> connects you directly to the airline&apos;s official booking portal or verified ticketing platform. We earn a modest referral commission from our airline partners at <strong>zero additional cost to you</strong>.
+            When you find a flight on an aircraft you love, clicking <strong>&quot;Select Flight&quot;</strong> connects you directly to the airline&apos;s official booking portal or verified ticketing platform.
           </p>
           <div className="pt-2">
             <Link
