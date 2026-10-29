@@ -3,17 +3,25 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
 const eslintConfig = defineConfig([
-  ...nextVitals,
+  ...nextVitals.map((config) => {
+    if (config.rules) {
+      return {
+        ...config,
+        rules: {
+          ...config.rules,
+          "react-hooks/set-state-in-effect": "warn",
+        },
+      };
+    }
+    return config;
+  }),
   ...nextTs,
-  {
-    rules: {
-      "react-hooks/set-state-in-effect": "warn",
-    },
-  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
+    ".open-next/**",
+    ".wrangler/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
